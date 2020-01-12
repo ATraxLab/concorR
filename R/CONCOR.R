@@ -3,7 +3,7 @@
 #By Tyme Suda
 #updated 8/20/18
 
-#All needed functions to run the concor function for an arbituary number of 
+#All needed functions to run the concor function for an arbituary number of
 #splits (equal or less than the maximimum for said data)
 #Works for single or maultiple relations formated as square matrixies in a simmple list
 #*should* work for weighted networks would be nice to have known resaults to compare to
@@ -13,7 +13,7 @@ library(igraph)
 
 concor1=function(m_stack, cutoff=.9999999, max_iter=50){
   #does concor once
-  #needs the matrix stack as an input 
+  #needs the matrix stack as an input
   #outputs a matrix
   if (ncol(m_stack) < 2)
     stop("Too few columns to partition.")
@@ -130,12 +130,12 @@ block_names=function(mat_list){
 concor=function(m0, cutoff=.9999999, max_iter=50, p=1){
   #Inputed m0 must be a list of matrixes WITH COL/ROW NAMES
   #outpust vectors of collumn names of final grouping
-  
+
   #initializing varibles
   #set diaganals of each relation to zero for isolate surch
   mi=lapply(m0, function(x) val.diag(x,0))
   miso=mi
-  
+
   if (length(isolates.col(stack_mat(miso)))>0) {
     #remove isolates
     #make a stack of matrix and transposes to check overall isolates over
@@ -157,13 +157,13 @@ concor=function(m0, cutoff=.9999999, max_iter=50, p=1){
     #make matrix of just isolates
     m.iso=m0[[1]][iso.bool,iso.bool, drop=FALSE]
   }
-  
-  
+
+
   #set diaganals to NA
   mi=lapply(mi, function(x) val.diag(x, NA))
-  
+
   stack_list=list(stack_mat(mi))
-  
+
   for (i in 1:p){
     #apply concor1 to each matrix stack (should have 2^(i-1) mat stacks/elements of output list)
     concored=lapply(stack_list, function(x) concor1(x, cutoff=.9999999, max_iter=50))
@@ -186,7 +186,6 @@ concor=function(m0, cutoff=.9999999, max_iter=50, p=1){
     #make list of skinny matrix stacks for next itteration (apply boolians)
     stack_list=lapply(bool_list, function(x) boolian_apply(x, stack_list))
   }
-  #groups=lapply(stack_list, function(x) colnames(x)
   #tack on the isolate group to stack list to run blocknames on
   mats.groups= stack_list
   if (exists("m.iso")) {
@@ -195,7 +194,7 @@ concor=function(m0, cutoff=.9999999, max_iter=50, p=1){
   #run blocknames to produce/format groups
   groups <- do.call(rbind, block_names(mats.groups))
   groups[match(rownames(m0[[1]]), groups$vertex), ]
-  
+
   return(groups)
 }
 
