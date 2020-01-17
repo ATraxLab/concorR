@@ -5,14 +5,14 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Runs \code{plot.blk} but gets rid of pesky labels. Needs the \code{sna} package installed to work (is not needed to be attached).
 }
 \usage{
-plot.blk.labeless(x)
+plot.blk.labeless(bm)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
+  \item{bm}{An object of class \code{blockmodel}
 %%     ~~Describe \code{x} here~~
 }
 }
@@ -20,11 +20,7 @@ plot.blk.labeless(x)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Plots a square blockmodel with no labels.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,19 +35,17 @@ plot.blk.labeless(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link[sna]{plot.blockmodel}}, \code{\link{plot.blk}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+#Create a random graph with some edge structure
+g.p1<-sapply(runif(20,0,1),rep,20)  #Create a matrix of edge probabilities
+g1<-rgraph(20,tprob=g.p1)           #Draw from a Bernoulli graph distribution4
+colnames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
+rownames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
 
-## The function is currently defined as
-function (x)
-{
-  }
+gl=list(g1)
+bm=make.blk(gl,2)[[1]]
+plot.blk.labeless(bm)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

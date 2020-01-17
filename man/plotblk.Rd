@@ -5,32 +5,29 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Displays a plot of a blockmodel. Is \code{\link[sna]{plot.blockmodel}} but reformats the shape to be square and removed the "relation - " form the titling of the output. Needs the \code{sna} package installed to work (is not needed to be attached).
 }
 \usage{
-plot.blk(x)
+plot.blk(x, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
+  \item{x}{An object of class \code{blockmodel}}
+  \item{...}{Further arguments passed to or from other methods}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Plots a blockmodel that is square.
 }
 \references{
-%% ~put references to the literature/web site here ~
+https://CRAN.R-project.org/package=sna
 }
 \author{
-%%  ~~who you are~~
+Carter T. Butts buttsc@uci.edu
+
+edited by Tyme Suda
 }
 \note{
 %%  ~~further notes~~
@@ -39,19 +36,17 @@ plot.blk(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link[sna]{plot.blockmodel}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+#Create a random graph with some edge structure
+g.p1<-sapply(runif(20,0,1),rep,20)  #Create a matrix of edge probabilities
+g1<-rgraph(20,tprob=g.p1)           #Draw from a Bernoulli graph distribution4
+colnames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
+rownames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
 
-## The function is currently defined as
-function (x)
-{
-  }
+gl=list(g1)
+bm=make.blk(gl,2)[[1]]
+plot.blk(bm)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

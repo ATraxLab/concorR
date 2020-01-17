@@ -5,14 +5,14 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Calculate the edge density of an adjacency matrix where self ties are not possible.
 }
 \usage{
-edge.dens(x)
+edge.dens(adj.mat)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
+  \item{adj.mat}{The adjacency matrix of interest
 %%     ~~Describe \code{x} here~~
 }
 }
@@ -20,11 +20,7 @@ edge.dens(x)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Returns the numeric value for edge density, for unweighted matrices this is between 0 and 1.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -42,16 +38,10 @@ edge.dens(x)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+#Create a random graph with some edge structure
+g.p1<-sapply(runif(20,0,1),rep,20)  #Create a matrix of edge probabilities
+g1<-rgraph(20,tprob=g.p1)           #Draw from a Bernoulli graph distribution
 
-## The function is currently defined as
-function (x)
-{
-  }
+edge.dens(g1)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
