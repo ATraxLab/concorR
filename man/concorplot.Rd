@@ -5,26 +5,22 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Plots a network of interest with a concor output as the vertex color. The \code{igraph} object used should be created using \code{\link{make.igraph}} or \code{\link{concor.igraph.apply}}.
 }
 \usage{
-concor.plot(x)
+concor.plot(iobject, p=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
+  \item{iobjet}{The igraph object with \code{concor} splitting as a vertex attribute. Should be created using \code{\link{make.igraph}} or \code{\link{concor.igraph.apply}}}
+  \item{p}{The \code{concor} splitting of interest, \code{p} must correspond to a split number added to the igraph object}
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Plots the network with the concor blocking as color.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,19 +35,14 @@ concor.plot(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}, \code{\link{make.igraph}}, \code{\link{concor.igraph.apply}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+rownames(a)=c("a","b","c","d")
+colnames(a)=c("a","b","c","d")
 
-## The function is currently defined as
-function (x)
-{
-  }
+i.out=make.igraph(list(a))
+concor.plot(i.out[[1]], 1)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

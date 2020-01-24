@@ -5,26 +5,22 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Adds the split taken from the output of \code{concor} to its \code{igraph} object as a vertex attribute.
 }
 \usage{
-blk.apply(x)
+blk.apply(iobject, split, v="cat")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
+  \item{iobject}{The igraph object representing same data used in \cose{concor}}
+  \item{split}{The output form \code{concor} for a specific split}
+  \item{v}{What the vertex attribute will be called, defaults to "cat"}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Returns the igraph object with the new vertex attribute v.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,19 +35,16 @@ blk.apply(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+library(igraph)
+a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+rownames(a)=c("a","b","c","d")
+colnames(a)=c("a","b","c","d")
+a.igraph=graph_from_adjacency_matrix(a)
 
-## The function is currently defined as
-function (x)
-{
-  }
+con.out=concor(list(a))
+
+blk.apply(a.igraph, con.out, "split_1")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

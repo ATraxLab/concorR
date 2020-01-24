@@ -5,14 +5,14 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Checks whether a list of input matrices are valid for \code{concor}. Specifically makes sure matrix sizes/vertex names match and adds vertex names if they don't exist.
 }
 \usage{
-concor.validitycheck(x)
+concor.validitycheck(m.list)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
+  \item{m.list}{The list of input matrices  for use in \code{concor}
 %%     ~~Describe \code{x} here~~
 }
 }
@@ -20,11 +20,7 @@ concor.validitycheck(x)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Returns the same list of matrices if everything checks out, fails if size mismatch or node names mismatch, or if node names are simply missing adds them and warns you.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,19 +35,25 @@ concor.validitycheck(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}, \code{\link{name}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+b=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+c=matrix(c(0,0,0,1,1,0,1,0,1), ncol=3)
+rownames(a)=c("a","b","c","d")
+colnames(a)=c("a","b","c","d")
 
-## The function is currently defined as
-function (x)
-{
-  }
+#fails name mismatch
+concor.validitycheck(list(a,b))
+
+#fails size mismach
+concor.validitycheck(list(b,c))
+
+#passes but adds node names
+concor.validitycheck(list(b,b))
+
+#passes
+concor.validitycheck(list(a,a))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+

@@ -5,26 +5,21 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Takes a list of graph objects and runs \code{concor} on the desired split \code{nsplit} and adds the outputted split to each \code{igraph} object as an vertex attribute.
 }
 \usage{
-concor.igraph.apply(x)
+concor.igraph.apply(igraph.list, nsplit=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
+  \item{igraph.list}{The list of igraph objects for use in \code{concor}}
+  \item{nsplit}{The split number desired, defaults to 1}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Returns a list of igraph objects with a vertex attribute \code{csplit_n} where \code{n} is \code{nsplit} that contain the block information obtained from \code{concor}.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,19 +34,13 @@ concor.igraph.apply(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}, \code{\link{blk.apply}}, \code{\link{make.igraph}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+rownames(a)=c("a","b","c","d")
+colnames(a)=c("a","b","c","d")
+a.igraph=graph_from_adjacency_matrix(a)
 
-## The function is currently defined as
-function (x)
-{
-  }
+concor.igraph.apply(list(a.igraph))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
