@@ -38,9 +38,7 @@ Returns the numeric value for edge density, for unweighted matrices this is betw
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-#Create a random graph with some edge structure
-g.p1<-sapply(runif(20,0,1),rep,20)  #Create a matrix of edge probabilities
-g1<-rgraph(20,tprob=g.p1)           #Draw from a Bernoulli graph distribution
+g1=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
 
 edge.dens(g1)
 }

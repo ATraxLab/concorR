@@ -5,26 +5,20 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Plot a reduced graph with weighted ties using \code{igraph}.
 }
 \usage{
 plot.red.weighted(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
+  \item{blk}{The igraph object representing the weighted reduced graph}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+Plots the reduced graph with node color being different for each role (and the same for the overall network) and tie thickness representing the weight of that tie.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,19 +33,17 @@ plot.red.weighted(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{make.red}}, \code{\link{make.red.igraph}}, \code{\link{plot.red.unweighted}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+library(igraph)
+a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+rownames(a)=c("a","b","c","d")
+colnames(a)=c("a","b","c","d")
 
-## The function is currently defined as
-function (x)
-{
-  }
+#make the reduced matrix
+r.mat=make.red(list(a),splitn=1, TRUE)
+r.igraph=make.red.igraph(r.mat$red.mat[[1]])
+
+plot.red.weighted(r.igraph)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

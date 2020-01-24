@@ -38,16 +38,13 @@ Returns a list of blockmodel type objects based off the input matrices and the c
   \code{\link{concor}}
 }
 \examples{
-#Create a random graph with some edge structure
-g.p1<-sapply(runif(20,0,1),rep,20)  #Create a matrix of edge probabilities
-g1<-rgraph(20,tprob=g.p1)           #Draw from a Bernoulli graph distribution4
-colnames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
-rownames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
+g1=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+rownames(g1)=c("a","b","c","d")
+colnames(g1)=c("a","b","c","d")
 
-g.p2<-sapply(runif(20,0,1),rep,20)
-g2<-rgraph(20,tprob=g.p2)
-colnames(g2) <- paste( LETTERS, "col", sep ="")[1:20]
-rownames(g2) <- paste( LETTERS, "col", sep ="")[1:20]
+g2=matrix(c(0,1,0,0,0,0,1,0,0,0,1,1,1,1,0,0), ncol=4)
+rownames(g2)=c("a","b","c","d")
+colnames(g2)=c("a","b","c","d")
 
 gl=list(g1,g2)
 make.blk(gl)

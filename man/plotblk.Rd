@@ -39,14 +39,12 @@ edited by Tyme Suda
 \code{\link[sna]{plot.blockmodel}}
 }
 \examples{
-#Create a random graph with some edge structure
-g.p1<-sapply(runif(20,0,1),rep,20)  #Create a matrix of edge probabilities
-g1<-rgraph(20,tprob=g.p1)           #Draw from a Bernoulli graph distribution4
-colnames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
-rownames(g1) <- paste( LETTERS, "col", sep ="")[1:20]
+g1=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
+rownames(g1)=c("a","b","c","d")
+colnames(g1)=c("a","b","c","d")
 
 gl=list(g1)
-bm=make.blk(gl,2)[[1]]
+bm=make.blk(gl,1)[[1]]
 plot.blk(bm)
 }
 
