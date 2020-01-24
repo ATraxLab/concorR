@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A subfunction of concor.
+A subfunction of \code{\link{concor}}.
 
 Runs the Pearson correlation on the matrix stack repeatedly until a square matrix consisting of only +1 and -1 is formed. This will only run the correlation until either all values are absolutely greater than that of the cutoff or the maximum number of iterations max_iter is reached.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -24,7 +24,7 @@ concor1(m_stack, cutoff=.9999999, max_iter=50)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-Returns a sure matrix with number of rows/columns equal to the number of columns of m_stack where the values are either +1 or -1, the input matrix can later be split into two "roles" based off the locations of the positive/negative values.
+Returns a sure matrix with number of rows/columns equal to the number of columns of \code{m_stack} where the values are either +1 or -1, the input matrix can later be split into two "roles" based off the locations of the positive/negative values.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -39,7 +39,7 @@ Returns a sure matrix with number of rows/columns equal to the number of columns
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)

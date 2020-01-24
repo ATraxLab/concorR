@@ -5,16 +5,16 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A sub-function of concor, you will probably never use this function outside of the concor function.
+A sub-function of \code{\link{concor}}, you will probably never use this function outside of the \code{\link{concor}} function.
 
-A function to take a list of booleans in a specified order and to make large booleans that are the length of all the boolean vectors combined. These large booleans are all FALSE except for the location of one of the booleans.
+A function to take a list of booleans in a specified order and to make large booleans that are the length of all the boolean vectors combined. These large booleans are all \code{FALSE} except for the location of one of the booleans.
 }
 \usage{
 make_big_boolians(bool_list)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{bool_list}{ The list of input booleans, they should be in the order desired.
+  \item{bool_list}{The list of input booleans, they should be in the order desired.
 %%     ~~Describe \code{x} here~~
 }
 }
@@ -37,7 +37,7 @@ Returns a list of booleans of length double the number of input booleans each th
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 b1=c(FALSE,FALSE,TRUE)

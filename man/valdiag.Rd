@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A subfunction of concor.
+A subfunction of \code{\link{concor}}.
 
 Sets the value of the diagonal of a matrix, for use in apply functions.
 }
@@ -15,7 +15,7 @@ valdiag(m, value=NA)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{m}{The matrix}
-  \item{value}{The value for the diagonals, defaults to NA}
+  \item{value}{The value for the diagonals, defaults to \code{NA}}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -36,7 +36,7 @@ Returns the matrix with the new diagonal values.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 a=matrix(c(1,2,3,4),2)

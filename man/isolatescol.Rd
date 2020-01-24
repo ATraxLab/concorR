@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A subfunction of concor.
+A subfunction of\code{\link{concor}}.
 
 Find all empty columns (all values zero), for a stack of an adjacency matrix and its transpose these will correspond to the isolates in the network.
 }
@@ -37,7 +37,7 @@ Returns the column names of the empty columns.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 m=matrix(c(0,0,0,1,0,1,1,0,0),3)

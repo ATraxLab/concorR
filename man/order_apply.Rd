@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A sub-function of concor.
+A sub-function of \code{\link{concor}}.
 
 A simple function for rearranging the row and columns of a matrix.
 }
@@ -37,7 +37,7 @@ Returns the rearranged matrix
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 o=c(1,3,2,4)

@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A sub-function of concor.
+A sub-function of \code{\link{concor}}.
 
 Combines a list of suborders into an overall order.
 }
@@ -14,7 +14,7 @@ make_order(order_list)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{order_list}{ list of suborders, they are in the order they will be combined in
+  \item{order_list}{list of suborders, they are in the order they will be combined in
 %%     ~~Describe \code{x} here~~
 }
 }
@@ -37,7 +37,7 @@ Returns the overall order that is combined form the smaller sub-orders
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 #find the order of the top row of two matrixies then conbine for some reason

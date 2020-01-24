@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A sub-function of concor.
+A sub-function of \code{\link{concor}}.
 
 Makes a Boolean vector from the first column of a matrix where TRUE a positive value and FALSE is negative.
 }
@@ -37,7 +37,7 @@ Returns the Boolean vector.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)

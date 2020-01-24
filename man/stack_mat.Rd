@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A subfunction of concor.
+A subfunction of \code{\link{concor}}.
 
 Stacks all matrices in a list and their transposes atop each other.
 }
@@ -37,7 +37,7 @@ Returns a very tall matrix formed from each input matrix stacked atop its transp
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 a=matrix(c(1,2,3,4),2)

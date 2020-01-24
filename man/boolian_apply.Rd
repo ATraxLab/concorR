@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A sub-function of concor.
+A sub-function of \code{\link{concor}}.
 
 Take a matrix with n columns and a boolean vector with n entries and remove the columns that correspond to the false entries to of the vector.
 }
@@ -37,7 +37,7 @@ Returns the shrunken matrix
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)

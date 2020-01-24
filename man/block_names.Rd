@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A sub-function of concor.
+A sub-function of \code{\link{concor}}.
 
 Create list a data frames from a list of matrices with column names. The data frames will each include the input matrix as the block, and the column names as vertex.
 }
@@ -37,7 +37,7 @@ Returns list of data frames each with the first column and arbitrary index numbe
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{concor}}
 }
 \examples{
 #make the block names for two matrixies and conbine
