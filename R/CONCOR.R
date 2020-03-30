@@ -11,7 +11,7 @@
 
 library(igraph)
 
-concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50){
+concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   #does concor once
   #needs the matrix stack as an input
   #outputs a matrix
@@ -19,16 +19,16 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50){
     stop("Too few columns to partition.")
   cor_i <- cor(m_stack, use  =  "pairwise.complete.obs")
   iter<-0
-  while (any(abs(cor_i) <= cutoff, na.rm = TRUE) & iter <= max_iter){
+  while (any(abs(cor_i) <= cutoff, na.rm = TRUE) & iter <= max_iter) {
     cor_i <- cor(cor_i, use = "pairwise.complete.obs")
-    iter <- iter+1
+    iter <- iter + 1
   }
-  cor_i[cor_i<0] <- -1
-  cor_i[cor_i>0] <- 1
+  cor_i[cor_i < 0] <- -1
+  cor_i[cor_i > 0] <- 1
   return(cor_i)
 }
 
-.val_diag <- function(m, value = NA){
+.val_diag <- function(m, value = NA) {
   #make  the diaganlas of a matrix be value
   #value defaults to NA
   #return matrix
@@ -36,37 +36,37 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50){
   return(m)
 }
 
-.isolates_col <- function(m){
+.isolates_col <- function(m) {
   #taake in matrix return return col names of isolate columns
   #diaganals must be stet to zero beforhand
   #check to see what nodes are isolates
   #return vector of isolate names
   bob <- raw()
   for (i in 1:length(colnames(m))) {
-    if (all(m[,i]==0)) {
-      bob <- c(bob,colnames(m)[i])
+    if (all(m[, i] == 0)) {
+      bob <- c(bob, colnames(m)[i])
     }
   }
   return(bob)
 }
 
-.stack_mat <- function(m_list){
+.stack_mat <- function(m_list) {
   #makes stack of matrixes followed by their transposes for calling in concor
   #input a list of matrixes, output a tall matrix
   mt_list <- lapply(m_list, t)
-  m_mt_list <- c(m_list,mt_list)
+  m_mt_list <- c(m_list, mt_list)
   mat_stack <- do.call("rbind", m_mt_list)
 }
 
-.make_order <- function(order_list){
+.make_order <- function(order_list) {
   #conbines suborders into an overall order for applying to the previously orderd matrix inputs
   #takes in a list of orders, returns a order vector
-  if (!is.list(order_list)){
+  if (!is.list(order_list)) {
     stop("not a list")
   }
   l_length <- length(order_list)
   l_sub <- 0
-  for (i in 1:l_length){
+  for (i in 1:l_length) {
     order_list[[i]] <- order_list[[i]]+l_sub
     l_sub <- l_sub+length(order_list[[i]])
   }
@@ -74,26 +74,26 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50){
   return(order)
 }
 
-.order_apply <- function(order,mat){
+.order_apply <- function(order, mat) {
   #orders rows and collumns of mat for use via lapply
   #input is the order being applied followed by the matrix it is applied to
   #output is orderd matrix
-  m1 <- mat[order,order]
+  m1 <- mat[order, order]
   return(m1)
 }
 
-.make_sub_boolean <- function(cor_mat_orderd){
+.make_sub_boolean <- function(cor_mat_orderd) {
   #make boolean of first row of cor_mat_orderd where -1=>FALSE 1=>TRUE
   #for use with lapply, input matrix, output boolean vector
   group <- cor_mat_orderd[, 1] > 0
   return(group)
 }
 
-.make_big_booleans <- function(bool_list){
+.make_big_booleans <- function(bool_list) {
   #makes 2 booleans (false=false, and false=true) that can be applied to the total matrix from each input boolean in bool_list
   #input is list of booleans
   #output is list double length of input list of booleans as long as all logical expersions in input
-  if (!is.list(bool_list)){
+  if (!is.list(bool_list)) {
     stop("not a list")
   }
   boo_num <- length(bool_list)
@@ -101,8 +101,8 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50){
   #setup list of 2*boo_length false logical vectors each as long as tot_lenght
   booleans_out <- rep(list(vector("logical", tot_length)), 2 * boo_num)
   a <- 1
-  for (i in 1:boo_num){
-    for(j in 1:length(bool_list[[i]])){
+  for (i in 1:boo_num) {
+    for(j in 1:length(bool_list[[i]])) {
       booleans_out[[2*i-1]][a] <- bool_list[[i]][j]
       booleans_out[[2*i]][a] <- !bool_list[[i]][j]
       a <- a + 1
@@ -111,23 +111,23 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50){
   return(booleans_out)
 }
 
-.boolean_apply <- function(boolean, mat_stack){
+.boolean_apply <- function(boolean, mat_stack) {
   #apply a boolean to a matrix, removing false collumns, check boolean correct size
   #input boolean vector, matrix
   #output matrix
-  if (ncol(mat_stack) != length(boolean)){
+  if (ncol(mat_stack) != length(boolean)) {
     stop("boolean wrong size")
   }
-  stack_shrunck <- mat_stack[,boolean, drop = FALSE]
+  stack_shrunck <- mat_stack[, boolean, drop = FALSE]
   return(stack_shrunck)
 }
 
-.block_names <- function(mat_list){
+.block_names <- function(mat_list) {
   lapply(seq_along(mat_list), function(x) data.frame(block = x,
                                                      vertex = colnames(mat_list[[x]]), stringsAsFactors = FALSE))
 }
 
-concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1){
+concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
   #Inputed m0 must be a list of matrixes WITH COL/ROW NAMES
   #outpust vectors of collumn names of final grouping
 
@@ -164,13 +164,13 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1){
 
   stack_list <- list(.stack_mat(mi))
 
-  for (i in 1:p){
+  for (i in 1:p) {
     #apply concor1 to each matrix stack (should have 2^(i-1) mat stacks/elements of output list)
     concored <- lapply(stack_list, function(x) concor1(x))
     #make orders sub orders
-    order_list <- lapply(concored, function(x) order(x[,1]))
+    order_list <- lapply(concored, function(x) order(x[, 1]))
     #apply each suborder corisponding matrix in concored
-    for (j in 1:(2^(i-1))){
+    for (j in 1:(2^(i-1))) {
       concored[[j]] <- .order_apply(order_list[[j]], concored[[j]])
     }
     #conbine suborders
