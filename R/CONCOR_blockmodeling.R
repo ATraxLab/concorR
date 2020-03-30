@@ -9,24 +9,24 @@ make_blk <- function(adj_list, splitn = 1) {
   concor_order <- match(colnames(adj_list[[1]]), concor_out$vertex)
   block_ordered <- concor_out$block[concor_order]
 
-  ##prepare to attach sna (needed for next part) so it can later be detached easily
-  #record the packages that existed at the start
-  pre <- names(sessionInfo()$otherPkgs)
-  #get rid of all nondefault packages
-  if (length(pre) != 0) {
-    invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""), detach,
-                     character.only = TRUE, unload = TRUE))
-  }
-  #add that asshole of a package nice and quietly
-  suppressMessages(library(sna))
+  # ##prepare to attach sna (needed for next part) so it can later be detached easily
+  # #record the packages that existed at the start
+  # pre <- names(sessionInfo()$otherPkgs)
+  # #get rid of all nondefault packages
+  # if (length(pre) != 0) {
+  #   invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""), detach,
+  #                    character.only = TRUE, unload = TRUE))
+  # }
+  # #add that asshole of a package nice and quietly
+  # suppressMessages(library(sna))
 
   #make blokmodels (aka the thing all this has lead to)
-  blockmodel_list <- lapply(adj_list, function(x) blockmodel(as.matrix(x), block_ordered))
+  blockmodel_list <- lapply(adj_list, function(x) sna::blockmodel(as.matrix(x), block_ordered))
 
-  ##detach sna and reattach whatever else
-  suppressMessages(invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""),
-                                    detach, character.only = TRUE, unload = TRUE)))
-  suppressMessages(invisible(lapply(pre, library, character.only = TRUE)))
+  # ##detach sna and reattach whatever else
+  # suppressMessages(invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""),
+  #                                   detach, character.only = TRUE, unload = TRUE)))
+  # suppressMessages(invisible(lapply(pre, library, character.only = TRUE)))
 
   #return raw blockmodel data
   return(blockmodel_list)
@@ -90,19 +90,19 @@ plot_blk <- function (x, ...) {
   #slightly edited version of the function from SNA, plots as square and slightly changed labeling also attached SNA and later removed
   #why is it convention to not have comments
 
-  ##attach SNA for later use and record packages that existed beforehand
-  #record the packages that existed at the start
-  pre <- names(sessionInfo()$otherPkgs)
-  #get rid of all nondefault packages
-  invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""), detach,
-                   character.only = TRUE, unload = TRUE))
-  #add sna
-  suppressMessages(library(sna))
+  # ##attach SNA for later use and record packages that existed beforehand
+  # #record the packages that existed at the start
+  # pre <- names(sessionInfo()$otherPkgs)
+  # #get rid of all nondefault packages
+  # invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""), detach,
+  #                  character.only = TRUE, unload = TRUE))
+  # #add sna
+  # suppressMessages(library(sna))
 
   oldpar <- par(no.readonly = TRUE)
   on.exit(par(oldpar))
   n <- dim(x$blocked.data)[2]
-  m <- stackcount(x$blocked.data)
+  m <- sna::stackcount(x$blocked.data)
   if (!is.null(x$plabels))
     plab <- x$plabels
   else plab <- (1:n)[x$order.vector]
@@ -110,24 +110,24 @@ plot_blk <- function (x, ...) {
   par(mfrow = c(floor(sqrt(m)), ceiling(m/floor(sqrt(m)))))
   if (m > 1)
     for (i in 1:m) {
-      plot.sociomatrix(x$blocked.data[i, , ], labels = list(plab, plab),
+      sna::plot.sociomatrix(x$blocked.data[i, , ], labels = list(plab, plab),
                        main = glab[i], drawlines = FALSE, asp = 1)
 
       for (j in 2:n) if (x$block.membership[j] != x$block.membership[j - 1])
         abline(v = j - 0.5, h = j - 0.5, lty = 3)
     }
   else {
-    plot.sociomatrix(x$blocked.data, labels = list(plab, plab),
+    sna::plot.sociomatrix(x$blocked.data, labels = list(plab, plab),
                      main = glab[1], drawlines = FALSE, asp = 1)
 
     for (j in 2:n) if (x$block.membership[j] != x$block.membership[j - 1])
       abline(v = j - 0.5, h = j - 0.5, lty = 3)
   }
 
-  ##detach sna and reattach whatever else
-  invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""),
-                   detach, character.only = TRUE, unload = TRUE))
-  suppressMessages(invisible(lapply(pre, library, character.only = TRUE)))
+  # ##detach sna and reattach whatever else
+  # invisible(lapply(paste('package:', names(sessionInfo()$otherPkgs), sep = ""),
+  #                  detach, character.only = TRUE, unload = TRUE))
+  # suppressMessages(invisible(lapply(pre, library, character.only = TRUE)))
 }
 
 plot_blk_labeless <- function(bm) {
@@ -141,24 +141,24 @@ plot_blk_labeless <- function(bm) {
 #Igraph needed beyond this point
 make_reduced_igraph <- function(reduced_mat) {
   w <- NULL
-  if (any(reduced_mat>1)) {
+  if (any(reduced_mat > 1)) {
     w <- TRUE
   }
-  iplotty <- graph_from_adjacency_matrix(reduced_mat, mode = "directed", weighted = w)
+  iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat, mode = "directed", weighted = w)
   return(iplotty)
 }
 
 plot_red_weighted <- function(blk) {
   #plots just weighted blockmodel network
   #plots colors based on order of blocks (I think this should match those on the networks)
-  plot(blk, vertex.color = c(1:length(vertex.attributes(blk)[[1]])), vertex.label = NA,
-       edge.width = (E(blk)$weight/3), edge.arrow.size = (E(blk)$weight/15), vertex.size = 25)
+  igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
+       edge.width = (E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
 }
 
 plot_red_unweighted <- function(blk) {
   #plots just weighted blockmodel network
   #plots colors based on order of blocks (I think this should match those on the networks)
-  plot(blk, vertex.color = c(1:length(vertex.attributes(blk)[[1]])), vertex.label = NA,
+  igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
        edge.arrow.size = .6, vertex.size = 25)
 }
 
