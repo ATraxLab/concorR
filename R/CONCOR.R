@@ -62,11 +62,11 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   if (!is.list(order_list)) {
     stop("not a list")
   }
-  l_length <- length(order_list)
+  num_list <- length(order_list)
   l_sub <- 0
-  for (i in 1:l_length) {
-    order_list[[i]] <- order_list[[i]]+l_sub
-    l_sub <- l_sub+length(order_list[[i]])
+  for (i in 1:num_list) {
+    order_list[[i]] <- order_list[[i]] + n
+    n <- n + length(order_list[[i]])
   }
   order <- unlist(order_list)
   return(order)
@@ -80,10 +80,10 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(m1)
 }
 
-.make_sub_boolean <- function(cor_mat_orderd) {
+.make_sub_boolean <- function(cor_matrixies_orderd) {
   #make boolean of first row of cor_mat_orderd where -1=>FALSE 1=>TRUE
   #for use with lapply, input matrix, output boolean vector
-  group <- cor_mat_orderd[, 1] > 0
+  group <- cor_matrixies_orderd[, 1] > 0
   return(group)
 }
 
@@ -94,12 +94,12 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   if (!is.list(bool_list)) {
     stop("not a list")
   }
-  boo_num <- length(bool_list)
+  bool_num <- length(bool_list)
   tot_length <- length(unlist(bool_list))
   #setup list of 2*boo_length false logical vectors each as long as tot_lenght
-  booleans_out <- rep(list(vector("logical", tot_length)), 2 * boo_num)
+  booleans_out <- rep(list(vector("logical", tot_length)), 2 * bool_num)
   a <- 1
-  for (i in 1:boo_num) {
+  for (i in 1:bool_num) {
     for(j in 1:length(bool_list[[i]])) {
       booleans_out[[2*i-1]][a] <- bool_list[[i]][j]
       booleans_out[[2*i]][a] <- !bool_list[[i]][j]
@@ -114,7 +114,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   #input boolean vector, matrix
   #output matrix
   if (ncol(mat_stack) != length(boolean)) {
-    stop("boolean wrong size")
+    stop("boolean of wrong size")
   }
   stack_shrunck <- mat_stack[, boolean, drop = FALSE]
   return(stack_shrunck)
@@ -122,7 +122,8 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
 
 .block_names <- function(mat_list) {
   lapply(seq_along(mat_list), function(x) data.frame(block = x,
-                                                     vertex = colnames(mat_list[[x]]), stringsAsFactors = FALSE))
+                                                     vertex = colnames(mat_list[[x]]),
+                                                     stringsAsFactors = FALSE))
 }
 
 concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
