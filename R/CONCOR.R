@@ -34,7 +34,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(m)
 }
 
-.isolates_col <- function(m) {
+isolates_col <- function(m) {
   #taake in matrix return return col names of isolate columns
   #diaganals must be stet to zero beforhand
   #check to see what nodes are isolates
@@ -135,14 +135,14 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
   mi <- lapply(m0, function(x) .val_diag(x, 0))
   miso <- mi
 
-  if (length(.isolates_col(.stack_mat(miso))) > 0) {
+  if (length(isolates_col(.stack_mat(miso))) > 0) {
     #remove isolates
     #make a stack of matrix and transposes to check overall isolates over
     iso_stack <- .stack_mat(miso)
     #check number of relations
     num_relat <- length(miso)
     #get overall isolates of all relations
-    isolist <- .isolates_col(iso_stack)
+    isolist <- isolates_col(iso_stack)
     #make vector of names to compare to and make boolean
     mi_names <- colnames(miso[[1]])
     #make boolean of which are isolates
