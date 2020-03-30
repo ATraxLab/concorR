@@ -1,5 +1,5 @@
 
-make_blk=function(adj.list, splitn = 1) {
+make_blk <- function(adj.list, splitn = 1) {
   #returns raw blockmodel data
 
   #run concor to get igraph splits, and shhh
