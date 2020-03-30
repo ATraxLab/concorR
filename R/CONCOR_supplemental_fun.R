@@ -52,9 +52,9 @@ blk_apply <- function(iobject, split, v = "cat"){
   #split is the output from concor for the desired split
   #Output: returns the igraph object with the new vertex attribute
 
-  o <- match(vertex.attributes(iobject)$name, split$vertex)
+  o <- match(igraph::vertex.attributes(iobject)$name, split$vertex)
   o_block <- split$block[o]
-  temp <- set.vertex.attribute(iobject, v, value = o_block)
+  temp <- igraph::set.vertex.attribute(iobject, v, value = o_block)
   return(temp)
 }
 
@@ -69,7 +69,7 @@ make_igraph <- function(adj_list, nsplit = 1){
   concor_out <- suppressWarnings(concor(adj_list, p = nsplit))
 
   #create igraph objects from the adjacency matrixes used as concor inputs
-  igraph_list <- lapply(adj_list, function(x) graph_from_adjacency_matrix(x))
+  igraph_list <- lapply(adj_list, function(x) igraph::graph_from_adjacency_matrix(x))
 
   #Create split name (name of the vertex attribute)
   v <- paste("csplit", nsplit ,sep = "")
@@ -84,7 +84,7 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1){
   #run concor on a series of relations in igraph_list and add the putput as a vertex attribute
 
   #get adjacency matrix list for running concor on
-  adj_list <- lapply(igraph_list, function(x) get.adjacency(x, sparse = FALSE))
+  adj_list <- lapply(igraph_list, function(x) igraph::get.adjacency(x, sparse = FALSE))
 
   #run concor on adj_list
   concor_out <- suppressWarnings(concor(adj_list, p = nsplit))
@@ -100,6 +100,6 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1){
 
 concor_plot <- function(iobject, p = NULL){
   split.name <- paste0("csplit", p)
-  plot(iobject, vertex.color = vertex.attributes(iobject)[[split.name]], vertex.label = NA, vertex.size = 5, edge.arrow.size = .3)
+  igraph::plot.igraph(iobject, vertex.color = igraph::vertex.attributes(iobject)[[split.name]], vertex.label = NA, vertex.size = 5, edge.arrow.size = .3)
 }
 
