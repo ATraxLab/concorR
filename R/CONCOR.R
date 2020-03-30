@@ -9,8 +9,6 @@
 #*should* work for weighted networks would be nice to have known resaults to compare to
 
 
-library(igraph)
-
 concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   #does concor once
   #needs the matrix stack as an input
