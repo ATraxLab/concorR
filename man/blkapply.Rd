@@ -1,5 +1,5 @@
-\name{blk.apply}
-\alias{blk.apply}
+\name{blk_apply}
+\alias{blk_apply}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{blk.apply
 %%  ~~function to do ... ~~

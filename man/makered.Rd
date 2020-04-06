@@ -1,5 +1,5 @@
-\name{make.red}
-\alias{make.red}
+\name{make_red}
+\alias{make_red}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{make.red
 %%  ~~function to do ... ~~

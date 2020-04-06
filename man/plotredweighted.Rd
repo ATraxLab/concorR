@@ -1,5 +1,5 @@
-\name{plot.red.weighted}
-\alias{plot.red.weighted}
+\name{plot_red_weighted}
+\alias{plot_red_weighted}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{plot.red.weighted
 %%  ~~function to do ... ~~

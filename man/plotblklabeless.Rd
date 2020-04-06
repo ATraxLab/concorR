@@ -1,11 +1,11 @@
-\name{plot.blk.labeless}
-\alias{plot.blk.labeless}
+\name{plot_blk_labeless}
+\alias{plot_blk_labeless}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{plot.blk.labeless
 %%  ~~function to do ... ~~
 }
 \description{
-Runs \code{plot.blk} but gets rid of pesky labels. Needs the \code{sna} package installed to work (is not needed to be attached).
+Runs \code{plot.blk} but gets rid of pesky labels.
 }
 \usage{
 plot.blk.labeless(bm)

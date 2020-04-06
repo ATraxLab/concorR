@@ -1,5 +1,5 @@
-\name{concor.igraph.apply}
-\alias{concor.igraph.apply}
+\name{concor_igraph_apply}
+\alias{concor_igraph_apply}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{concor.igraph.apply
 %%  ~~function to do ... ~~

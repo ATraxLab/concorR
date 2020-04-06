@@ -1,5 +1,5 @@
-\name{plot.red.unweighted}
-\alias{plot.red.unweighted}
+\name{plot_red_unweighted}
+\alias{plot_red_unweighted}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{plot.red.unweighted
 %%  ~~function to do ... ~~

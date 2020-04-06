@@ -1,5 +1,5 @@
-\name{concor.validitycheck}
-\alias{concor.validitycheck}
+\name{concor_validitycheck}
+\alias{concor_validitycheck}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{concor.validitycheck
 %%  ~~function to do ... ~~

@@ -1,5 +1,5 @@
-\name{make.red.igraph}
-\alias{make.red.igraph}
+\name{make_red_igraph}
+\alias{make_red_igraph}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{make.red.igraph
 %%  ~~function to do ... ~~

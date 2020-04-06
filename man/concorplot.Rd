@@ -1,5 +1,5 @@
-\name{concor.plot}
-\alias{concor.plot}
+\name{concor_plot}
+\alias{concor_plot}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{concor.plot
 %%  ~~function to do ... ~~

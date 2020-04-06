@@ -1,11 +1,11 @@
-\name{plot.blk}
-\alias{plot.blk}
+\name{plot_blk}
+\alias{plot_blk}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{plot.blk
 %%  ~~function to do ... ~~
 }
 \description{
-Displays a plot of a blockmodel. Is \code{\link[sna]{plot.blockmodel}} but reformats the shape to be square and removed the "relation - " form the titling of the output. Needs the \code{sna} package installed to work (is not needed to be attached).
+Displays a plot of a blockmodel. Is \code{\link[sna]{plot.blockmodel}} but reformats the shape to be square and removed the "relation - " form the titling of the output.
 }
 \usage{
 plot.blk(x, ...)

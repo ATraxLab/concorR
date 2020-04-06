@@ -1,11 +1,11 @@
-\name{make.blk}
-\alias{make.blk}
+\name{make_blk}
+\alias{make_blk}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{make.blk
+\title{make_blk
 %%  ~~function to do ... ~~
 }
 \description{
-Run concor for a specified split, \code{splitn}, and create a \code{blockmodel} type object from each input matrix in \code{adj.list} using the membership vector created through \code{concor}. Needs the \code{sna} package installed to work (is not needed to be attached).
+Run concor for a specified split, \code{splitn}, and create a \code{blockmodel} type object from each input matrix in \code{adj.list} using the membership vector created through \code{concor}.
 }
 \usage{
 make.blk(adj.list, splitn=1)
