@@ -26,19 +26,15 @@ make_reduced <- function(adj_list, splitn = 1, weighted = FALSE) {
 
   for (i in 1:length(dens_vec)) {
     temp1 <- d[[i]]
-    #check for and make NaN to 0
     temp1[is.nan(temp1)] <- 0
-    #set blocks with density less than overall density to 0
     temp1[temp1 < dens_vec[[i]]] <- 0
     if (!weighted) {
       temp1[temp1 > 0] <- 1
       mat_return[[i]] <- temp1
     }
     if (weighted) {
-      #find minimum density and scale all by that
       min <- min(temp1[temp1 > 0])
       mat_return[[i]] <- as.matrix(temp1 / min)
-      #scale all densities to 10 or less
       while (max(mat_return[[i]]) > 20) {
         mat_return[[i]] <- mat_return[[i]] / 1.05
       }
