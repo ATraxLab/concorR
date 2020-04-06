@@ -10,7 +10,7 @@ make_blk <- function(adj_list, splitn = 1) {
   return(blockmodel_list)
 }
 
-edge_dens <- function(adj_mat) {
+.edge_dens <- function(adj_mat) {
   adj_mat[adj_mat > 0] <- 1
   a <- sum(adj_mat)
   m <- length(adj_mat) - sqrt(length(adj_mat))
@@ -20,7 +20,7 @@ edge_dens <- function(adj_mat) {
 
 make_reduced <- function(adj_list, splitn = 1, weighted = FALSE) {
   blk_out = make_blk(adj_list, splitn)
-  dens_vec <- sapply(adj_list, function(x) edge_dens(x))
+  dens_vec <- sapply(adj_list, function(x) .edge_dens(x))
   d <- lapply(blk_out, function(x) x[[5]])
   mat_return <- vector("list", length = length(dens_vec))
 
