@@ -24,7 +24,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(m)
 }
 
-isolates_col <- function(m) {
+.isolates_col <- function(m) {
   isolates <- raw()
   for (i in 1:length(colnames(m))) {
     if (all(m[, i] == 0)) {
@@ -100,10 +100,10 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
   mi <- lapply(m0, function(x) .val_diag(x, 0))
   miso <- mi
 
-  if (length(isolates_col(.stack_mat(miso))) > 0) {
+  if (length(.isolates_col(.stack_mat(miso))) > 0) {
     iso_stack <- .stack_mat(miso)
     num_relat <- length(miso)
-    isolist <- isolates_col(iso_stack)
+    isolist <- .isolates_col(iso_stack)
     mi_names <- colnames(miso[[1]])
     iso_bool <- mi_names %in% isolist
     for (i in 1:num_relat) {
