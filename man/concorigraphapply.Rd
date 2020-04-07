@@ -1,7 +1,7 @@
 \name{concor_igraph_apply}
 \alias{concor_igraph_apply}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{concor.igraph.apply
+\title{concor_igraph_apply
 %%  ~~function to do ... ~~
 }
 \description{
@@ -34,13 +34,13 @@ Returns a list of igraph objects with a vertex attribute \code{csplit_n} where \
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{concor}}, \code{\link{blk.apply}}, \code{\link{make.igraph}}
+\code{\link{concor}}, \code{\link{blk_apply}}, \code{\link{make_igraph}}
 }
 \examples{
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(a)=c("a","b","c","d")
-colnames(a)=c("a","b","c","d")
-a.igraph=graph_from_adjacency_matrix(a)
+a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(a) <- c("a", "b", "c", "d")
+colnames(a) <- c("a", "b", "c", "d")
+a.igraph <- igraph::graph_from_adjacency_matrix(a)
 
-concor.igraph.apply(list(a.igraph))
+concor_igraph_apply(list(a.igraph))
 }

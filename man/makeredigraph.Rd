@@ -1,18 +1,18 @@
-\name{make_red_igraph}
-\alias{make_red_igraph}
+\name{make_reduced_igraph}
+\alias{make_reduced_igraph}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{make.red.igraph
+\title{make_reduced_igraph
 %%  ~~function to do ... ~~
 }
 \description{
-A function to turn a adjacency matrix outputted from \code{\link{make.red}} into an \code{igraph} object. This function requires \code{igraph} to function.
+A function to turn a adjacency matrix outputted from \code{\link{make_reduced}} into an \code{igraph} object. This function requires \code{igraph} to function.
 }
 \usage{
-make.red.igraph(red.mat)
+make_reduced_igraph(reduced_mat)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{red.mat}{The outputted reduced network adjacency matrix outputted from \code{\link{make.red}} as \code{$red.mat[[i]]}}
+  \item{reduced_mat}{The outputted reduced network adjacency matrix outputted from \code{\link{make_reduced}} as \code{$reduced_mat[[i]]}}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -33,17 +33,16 @@ returns either a weighted or weighted igraph object depending on if the input ma
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{make.red}}
+\code{\link{make_reduced}}
 }
 \examples{
-library(igraph)
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(a)=c("a","b","c","d")
-colnames(a)=c("a","b","c","d")
+a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(g1) <- c("a", "b", "c", "d")
+colnames(g1) <- c("a", "b", "c", "d")
 
 #make the reduced matrix
-r.mat=make.red(list(a),splitn=1, TRUE)
+r_mat <- make_reduced(list(a), splitn = 1, TRUE)
 
-make.red.igraph(r.mat$red.mat[[1]])
+make_reduced_igraph(r_mat$reduced_mat[[1]])
 }
 

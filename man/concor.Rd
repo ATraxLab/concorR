@@ -8,7 +8,7 @@
 Utilize the CONCOR (CONvergence of iterated CORrelations) algorithm to identify roles within social network data. This version works for an arbitrary number of relationships, assuming they all are for the same data (same size of input matrices), and is able to be used with isolates present. It requires further testing on weighted networks (but there is no evidence of it failing on them yet). It will attempt split the network p times, causing there to be 2^p partitions with one extra that is just the isolated nodes (if they exist). If the algorithm attempts to split a structurally equivalent node group, or a singular node group the function will fail. Due to the current function being unable to ignore such a group and continue to split subsequent groups one must lower the number of desired splits, p, to allow the function to succeed.
 }
 \usage{
-concor(m0, cutoff=.9999999, max_iter=50, p=1)
+concor(m0, cutoff = .9999999, max_iter = 50, p = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -39,9 +39,9 @@ The output will be a single large data-frame with two important columns the firs
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(a)=c("a","b","c","d")
-colnames(a)=c("a","b","c","d")
+a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(a) <- c("a", "b", "c", "d")
+colnames(a) <- c("a", "b", "c", "d")
 
 concor(list(a))
 }

@@ -8,11 +8,11 @@
 Adds the split taken from the output of \code{concor} to its \code{igraph} object as a vertex attribute.
 }
 \usage{
-blk.apply(iobject, split, v="cat")
+blk_apply(iobject, split, v = "cat")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{iobject}{The igraph object representing same data used in \cose{concor}}
+  \item{iobject}{The igraph object representing same data used in \code{concor}}
   \item{split}{The output form \code{concor} for a specific split}
   \item{v}{What the vertex attribute will be called, defaults to "cat"}
 }
@@ -39,12 +39,12 @@ Returns the igraph object with the new vertex attribute v.
 }
 \examples{
 library(igraph)
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(a)=c("a","b","c","d")
-colnames(a)=c("a","b","c","d")
-a.igraph=graph_from_adjacency_matrix(a)
+a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(a) <- c("a", "b", "c", "d")
+colnames(a) <- c("a", "b", "c", "d")
+a_igraph <- igraph::graph_from_adjacency_matrix(a)
 
-con.out=concor(list(a))
+con_out <- concor(list(a))
 
-blk.apply(a.igraph, con.out, "split_1")
+blk_apply(a_igraph, con_out, "split_1")
 }

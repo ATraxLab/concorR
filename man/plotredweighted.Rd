@@ -1,14 +1,14 @@
 \name{plot_red_weighted}
 \alias{plot_red_weighted}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{plot.red.weighted
+\title{plot_red_weighted
 %%  ~~function to do ... ~~
 }
 \description{
 Plot a reduced graph with weighted ties using \code{igraph}.
 }
 \usage{
-plot.red.weighted(x)
+plot_red_weighted(blk)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,17 +33,17 @@ Plots the reduced graph with node color being different for each role (and the s
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{make.red}}, \code{\link{make.red.igraph}}, \code{\link{plot.red.unweighted}}
+\code{\link{make_reduced}}, \code{\link{make_reduced_igraph}}, \code{\link{plot_red_unweighted}}
 }
 \examples{
 library(igraph)
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(a)=c("a","b","c","d")
-colnames(a)=c("a","b","c","d")
+g1 <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(g1) <- c("a", "b", "c", "d")
+colnames(g1) <- c("a", "b", "c", "d")
 
 #make the reduced matrix
-r.mat=make.red(list(a),splitn=1, TRUE)
-r.igraph=make.red.igraph(r.mat$red.mat[[1]])
+r_mat <- make_reduced(list(g1), splitn = 1, TRUE)
+r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 
-plot.red.weighted(r.igraph)
+plot_red_weighted(r_igraph)
 }

@@ -5,14 +5,14 @@
 %%  ~~function to do ... ~~
 }
 \description{
-Run concor for a specified split, \code{splitn}, and create a \code{blockmodel} type object from each input matrix in \code{adj.list} using the membership vector created through \code{concor}.
+Run concor for a specified split, \code{splitn}, and create a \code{blockmodel} type object from each input matrix in \code{adj_list} using the membership vector created through \code{concor}.
 }
 \usage{
-make.blk(adj.list, splitn=1)
+make_blk(adj_list, splitn = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{adj.list}{The list of input matrices to CONCOR, each representing a specific relationship}
+  \item{adj_list}{The list of input matrices to CONCOR, each representing a specific relationship}
   \item{splitn}{The total number of splits CONCOR will preform}
 }
 \details{
@@ -38,15 +38,15 @@ Returns a list of blockmodel type objects based off the input matrices and the c
   \code{\link{concor}}
 }
 \examples{
-g1=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(g1)=c("a","b","c","d")
-colnames(g1)=c("a","b","c","d")
+g1 <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(g1) <- c("a", "b", "c", "d")
+colnames(g1) <- c("a", "b", "c", "d")
 
-g2=matrix(c(0,1,0,0,0,0,1,0,0,0,1,1,1,1,0,0), ncol=4)
-rownames(g2)=c("a","b","c","d")
-colnames(g2)=c("a","b","c","d")
+g2 <- matrix(c(0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0), ncol = 4)
+rownames(g2) <- c("a", "b", "c", "d")
+colnames(g2) <- c("a", "b", "c", "d")
 
-gl=list(g1,g2)
-make.blk(gl)
+gl <- list(g1, g2)
+make_blk(gl)
 }
 

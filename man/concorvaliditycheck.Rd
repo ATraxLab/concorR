@@ -8,11 +8,11 @@
 Checks whether a list of input matrices are valid for \code{concor}. Specifically makes sure matrix sizes/vertex names match and adds vertex names if they don't exist.
 }
 \usage{
-concor.validitycheck(m.list)
+concor_validitycheck(m_list)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{m.list}{The list of input matrices  for use in \code{concor}
+  \item{m_list}{The list of input matrices  for use in \code{concor}
 %%     ~~Describe \code{x} here~~
 }
 }
@@ -38,22 +38,22 @@ Returns the same list of matrices if everything checks out, fails if size mismat
 \code{\link{concor}}, \code{\link{name}}
 }
 \examples{
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-b=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-c=matrix(c(0,0,0,1,1,0,1,0,1), ncol=3)
-rownames(a)=c("a","b","c","d")
-colnames(a)=c("a","b","c","d")
+a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+b <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+c <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1), ncol = 3)
+rownames(a) <- c("a", "b", "c", "d")
+colnames(a) <- c("a", "b", "c", "d")
 
 #fails name mismatch
-concor.validitycheck(list(a,b))
+concor_validitycheck(list(a, b))
 
 #fails size mismach
-concor.validitycheck(list(b,c))
+concor_validitycheck(list(b, c))
 
 #passes but adds node names
-concor.validitycheck(list(b,b))
+concor_validitycheck(list(b, b))
 
 #passes
-concor.validitycheck(list(a,a))
+concor_validitycheck(list(a, a))
 }
 

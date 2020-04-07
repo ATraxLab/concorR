@@ -22,6 +22,7 @@ plot.blk(x, ...)
 Plots a blockmodel that is square.
 }
 \references{
+Carter T. Butts (2019). sna: Tools for Social Network Analysis. R package version 2.5.
 https://CRAN.R-project.org/package=sna
 }
 \author{
@@ -39,12 +40,12 @@ edited by Tyme Suda
 \code{\link[sna]{plot.blockmodel}}
 }
 \examples{
-g1=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-rownames(g1)=c("a","b","c","d")
-colnames(g1)=c("a","b","c","d")
+g1 <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+rownames(g1) <- c("a", "b", "c", "d")
+colnames(g1) <- c("a", "b", "c", "d")
 
-gl=list(g1)
-bm=make.blk(gl,1)[[1]]
-plot.blk(bm)
+gl <- list(g1)
+bm <- make_blk(gl, 1)[[1]]
+plot_plk(bm)
 }
 

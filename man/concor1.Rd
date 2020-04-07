@@ -11,7 +11,7 @@ Runs the Pearson correlation on the matrix stack repeatedly until a square matri
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-concor1(m_stack, cutoff=.9999999, max_iter=50)
+concor1(m_stack, cutoff = .9999999, max_iter = 50)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,8 +42,8 @@ Returns a sure matrix with number of rows/columns equal to the number of columns
 \code{\link{concor}}
 }
 \examples{
-a=matrix(c(0,0,0,1,1,0,1,0,1,1,0,1,1,0,1,0), ncol=4)
-b=rbind(a, t(a))
+a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
+b <- rbind(a, t(a))
 
 concor1(b)
 }
