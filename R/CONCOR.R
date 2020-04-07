@@ -45,7 +45,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
     stop("not a list")
   }
   num_list <- length(order_list)
-  l_sub <- 0
+  n <- 0
   for (i in 1:num_list) {
     order_list[[i]] <- order_list[[i]] + n
     n <- n + length(order_list[[i]])
