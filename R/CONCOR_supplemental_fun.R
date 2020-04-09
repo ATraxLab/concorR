@@ -10,33 +10,6 @@
   return(mat)
 }
 
-concor_validitycheck <- function(m_list) {
-  a <- m_list[[1]]
-  for (i in 1:length(m_list)) {
-    if (length(a) != length(m_list[[i]])) {
-      stop('Adjacency matrixes of mismatched sizes')
-    }
-  }
-
-  b <- sapply(m_list, function(x) is.null(colnames(x)))
-  if (all(b)) {
-    warning("node names don't exist\nAdding default node names\n")
-    m_list <- lapply(m_list, function(x) .name(x))
-    b <- sapply(m_list, function(x) is.null(colnames(x)))
-  }
-  if (any(b)) {
-    stop("Node name mismatch")
-  }
-
-  a <- m_list[[1]]
-  for (i in 1:length(m_list)) {
-    if (all(colnames(a) != colnames(m_list[[i]]))) {
-      stop("Node name mismatch")
-    }
-  }
-  return(m_list)
-}
-
 blk_apply <- function(iobject, split, v = "cat") {
   o <- match(igraph::vertex.attributes(iobject)$name, split$vertex)
   o_block <- split$block[o]

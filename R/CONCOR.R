@@ -19,6 +19,33 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(cor_i)
 }
 
+concor_validitycheck <- function(m_list) {
+  a <- m_list[[1]]
+  for (i in 1:length(m_list)) {
+    if (length(a) != length(m_list[[i]])) {
+      stop('Adjacency matrixes of mismatched sizes')
+    }
+  }
+
+  b <- sapply(m_list, function(x) is.null(colnames(x)))
+  if (all(b)) {
+    warning("node names don't exist\nAdding default node names\n")
+    m_list <- lapply(m_list, function(x) .name(x))
+    b <- sapply(m_list, function(x) is.null(colnames(x)))
+  }
+  if (any(b)) {
+    stop("Node name mismatch")
+  }
+
+  a <- m_list[[1]]
+  for (i in 1:length(m_list)) {
+    if (all(colnames(a) != colnames(m_list[[i]]))) {
+      stop("Node name mismatch")
+    }
+  }
+  return(m_list)
+}
+
 .val_diag <- function(m, value = NA) {
   diag(m) <- value
   return(m)
@@ -96,8 +123,9 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
                                                      stringsAsFactors = FALSE))
 }
 
-concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
-  mi <- lapply(m0, function(x) .val_diag(x, 0))
+concor <- function(m_list, cutoff = .9999999, max_iter = 50, p = 1) {
+  m_list <- concor_validitycheck(m_list)
+  mi <- lapply(m_list, function(x) .val_diag(x, 0))
   miso <- mi
 
   if (length(.isolates_col(.stack_mat(miso))) > 0) {
@@ -109,7 +137,7 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
     for (i in 1:num_relat) {
       mi[[i]] <- miso[[i]][!iso_bool, !iso_bool, drop = FALSE]
     }
-    m_iso <- m0[[1]][iso_bool, iso_bool, drop = FALSE]
+    m_iso <- m_list[[1]][iso_bool, iso_bool, drop = FALSE]
   }
 
   mi <- lapply(mi, function(x) .val_diag(x, NA))
@@ -134,7 +162,7 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
     mats_groups[[length(stack_list)+1]] <- m_iso
   }
   groups <- do.call(rbind, .block_names(mats_groups))
-  groups[match(rownames(m0[[1]]), groups$vertex), ]
+  groups[match(rownames(m_list[[1]]), groups$vertex), ]
 
   return(groups)
 }
