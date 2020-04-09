@@ -5,14 +5,14 @@
 %%  ~~function to do ... ~~
 }
 \description{
-Plots a network of interest with a concor output as the vertex color. The \code{igraph} object used should be created using \code{\link{make_igraph}} or \code{\link{concor_igraph_apply}}.
+Plots a network of interest with a concor output as the vertex color. The \code{igraph} object used should be created using \code{\link{concor_make_igraph}} or \code{\link{concor_igraph_apply}}.
 }
 \usage{
-concor.plot(iobject, p=NULL)
+concor.plot(iobject, p = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{iobjet}{The igraph object with \code{concor} splitting as a vertex attribute. Should be created using \code{\link{make_igraph}} or \code{\link{concor_igraph_apply}}}
+  \item{iobjet}{The igraph object with \code{concor} splitting as a vertex attribute. Should be created using \code{\link{concor_make_igraph}} or \code{\link{concor_igraph_apply}}}
   \item{p}{The \code{concor} splitting of interest, \code{p} must correspond to a split number added to the igraph object}
 }
 \details{
@@ -34,7 +34,7 @@ Plots the network with the concor blocking as color.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{concor}}, \code{\link{make_igraph}}, \code{\link{concor_igraph_apply}}
+\code{\link{concor}}, \code{\link{concor_make_igraph}}, \code{\link{concor_igraph_apply}}
 }
 \examples{
 a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)

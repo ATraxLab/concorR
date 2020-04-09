@@ -44,7 +44,7 @@ blk_apply <- function(iobject, split, v = "cat") {
   return(blk_return)
 }
 
-make_igraph <- function(adj_list, nsplit = 1) {
+concor_make_igraph <- function(adj_list, nsplit = 1) {
   concor_out <- suppressWarnings(concor(adj_list, p = nsplit))
 
   igraph_list <- lapply(adj_list, function(x) igraph::graph_from_adjacency_matrix(x))
