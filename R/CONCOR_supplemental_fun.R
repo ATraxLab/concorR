@@ -10,7 +10,7 @@
   return(mat)
 }
 
-blk_apply <- function(iobject, split, v = "cat") {
+.blk_apply <- function(iobject, split, v = "cat") {
   o <- match(igraph::vertex.attributes(iobject)$name, split$vertex)
   o_block <- split$block[o]
   blk_return <- igraph::set.vertex.attribute(iobject, v, value = o_block)
@@ -22,7 +22,7 @@ concor_make_igraph <- function(adj_list, nsplit = 1) {
 
   igraph_list <- lapply(adj_list, function(x) igraph::graph_from_adjacency_matrix(x))
   v <- paste("csplit", nsplit, sep = "")
-  igraph_out <- lapply(igraph_list, function(x) blk_apply(x, concor_out, v))
+  igraph_out <- lapply(igraph_list, function(x) .blk_apply(x, concor_out, v))
 
   return(igraph_out)
 }
@@ -32,7 +32,7 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1) {
 
   concor_out <- suppressWarnings(concor(adj_list, p = nsplit))
   v <- paste("csplit", nsplit, sep = "")
-  igraph_out <- lapply(igraph_list, function(x) blk_apply(x, concor_out, v))
+  igraph_out <- lapply(igraph_list, function(x) .blk_apply(x, concor_out, v))
 
   return(igraph_out)
 }

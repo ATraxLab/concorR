@@ -19,7 +19,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(cor_i)
 }
 
-concor_validitycheck <- function(m_list) {
+.concor_validitycheck <- function(m_list) {
   a <- m_list[[1]]
   for (i in 1:length(m_list)) {
     if (length(a) != length(m_list[[i]])) {
@@ -124,7 +124,7 @@ concor_validitycheck <- function(m_list) {
 }
 
 concor <- function(m_list, cutoff = .9999999, max_iter = 50, p = 1) {
-  m_list <- concor_validitycheck(m_list)
+  m_list <- .concor_validitycheck(m_list)
   mi <- lapply(m_list, function(x) .val_diag(x, 0))
   miso <- mi
 
