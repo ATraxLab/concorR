@@ -2,14 +2,6 @@
 #Tyme Suda
 
 
-.name <- function(mat) {
-  a <- 1:nrow(mat)
-  vnames <- sprintf("v%03d", a)
-  colnames(mat) <- vnames
-  rownames(mat) <- vnames
-  return(mat)
-}
-
 .blk_apply <- function(iobject, split, v = "cat") {
   o <- match(igraph::vertex.attributes(iobject)$name, split$vertex)
   o_block <- split$block[o]
