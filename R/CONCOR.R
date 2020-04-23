@@ -154,6 +154,7 @@ concor <- function(m_list, cutoff = .9999999, max_iter = 50, p = 1) {
 
   mi <- lapply(mi, function(x) .val_diag(x, NA))
   stack_list <- list(.stack_mat(mi))
+  stop_check <- list()
 
   for (i in 1:p) {
     concored <- lapply(stack_list, function(x) concor1(x))
@@ -170,6 +171,13 @@ concor <- function(m_list, cutoff = .9999999, max_iter = 50, p = 1) {
 
     is_empty <- sapply(stack_list, function(x) ncol(x) != 0)
     stack_list <- stack_list[is_empty]
+
+    if (identical(stop_check, stack_list)) {
+      warning(paste("split", i, "was the same as split",  i - 1, "\n stopping"))
+      break
+    }
+
+    stop_check <- stack_list
   }
 
   mats_groups <- stack_list
