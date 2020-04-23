@@ -135,7 +135,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
                                                      stringsAsFactors = FALSE))
 }
 
-concor <- function(m_list, cutoff = .9999999, max_iter = 50, p = 1) {
+concor <- function(m_list, p = 1, cutoff = .9999999, max_iter = 50) {
   m_list <- .concor_validitycheck(m_list)
   mi <- lapply(m_list, function(x) .val_diag(x, 0))
   miso <- mi
