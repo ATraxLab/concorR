@@ -135,9 +135,12 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
                                                      stringsAsFactors = FALSE))
 }
 
-concor <- function(m_list, p = 1, cutoff = .9999999, max_iter = 50) {
+concor <- function(m_list, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50) {
   m_list <- .concor_validitycheck(m_list)
-  mi <- lapply(m_list, function(x) .val_diag(x, 0))
+  mi <- m_list
+  if (all(sapply(mi, function(x) all(is.na(diag(x)))))) {
+    mi <- lapply(mi, function(x) .val_diag(x, 0))
+  }
   miso <- mi
 
   if (length(.isolates_col(.stack_mat(miso))) > 0) {
@@ -152,7 +155,9 @@ concor <- function(m_list, p = 1, cutoff = .9999999, max_iter = 50) {
     m_iso <- m_list[[1]][iso_bool, iso_bool, drop = FALSE]
   }
 
-  mi <- lapply(mi, function(x) .val_diag(x, NA))
+  if (!self_ties) {
+    mi <- lapply(mi, function(x) .val_diag(x, NA))
+  }
   stack_list <- list(.stack_mat(mi))
   stop_check <- list()
 
