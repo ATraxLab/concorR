@@ -3,8 +3,9 @@
 #By Tyme Suda
 
 concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
-  if (ncol(m_stack) < 2)
-    stop("Too few columns to partition.")
+  if (ncol(m_stack) < 2){
+    return(cor(m_stack, use  =  "pairwise.complete.obs"))
+  }
 
   cor_i <- cor(m_stack, use  =  "pairwise.complete.obs")
   iter <- 0
@@ -17,6 +18,41 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   cor_i[cor_i > 0] <- 1
 
   return(cor_i)
+}
+
+.name <- function(mat) {
+  a <- 1:nrow(mat)
+  vnames <- sprintf("v%03d", a)
+  colnames(mat) <- vnames
+  rownames(mat) <- vnames
+  return(mat)
+}
+
+.concor_validitycheck <- function(m_list) {
+  a <- m_list[[1]]
+  for (i in 1:length(m_list)) {
+    if (length(a) != length(m_list[[i]])) {
+      stop('Adjacency matrixes of mismatched sizes')
+    }
+  }
+
+  b <- sapply(m_list, function(x) is.null(colnames(x)))
+  if (all(b)) {
+    warning("node names don't exist\nAdding default node names\n")
+    m_list <- lapply(m_list, function(x) .name(x))
+    b <- sapply(m_list, function(x) is.null(colnames(x)))
+  }
+  if (any(b)) {
+    stop("Node name mismatch")
+  }
+
+  a <- m_list[[1]]
+  for (i in 1:length(m_list)) {
+    if (all(colnames(a) != colnames(m_list[[i]]))) {
+      stop("Node name mismatch")
+    }
+  }
+  return(m_list)
 }
 
 .val_diag <- function(m, value = NA) {
@@ -55,6 +91,9 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
 }
 
 .order_apply <- function(order, mat) {
+  if (length(order) == 1) {
+    return(mat)
+  }
   m1 <- mat[order, order]
   return(m1)
 }
@@ -96,8 +135,12 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
                                                      stringsAsFactors = FALSE))
 }
 
-concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
-  mi <- lapply(m0, function(x) .val_diag(x, 0))
+concor <- function(m_list, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50) {
+  m_list <- .concor_validitycheck(m_list)
+  mi <- m_list
+  if (all(sapply(mi, function(x) all(is.na(diag(x)))))) {
+    mi <- lapply(mi, function(x) .val_diag(x, 0))
+  }
   miso <- mi
 
   if (length(.isolates_col(.stack_mat(miso))) > 0) {
@@ -109,16 +152,19 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
     for (i in 1:num_relat) {
       mi[[i]] <- miso[[i]][!iso_bool, !iso_bool, drop = FALSE]
     }
-    m_iso <- m0[[1]][iso_bool, iso_bool, drop = FALSE]
+    m_iso <- m_list[[1]][iso_bool, iso_bool, drop = FALSE]
   }
 
-  mi <- lapply(mi, function(x) .val_diag(x, NA))
+  if (!self_ties) {
+    mi <- lapply(mi, function(x) .val_diag(x, NA))
+  }
   stack_list <- list(.stack_mat(mi))
+  stop_check <- list()
 
   for (i in 1:p) {
     concored <- lapply(stack_list, function(x) concor1(x))
     order_list <- lapply(concored, function(x) order(x[, 1]))
-    for (j in 1:(2 ^ (i - 1))) {
+    for (j in 1:length(order_list)) {
       concored[[j]] <- .order_apply(order_list[[j]], concored[[j]])
     }
     order_list <- .make_order(order_list)
@@ -127,14 +173,24 @@ concor <- function(m0, cutoff = .9999999, max_iter = 50, p = 1) {
     mi <- lapply(mi, function(x) .order_apply(order_list, x))
     stack_list <- .stack_mat(mi)
     stack_list <- lapply(bool_list, function(x) .boolean_apply(x, stack_list))
+
+    is_empty <- sapply(stack_list, function(x) ncol(x) != 0)
+    stack_list <- stack_list[is_empty]
+
+    if (identical(stop_check, stack_list)) {
+      warning(paste("split", i, "was the same as split",  i - 1, "\n stopping"))
+      break
+    }
+
+    stop_check <- stack_list
   }
 
   mats_groups <- stack_list
   if (exists("m_iso")) {
-    mats_groups[[length(stack_list)+1]] <- m_iso
+    mats_groups[[length( mats_groups) + 1]] <- m_iso
   }
   groups <- do.call(rbind, .block_names(mats_groups))
-  groups[match(rownames(m0[[1]]), groups$vertex), ]
+  groups[match(rownames(m_list[[1]]), groups$vertex), ]
 
   return(groups)
 }

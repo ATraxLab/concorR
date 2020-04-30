@@ -1,14 +1,14 @@
-\name{make_igraph}
-\alias{make_igraph}
+\name{concor_make_igraph}
+\alias{concor_make_igraph}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{make_igraph
+\title{concor_make_igraph
 %%  ~~function to do ... ~~
 }
 \description{
 Takes the list of adjacency matrices used in \code{concor} and creates a list of \code{igraph} objects with a specific concor split added as an vertex attribute.
 }
 \usage{
-make_igraph(adj_list, nsplit = 1)
+concor_make_igraph(adj_list, nsplit = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -41,5 +41,5 @@ a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
 rownames(a) <- c("a", "b", "c", "d")
 colnames(a) <- c("a", "b", "c", "d")
 
-make_igraph(list(a))
+concor_make_igraph(list(a))
 }

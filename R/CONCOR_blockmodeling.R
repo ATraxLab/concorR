@@ -50,6 +50,8 @@ make_reduced <- function(adj_list, splitn = 1, weighted = FALSE) {
   return(return_list)
 }
 
+
+
 plot_blk <- function (x, ...) {
   #edited version of the function from the SNA package, plots as square
   #and slightly changed labeling
@@ -102,7 +104,7 @@ make_reduced_igraph <- function(reduced_mat) {
 
 plot_red_weighted <- function(blk) {
   igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-       edge.width = (E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
+       edge.width = (igraph::E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
 }
 
 plot_red_unweighted <- function(blk) {
