@@ -34,7 +34,7 @@ Returns a list of igraph objects with a vertex attribute \code{csplit_n} where \
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{concor}}, \code{\link{blk_apply}}, \code{\link{concor_igraph_apply}}
+\code{\link{concor}}, \code{\link{concor_igraph_apply}}
 }
 \examples{
 a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
