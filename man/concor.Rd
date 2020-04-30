@@ -8,14 +8,15 @@
 Use the CONCOR (CONvergence of iterated CORrelations) algorithm to identify roles within social network data.
 }
 \usage{
-concor(m0, cutoff = .9999999, max_iter = 50, p = 1)
+concor(m0, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{m0}{A list of adjacency matrices. Matrices must be square, of the same dimensions, and have row/column names (node names). Each matrix represents a different relationship of the same nodes. If there is only one relationship of interest, \code{m0} is a list of that single matrix.}
+  \item{p}{The number of times the input matrices will be partitioned. Each split divides a partition in two, resulting in 2^p roles identified.}
+  \item{self_ties}{A Boolean representing whether self-ties can be present in the data, \code{TRUE} allows for self-ties, \code{FALSE} does not.}
   \item{cutoff}{The cutoff point of the iterated correlations. Both this and \code{max_iter} can be lowered slightly to improve speed.}
   \item{max_iter}{The maximum number of times the correlation will be run for a split. Both this and \code{cutoff} can be lowered slightly to improve speed.}
-  \item{p}{The number of times the input matrices will be partitioned. Each split divides a partition in two, resulting in 2^p roles identified.}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
