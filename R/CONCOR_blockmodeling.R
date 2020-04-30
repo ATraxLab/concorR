@@ -1,4 +1,5 @@
 
+
 make_blk <- function(adj_list, splitn = 1) {
   concor_out <- suppressWarnings(concor(adj_list, p = splitn))
 
@@ -49,8 +50,6 @@ make_reduced <- function(adj_list, splitn = 1, weighted = FALSE) {
   return_list$dens <- dens_vec
   return(return_list)
 }
-
-
 
 plot_blk <- function (x, labels = FALSE, ...) {
   #edited version of the function from the SNA package, plots as square
