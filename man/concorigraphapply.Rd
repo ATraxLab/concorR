@@ -5,7 +5,7 @@
 %%  ~~function to do ... ~~
 }
 \description{
-Takes a list of graph objects, runs \code{concor} until the desired number of splits \code{nsplit}, and adds the final split to each \code{igraph} object as a vertex attribute.
+Takes a list of igraph objects, runs \code{concor} until the desired number of splits \code{nsplit}, and adds the final split to each object as a vertex attribute.
 }
 \usage{
 concor_igraph_apply(igraph_list, nsplit = 1)
@@ -35,7 +35,7 @@ Returns a list of igraph objects, each with a vertex attribute \code{csplitn}, w
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{concor}}, \code{\link{blk_apply}}, \code{\link{concor_make_igraph}}
+\code{\link{concor}}, \code{\link{concor_make_igraph}}
 }
 \examples{
 a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
