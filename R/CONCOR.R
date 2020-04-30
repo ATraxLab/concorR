@@ -178,7 +178,7 @@ concor <- function(m_list, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter
     stack_list <- stack_list[is_empty]
 
     if (identical(stop_check, stack_list)) {
-      warning(paste("split", i, "was the same as split",  i - 1, "\n stopping"))
+      warning(paste("split", p, "was the same as split",  i - 1, "\n stopping"))
       break
     }
 
