@@ -1,14 +1,14 @@
 \name{concor_igraph_apply}
 \alias{concor_igraph_apply}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{concor_igraph_apply
+\title{Find CONCOR partition and add to a list of igraph objects
 %%  ~~function to do ... ~~
 }
 \description{
 Takes a list of graph objects, runs \code{concor} until the desired number of splits \code{nsplit}, and adds the final split to each \code{igraph} object as a vertex attribute.
 }
 \usage{
-concor_igraph_apply(igraph.list, nsplit = 1)
+concor_igraph_apply(igraph_list, nsplit = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,7 +20,7 @@ concor_igraph_apply(igraph.list, nsplit = 1)
 This function is a wrapper for a common task: Running \code{\link{concor}} on one or more igraph objects and adding the resulting partition to each object as a vertex attribute. If multiple igraph objects are included in the input list, they should be multiple relations for the same nodes.
 }
 \value{
-Returns a list of igraph objects, each with a vertex attribute \code{csplit_n}, where \code{n} is \code{nsplit} that contains the block assignment obtained from \code{concor}.
+Returns a list of igraph objects, each with a vertex attribute \code{csplitn}, where \code{n} is \code{nsplit} that contains the block assignment obtained from \code{concor}.
 }
 \references{
 %% ~put references to the literature/web site here ~
