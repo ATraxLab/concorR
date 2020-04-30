@@ -13,6 +13,7 @@ plot.blk(x, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{An object of class \code{blockmodel}}
+  \item{label}{A Boolean representing whether labels should be shown or not, \code{TRUE} shows them, \code{FALSE} does not.}
   \item{...}{Further arguments passed to or from other methods}
 }
 \details{

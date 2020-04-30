@@ -52,12 +52,17 @@ make_reduced <- function(adj_list, splitn = 1, weighted = FALSE) {
 
 
 
-plot_blk <- function (x, ...) {
+plot_blk <- function (x, labels = FALSE, ...) {
   #edited version of the function from the SNA package, plots as square
   #and slightly changed labeling
 
   #Carter T. Butts (2019). sna: Tools for Social Network Analysis. R package version 2.5.
   #https://CRAN.R-project.org/package=sna
+
+  if (!labels) {
+    x$plabels <- rep("", length(x$plabels))
+    x$glabels <- ""
+  }
 
   oldpar <- par(no.readonly = TRUE)
   on.exit(par(oldpar))
@@ -84,14 +89,6 @@ plot_blk <- function (x, ...) {
       abline(v = j - 0.5, h = j - 0.5, lty = 3)
   }
 }
-
-plot_blk_labeless <- function(bm) {
-  bm$plabels <- rep("", length(bm$plabels))
-  bm$glabels <- ""
-  plot_blk(bm)
-}
-
-
 
 make_reduced_igraph <- function(reduced_mat) {
   w <- NULL
