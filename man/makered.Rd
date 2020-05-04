@@ -52,5 +52,5 @@ rownames(g2) <- c("a", "b", "c", "d")
 colnames(g2) <- c("a", "b", "c", "d")
 
 make_reduced(list(g1, g2), splitn = 2)
-make_reduced(list(g1, g2), splitn = 2, TRUE)
+make_reduced(list(g1, g2), splitn = 2, weighted = TRUE)
 }
