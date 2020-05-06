@@ -11,7 +11,7 @@ A network of connections between 21 managers at a high-tech company taken by Dav
 \format{
 An directed and unweighted \code{igraph} object, including each of the 21 managers.
 
-Vertex Attributes:
+\bold{Vertex Attributes:}
 
   \code{Name}: Vertex names (v1, v2, ..., v21)
 
