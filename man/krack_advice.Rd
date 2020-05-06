@@ -15,9 +15,9 @@ Vertex Attributes:
 
   \code{Name}: Vertex names (v1, v2, ..., v21)
 
-  \code{x}: A stet of x coordinates, the same for \code{krack_friend}, \code{krack_advice}, and \code{krack_report}
+  \code{x}: A stet of x coordinates, the same for \link{krack_friend}, \link{krack_advice}, and \link{krack_report}
 
-  \code{y}: A stet of y coordinates, the same for \code{krack_friend}, \code{krack_advice}, and \code{krack_report}
+  \code{y}: A stet of y coordinates, the same for \link{krack_friend}, \link{krack_advice}, and \link{krack_report}
 
   \code{Age}: The age of each manager
 
