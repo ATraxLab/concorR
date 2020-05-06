@@ -2,78 +2,42 @@
 \alias{krack_friend}
 \docType{data}
 \title{
-%%   ~~ data name/kind ... ~~
+Krackhardt High-Tech Managers: Friendship
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
+A network of connections between 21 managers at a high-tech company taken by David Krackhardt in 1987. This network (\code{krack_friend}) uses the relational data from the question 'Who is a friend of X?' to define connections between managers.
 }
-\usage{data("krack_friend")}
+\usage{krack_advice}
 \format{
-  The format is:
-List of 10
- $ :List of 1
-  ..$ v1: 'igraph.vs' Named int [1:5] 2 4 8 12 16
-  .. ..- attr(*, "names")= chr [1:5] "v2" "v4" "v8" "v12" ...
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v2: 'igraph.vs' Named int [1:3] 1 18 21
-  .. ..- attr(*, "names")= chr [1:3] "v1" "v18" "v21"
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v3: 'igraph.vs' Named int [1:2] 14 19
-  .. ..- attr(*, "names")= chr [1:2] "v14" "v19"
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v4: 'igraph.vs' Named int [1:6] 1 2 8 12 16 17
-  .. ..- attr(*, "names")= chr [1:6] "v1" "v2" "v8" "v12" ...
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v5: 'igraph.vs' Named int [1:7] 2 9 11 14 17 19 21
-  .. ..- attr(*, "names")= chr [1:7] "v2" "v9" "v11" "v14" ...
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v6: 'igraph.vs' Named int [1:6] 2 7 9 12 17 21
-  .. ..- attr(*, "names")= chr [1:6] "v2" "v7" "v9" "v12" ...
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v7: 'igraph.vs' Named int(0) 
-  .. ..- attr(*, "names")= chr(0) 
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v8: 'igraph.vs' Named int 4
-  .. ..- attr(*, "names")= chr "v4"
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v9: 'igraph.vs' Named int(0) 
-  .. ..- attr(*, "names")= chr(0) 
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- $ :List of 1
-  ..$ v10: 'igraph.vs' Named int [1:7] 3 5 8 9 12 16 20
-  .. ..- attr(*, "names")= chr [1:7] "v3" "v5" "v8" "v9" ...
-  .. ..- attr(*, "env")=<weakref> 
-  .. ..- attr(*, "graph")= chr "78ba0f16-6215-11e8-90e6-4756b8bc11f9"
- - attr(*, "class")= chr "igraph"
+An directed and unweighted \code{igraph} object, including each of the 21 managers.
+
+Vertex Attributes:
+
+  \code{Name}: Vertex names (v1, v2, ..., v21)
+
+  \code{x}: A stet of x coordinates, the same for \code{krack_friend}, \code{krack_advice}, and \code{krack_report}
+
+  \code{y}: A stet of y coordinates, the same for \code{krack_friend}, \code{krack_advice}, and \code{krack_report}
+
+  \code{Age}: The age of each manager
+
+  \code{Tenure}: The tenure of each manager
+
+  \code{Level}: The level in the corporate hierarchy (1 = CEO, 2 = Vice President, 3 = manager)
+
+  \code{Departmen}t: What department each manager is in (1, 2, 3, 4, or 0 for the CEO)
 }
 \details{
 %%  ~~ If necessary, more details than the __description__ above ~~
 }
 \source{
-%%  ~~ reference to a publication or URL from which the data were obtained ~~
+The data was found at \href{http://vlado.fmf.uni-lj.si/pub/networks/data/WaFa/default.htm}{http://vlado.fmf.uni-lj.si/pub/networks/data/WaFa/default.htm} and reformat for use in R.
 }
 \references{
-%%  ~~ possibly secondary sources and usages ~~
+Krackhardt D. (1987). Cognitive social structures. Social Networks, 9, 104-134.
+
+Stanley Wasserman, Katherine Faust: Social Network Analysis: Methods and Applications. CUP, 1994.
 }
 \examples{
-data(krack_friend)
-## maybe str(krack_friend) ; plot(krack_friend) ...
 }
 \keyword{datasets}
