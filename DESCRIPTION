@@ -2,8 +2,9 @@ Package: concorR
 Type: Package
 Title: CONCOR and Supplemental Functions for R
 Version: 0.1.0
-Author: Tyme Suda <suda.4@wright.edu>
-Maintainer: Adrienne Traxler <adrienne.traxler@wright.edu>
+Authors@R: c(
+    person("Tyme", "Suda", email = "suda.4@wright.edu", role = "aut"),
+    person("Adrienne", "Traxler", email = "adrienne.traxler@wright.edu", role = "cre"))
 Description: A package that contains the CONCOR (CONvergence of iterated 
     CORrelations) algorithm written for R and a series of supplemental 
     functions to allow for easy running, plotting, and blockmodeling. The 
