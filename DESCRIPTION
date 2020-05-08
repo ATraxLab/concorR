@@ -2,15 +2,18 @@ Package: concorR
 Type: Package
 Title: CONCOR and Supplemental Functions for R
 Version: 0.1.0
-Author:Tyme Suda <suda.4@wright.edu>
+Author: Tyme Suda <suda.4@wright.edu>
 Maintainer: Adrienne Traxler <adrienne.traxler@wright.edu>
-Description: A package that contains the CONCOR (CONvergence of iterated CORrelations)
-    algorithm written for R and a series of supplemental functions to allow for easy running,
-    plotting, and blockmodeling. The CONCOR algorithm is meant for use on social network data 
-    as to identify social roles based off a definition of structural equivalence. This version 
-    allows for multiple relationships to be considered and looks at both incoming and outgoing ties.
-Imports:igraph,
-        sna
+Description: A package that contains the CONCOR (CONvergence of iterated 
+    CORrelations) algorithm written for R and a series of supplemental 
+    functions to allow for easy running, plotting, and blockmodeling. The 
+    CONCOR algorithm is meant for use on social network data as to identify 
+    social roles based off a definition of structural equivalence. This version
+    allows for multiple relationships to be considered and looks at both 
+    incoming and outgoing ties.
+Imports: 
+    igraph,
+    sna
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
