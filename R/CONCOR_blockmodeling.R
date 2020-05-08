@@ -98,13 +98,23 @@ make_reduced_igraph <- function(reduced_mat) {
   return(iplotty)
 }
 
-plot_red_weighted <- function(blk) {
-  igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-       edge.width = (igraph::E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
-}
+# plot_red_weighted <- function(blk) {
+#   igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
+#        edge.width = (igraph::E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
+# }
+#
+# plot_red_unweighted <- function(blk) {
+#   igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
+#        edge.arrow.size = .6, vertex.size = 25)
+# }
 
-plot_red_unweighted <- function(blk) {
-  igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-       edge.arrow.size = .6, vertex.size = 25)
+plot_red <- function(blk, weighted = FALSE) {
+  if (weighted) {
+    igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
+                        edge.width = (igraph::E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
+  }
+  else{
+    igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
+                        edge.arrow.size = .6, vertex.size = 25)
+  }
 }
-
