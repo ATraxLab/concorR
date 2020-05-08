@@ -1,26 +1,27 @@
 \name{plot_blk}
 \alias{plot_blk}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{plot.blk
+\title{Plots a blockmodel
 %%  ~~function to do ... ~~
 }
 \description{
-Displays a plot of a blockmodel. Is \code{\link[sna]{plot.blockmodel}} but reformats the shape to be square and removed the "relation - " form the titling of the output.
+Displays a plot of a blockmodel. Based on \code{\link[sna]{plot.blockmodel}} (\pkg{sna} must be installed), but reformats the plot to be square and removes the mandatory title.
 }
 \usage{
-plot.blk(x, ...)
+plot_blk(x, labels = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{An object of class \code{blockmodel}}
-  \item{label}{A Boolean representing whether labels should be shown or not, \code{TRUE} shows them, \code{FALSE} does not.}
+  \item{labels}{If \code{TRUE}, vertex ids are displayed as row/column/diagonal labels; if \code{FALSE}, no labels}
   \item{...}{Further arguments passed to or from other methods}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
+This is a modification of the \code{\link[sna]{plot.blockmodel}} function. The original displays vertex ids as row, column, and diagonal labels, which can cause readability problems for medium-sized and larger networks. \code{\link[sna]{plot.blockmodel}} also adds a title in the format "Relation - 1", which this version omits.
 }
 \value{
-Plots a blockmodel that is square.
+Returns \code{NULL}, invisibly.
 }
 \references{
 Carter T. Butts (2019). sna: Tools for Social Network Analysis. R package version 2.5.
@@ -29,7 +30,7 @@ https://CRAN.R-project.org/package=sna
 \author{
 Carter T. Butts buttsc@uci.edu
 
-edited by Tyme Suda
+Modified by Tyme Suda
 }
 \note{
 %%  ~~further notes~~
@@ -47,6 +48,6 @@ colnames(g1) <- c("a", "b", "c", "d")
 
 gl <- list(g1)
 bm <- make_blk(gl, 1)[[1]]
-plot_plk(bm)
+plot_blk(bm)
 }
 

@@ -5,20 +5,20 @@
 %%  ~~function to do ... ~~
 }
 \description{
-A function to turn a adjacency matrix outputted from \code{\link{make_reduced}} into an \code{igraph} object. This function requires \code{igraph} to function.
+Turns a reduced adjacency matrix (usually output from \code{\link{make_reduced}}) into an \pkg{igraph} object. This function requires \pkg{igraph} to work.
 }
 \usage{
 make_reduced_igraph(reduced_mat)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{reduced_mat}{The outputted reduced network adjacency matrix outputted from \code{\link{make_reduced}} as \code{$reduced_mat[[i]]}}
+  \item{reduced_mat}{A reduced network adjacency matrix, outputted from \code{\link{make_reduced}} as \code{$reduced_mat[[i]]}}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-returns either a weighted or weighted igraph object depending on if the input matrix has any values greater than 1. If such values exist the output will be a weighted igraph object.
+Either a weighted or unweighted \pkg{igraph} object depending on if the input matrix has any values greater than 1. If such values exist, the output will be a weighted igraph object.
 }
 \references{
 %% ~put references to the literature/web site here ~
