@@ -19,7 +19,7 @@ make_blk <- function(adj_list, nsplit = 1) {
   return(d)
 }
 
-make_reduced <- function(adj_list, nsplit = 1, weighted = FALSE) {
+make_reduced <- function(adj_list, nsplit = 1) {
   blk_out = make_blk(adj_list, nsplit)
   dens_vec <- sapply(adj_list, function(x) .edge_dens(x))
   d <- lapply(blk_out, function(x) x[[5]])
@@ -29,20 +29,8 @@ make_reduced <- function(adj_list, nsplit = 1, weighted = FALSE) {
     temp1 <- d[[i]]
     temp1[is.nan(temp1)] <- 0
     temp1[temp1 < dens_vec[[i]]] <- 0
-    if (!weighted) {
-      temp1[temp1 > 0] <- 1
-      mat_return[[i]] <- temp1
-    }
-    if (weighted) {
-      min <- min(temp1[temp1 > 0])
-      mat_return[[i]] <- as.matrix(temp1 / min)
-      while (max(mat_return[[i]]) > 20) {
-        mat_return[[i]] <- mat_return[[i]] / 1.05
-      }
-      while (max(mat_return[[i]]) < 18) {
-        mat_return[[i]] <- mat_return[[i]] * 1.05
-      }
-    }
+    temp1[temp1 > 0] <- 1
+    mat_return[[i]] <- temp1
   }
 
   return_list <- list()
@@ -90,31 +78,13 @@ plot_blk <- function (x, labels = FALSE, ...) {
 }
 
 make_reduced_igraph <- function(reduced_mat) {
-  w <- NULL
-  if (any(reduced_mat > 1)) {
-    w <- TRUE
-  }
-  iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat, mode = "directed", weighted = w)
+  iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat, mode = "directed")
   return(iplotty)
 }
 
-# plot_red_weighted <- function(blk) {
-#   igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-#        edge.width = (igraph::E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
-# }
-#
-# plot_red_unweighted <- function(blk) {
-#   igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-#        edge.arrow.size = .6, vertex.size = 25)
-# }
 
-plot_red <- function(blk, weighted = FALSE) {
-  if (weighted) {
-    igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-                        edge.width = (igraph::E(blk)$weight/3), edge.arrow.size = (igraph::E(blk)$weight/15), vertex.size = 25)
-  }
-  else{
-    igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-                        edge.arrow.size = .6, vertex.size = 25)
-  }
+plot_red <- function(blk) {
+  igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
+       edge.arrow.size = .6, vertex.size = 25)
 }
+
