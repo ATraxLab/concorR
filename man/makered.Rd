@@ -8,19 +8,19 @@
 Takes a list of adjacency matrices, partitions using \code{concor}, and returns a list of reduced adjacency matrices and their corresponding cutoff densities. Each reduced matrix corresponds to one input relation and can be weighted or unweighted. Needs the \pkg{sna} package installed to work (does not need to be attached).
 }
 \usage{
-make_reduced(adj_list, splitn = 1, weighted = FALSE)
+make_reduced(adj_list, nsplit = 1, weighted = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{adj_list}{List of adjacency matrices for use in \code{concor}}
-  \item{splitn}{The number of times \code{concor} splits each matrix}
+  \item{nsplit}{The number of times \code{concor} splits each matrix}
   \item{weighted}{Whether edges in reduced matrices should be weighted (\code{TRUE}) or unweighted (\code{FALSE})}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 A reduced network shows each identified position in the network as a single node. Links (or self-links) exist if the density of ties in that block is greater than the network density.
 
-In the list of input matrices, each should correspond to a different relation for the same nodes. Each matrix will be partitioned with the CONCOR algorithm, continuing through split \code{splitn}. The default \code{weighted} value of \code{FALSE} means that each reduced matrix has values of 0 or 1. If \code{weighted} is \code{TRUE}, the reduced matrices instead stores the density of ties within each block. Comparing density values is only useful if the blocks are of similar sizes, and otherwise can be misleading.
+In the list of input matrices, each should correspond to a different relation for the same nodes. Each matrix will be partitioned with the CONCOR algorithm, continuing through split \code{nsplit}. The default \code{weighted} value of \code{FALSE} means that each reduced matrix has values of 0 or 1. If \code{weighted} is \code{TRUE}, the reduced matrices instead stores the density of ties within each block. Comparing density values is only useful if the blocks are of similar sizes, and otherwise can be misleading.
 }
 \value{
 \item{reduced_mat}{A list of reduced matrices, one for each input matrix.}
@@ -51,6 +51,6 @@ g2 <- matrix(c(0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0), ncol = 4)
 rownames(g2) <- c("a", "b", "c", "d")
 colnames(g2) <- c("a", "b", "c", "d")
 
-make_reduced(list(g1, g2), splitn = 2)
-make_reduced(list(g1, g2), splitn = 2, weighted = TRUE)
+make_reduced(list(g1, g2), nsplit = 2)
+make_reduced(list(g1, g2), nsplit = 2, weighted = TRUE)
 }

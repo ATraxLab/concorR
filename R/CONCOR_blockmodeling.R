@@ -1,7 +1,7 @@
 
 
-make_blk <- function(adj_list, splitn = 1) {
-  concor_out <- suppressWarnings(concor(adj_list, p = splitn))
+make_blk <- function(adj_list, nsplit = 1) {
+  concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
   concor_order <- match(colnames(adj_list[[1]]), concor_out$vertex)
   block_ordered <- concor_out$block[concor_order]
@@ -19,8 +19,8 @@ make_blk <- function(adj_list, splitn = 1) {
   return(d)
 }
 
-make_reduced <- function(adj_list, splitn = 1, weighted = FALSE) {
-  blk_out = make_blk(adj_list, splitn)
+make_reduced <- function(adj_list, nsplit = 1, weighted = FALSE) {
+  blk_out = make_blk(adj_list, nsplit)
   dens_vec <- sapply(adj_list, function(x) .edge_dens(x))
   d <- lapply(blk_out, function(x) x[[5]])
   mat_return <- vector("list", length = length(dens_vec))

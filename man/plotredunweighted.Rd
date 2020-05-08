@@ -42,7 +42,7 @@ rownames(g1) <- c("a", "b", "c", "d")
 colnames(g1) <- c("a", "b", "c", "d")
 
 #make the reduced matrix
-r_mat <- make_reduced(list(g1), splitn = 1, FALSE)
+r_mat <- make_reduced(list(g1), nsplit = 1, FALSE)
 r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 
 plot_red_unweighted(r_igraph)

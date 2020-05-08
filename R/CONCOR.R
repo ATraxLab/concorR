@@ -135,7 +135,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
                                                      stringsAsFactors = FALSE))
 }
 
-concor <- function(m_list, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50) {
+concor <- function(m_list, nsplit = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50) {
   m_list <- .concor_validitycheck(m_list)
   mi <- m_list
   if (all(sapply(mi, function(x) all(is.na(diag(x)))))) {
@@ -161,7 +161,7 @@ concor <- function(m_list, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter
   stack_list <- list(.stack_mat(mi))
   stop_check <- list()
 
-  for (i in 1:p) {
+  for (i in 1:nsplit) {
     concored <- lapply(stack_list, function(x) concor1(x))
     order_list <- lapply(concored, function(x) order(x[, 1]))
     for (j in 1:length(order_list)) {
@@ -178,7 +178,7 @@ concor <- function(m_list, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter
     stack_list <- stack_list[is_empty]
 
     if (identical(stop_check, stack_list)) {
-      warning(paste("split", p, "was the same as split",  i - 1, "\n stopping"))
+      warning(paste("split", nsplit, "was the same as split",  i - 1, "\n stopping"))
       break
     }
 

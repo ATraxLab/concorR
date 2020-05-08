@@ -5,17 +5,17 @@
 Use the CONCOR (CONvergence of iterated CORrelations) algorithm to identify roles within social network data.
 }
 \usage{
-concor(m0, p = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50)
+concor(m0, nsplit = 1, self_ties = FALSE, cutoff = .9999999, max_iter = 50)
 }
 \arguments{
   \item{m0}{A list of adjacency matrices. Matrices must be square, of the same dimensions, and have row/column names (node names). Each matrix represents a different relationship of the same nodes. If there is only one relationship of interest, \code{m0} is a list of that single matrix.}
-  \item{p}{The number of times the input matrices will be partitioned. Each split divides a partition in two, resulting in 2^p roles identified.}
+  \item{nsplit}{The number of times the input matrices will be partitioned. Each split divides a partition in two, resulting in 2^nsplit roles identified.}
   \item{self_ties}{A Boolean representing whether self-ties can be present in the data, \code{TRUE} allows for self-ties, \code{FALSE} does not.}
   \item{cutoff}{The cutoff point of the iterated correlations. Both this and \code{max_iter} can be lowered slightly to improve speed.}
   \item{max_iter}{The maximum number of times the correlation will be run for a split. Both this and \code{cutoff} can be lowered slightly to improve speed.}
 }
 \details{
-This version works for multiple relationships, assuming they all are for the same data (same size of input matrices), and can be used with isolates present. It requires further testing on weighted networks (but appears to successfully split such networks). It will attempt to split the network \code{p} times, causing there to be 2^p partitions, plus one for isolated nodes (if they exist), unless a structurally equivalent node group or singular node group is present. If the algorithm attempts to split such a node group the function will ignore that group and continue to split all other blocks until specified. If a higher number of splits, \code{p}, are requested than are possible to apply to the specified data (due to structurally equivalent node groups being present or all blocks being singular nodes) the code will warn the user that split \code{p} was the same as split \code{i}, the final possible split, and stop.
+This version works for multiple relationships, assuming they all are for the same data (same size of input matrices), and can be used with isolates present. It requires further testing on weighted networks (but appears to successfully split such networks). It will attempt to split the network \code{nsplit} times, causing there to be 2^nsplit partitions, plus one for isolated nodes (if they exist), unless a structurally equivalent node group or singular node group is present. If the algorithm attempts to split such a node group the function will ignore that group and continue to split all other blocks until specified. If a higher number of splits, \code{nsplit}, are requested than are possible to apply to the specified data (due to structurally equivalent node groups being present or all blocks being singular nodes) the code will warn the user that split \code{nsplit} was the same as split \code{i}, the final possible split, and stop.
 }
 \value{
 A data frame with two columns: \code{block} is the block or role identified by concor, and \code{vertex} is the node names.

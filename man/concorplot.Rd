@@ -5,14 +5,14 @@
 Plots a network of interest with CONCOR partition as vertex color. The \pkg{igraph} object used should be created using \code{\link{concor_make_igraph}} or \code{\link{concor_igraph_apply}}.
 }
 \usage{
-concor_plot(iobject, p = NULL)
+concor_plot(iobject, nsplit = NULL)
 }
 \arguments{
   \item{iobject}{An \pkg{igraph} object with \code{concor} splitting as vertex attribute. Should be created using \code{\link{concor_make_igraph}} or \code{\link{concor_igraph_apply}}}
-  \item{p}{Split number of interest; \code{csplitp} should be a vertex attribute of \code{iobject}}
+  \item{nsplit}{Split number of interest; \code{csplitp} should be a vertex attribute of \code{iobject}}
 }
 \details{
-This is a wrapper to plot an \pkg{igraph} object with usually-readable settings. It looks for the input \code{iobject} to have a vertex attribute \code{csplitp} that holds the CONCOR partition assignment for split \code{p}.
+This is a wrapper to plot an \pkg{igraph} object with usually-readable settings. It looks for the input \code{iobject} to have a vertex attribute \code{csplitp} that holds the CONCOR partition assignment for split \code{nsplit}.
 }
 \value{
 Returns NULL, invisibly.

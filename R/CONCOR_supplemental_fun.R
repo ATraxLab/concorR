@@ -10,7 +10,7 @@
 }
 
 concor_make_igraph <- function(adj_list, nsplit = 1) {
-  concor_out <- suppressWarnings(concor(adj_list, p = nsplit))
+  concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
   igraph_list <- lapply(adj_list, function(x) igraph::graph_from_adjacency_matrix(x))
   v <- paste("csplit", nsplit, sep = "")
@@ -22,15 +22,15 @@ concor_make_igraph <- function(adj_list, nsplit = 1) {
 concor_igraph_apply <- function(igraph_list, nsplit = 1) {
   adj_list <- lapply(igraph_list, function(x) igraph::get.adjacency(x, sparse = FALSE))
 
-  concor_out <- suppressWarnings(concor(adj_list, p = nsplit))
+  concor_out <- suppressWarnings(concor(adj_list, nsplit))
   v <- paste("csplit", nsplit, sep = "")
   igraph_out <- lapply(igraph_list, function(x) .blk_apply(x, concor_out, v))
 
   return(igraph_out)
 }
 
-concor_plot <- function(iobject, p = NULL) {
-  split_name <- paste0("csplit", p)
+concor_plot <- function(iobject, nsplit = NULL) {
+  split_name <- paste0("csplit", nsplit)
   igraph::plot.igraph(iobject, vertex.color = igraph::vertex.attributes(iobject)[[split_name]],
                       vertex.label = NA, vertex.size = 5, edge.arrow.size = .3)
 }
