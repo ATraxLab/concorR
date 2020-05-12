@@ -14,7 +14,9 @@ Description: A package that contains the CONCOR (CONvergence of iterated
     incoming and outgoing ties.
 Imports: 
     igraph,
-    sna
+    sna,
+    stats,
+    graphics
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
