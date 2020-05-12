@@ -1,5 +1,5 @@
-\name{plot_red_unweighted}
-\alias{plot_red_unweighted}
+\name{plot_reduced}
+\alias{plot_reduced}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{plot_red_unweighted
 %%  ~~function to do ... ~~
@@ -8,7 +8,7 @@
 Plot a reduced graph with unweighted ties using \code{igraph}.
 }
 \usage{
-plot_red_unweighted(blk)
+plot_reduced(blk)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,7 +33,7 @@ Plots the reduced graph with node color being different for each role (and the s
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{make_reduced}}, \code{\link{make_reduced_igraph}}, \code{\link{plot_red_weighted}}
+\code{\link{make_reduced}}, \code{\link{make_reduced_igraph}}
 }
 \examples{
 library(igraph)
@@ -45,5 +45,5 @@ colnames(g1) <- c("a", "b", "c", "d")
 r_mat <- make_reduced(list(g1), nsplit = 1, FALSE)
 r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 
-plot_red_unweighted(r_igraph)
+plot_reduced(r_igraph)
 }
