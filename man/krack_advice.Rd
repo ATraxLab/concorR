@@ -1,43 +1,48 @@
 \name{krack_advice}
 \alias{krack_advice}
+\alias{krack_friend}
+\alias{krack_report}
 \docType{data}
 \title{
-Krackhardt High-Tech Managers: Advice
+Krackhardt High-Tech Managers data
 }
 \description{
-A network of connections between 21 managers at a high-tech company taken by David Krackhardt in 1987. This network (\code{krack_advice}) uses the relational data from the question 'Who does X go to for advice and help with work?' to define connections between managers.
+A network of connections between 21 managers at a manufacturing company taken by David Krackhardt in 1987. The three networks available are advice, friendship, and report structure.
 }
-\usage{krack_advice}
+\usage{
+krack_advice
+
+krack_friend
+
+krack_report
+}
 \format{
-An directed and unweighted \code{igraph} object, including each of the 21 managers.
+An directed and unweighted \pkg{igraph} object.
 
-\bold{Vertex Attributes:}
+Vertex attributes:
+\itemize{
+  \item \code{Name}: Vertex names (character; "v1", "v2", ..., "v21").
 
-  \code{Name}: Vertex names (v1, v2, ..., v21)
+  \item \code{x,y}: A set of plotting coordinates, used if no other layout is supplied (numeric).
 
-  \code{x}: A stet of x coordinates, the same for \link{krack_friend}, \link{krack_advice}, and \link{krack_report}
+  \item \code{Age}: The age of each manager (integer).
 
-  \code{y}: A stet of y coordinates, the same for \link{krack_friend}, \link{krack_advice}, and \link{krack_report}
+  \item \code{Tenure}: The tenure of each manager (numeric).
 
-  \code{Age}: The age of each manager
+  \item \code{Level}: The level in the corporate hierarchy (integer; 1 = CEO, 2 = Vice President, 3 = manager)
 
-  \code{Tenure}: The tenure of each manager
-
-  \code{Level}: The level in the corporate hierarchy (1 = CEO, 2 = Vice President, 3 = manager)
-
-  \code{Departmen}t: What department each manager is in (1, 2, 3, 4, or 0 for the CEO)
+  \item \code{Department}: What department each manager is in (integer; 1, 2, 3, 4, or 0 for the CEO)
+}
 }
 \details{
-%%  ~~ If necessary, more details than the __description__ above ~~
+Edges in the \code{krack_advice} network come from the question 'Who would X go to for help or advice at work?' Edges in the \code{krack_friend} network use the question 'Who is a friend of X?' The \code{krack_report} network uses who each manager reports to as to define connections between managers.
 }
 \source{
-The data was found at \href{http://vlado.fmf.uni-lj.si/pub/networks/data/WaFa/default.htm}{http://vlado.fmf.uni-lj.si/pub/networks/data/WaFa/default.htm} and reformat for use in R.
+The data was found at \href{http://vlado.fmf.uni-lj.si/pub/networks/data/WaFa/default.htm}{http://vlado.fmf.uni-lj.si/pub/networks/data/WaFa/default.htm} and reformatted for use in R.
 }
 \references{
-Krackhardt D. (1987). Cognitive social structures. Social Networks, 9, 104-134.
+D. Krackhardt, Cognitive social structures. \emph{Social Networks}. \strong{9}, 104 (1987). \doi{10.1016/0378-8733(87)90009-8}
 
-Stanley Wasserman, Katherine Faust: Social Network Analysis: Methods and Applications. CUP, 1994.
-}
-\examples{
+S. Wasserman and K. Faust, \emph{Social Network Analysis: Methods and Applications} (Cambridge University Press, 1994).
 }
 \keyword{datasets}
