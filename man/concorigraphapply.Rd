@@ -8,7 +8,7 @@ Takes a list of \pkg{igraph} objects, runs \code{concor} until the desired numbe
 concor_igraph_apply(igraph_list, nsplit = 1)
 }
 \arguments{
-  \item{igraph.list}{The list of \pkg{igraph} objects for use in \code{concor}}
+  \item{igraph_list}{The list of \pkg{igraph} objects for use in \code{concor}}
   \item{nsplit}{Number of times to split, defaults to 1}
 }
 \details{
