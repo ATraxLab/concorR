@@ -6,7 +6,9 @@ make_blk <- function(adj_list, nsplit = 1) {
   concor_order <- match(colnames(adj_list[[1]]), concor_out$vertex)
   block_ordered <- concor_out$block[concor_order]
 
-  blockmodel_list <- lapply(adj_list, function(x) sna::blockmodel(as.matrix(x), block_ordered))
+  blockmodel_list <- lapply(adj_list,
+                            function(x) sna::blockmodel(as.matrix(x),
+                                                        block_ordered))
 
   return(blockmodel_list)
 }
@@ -43,7 +45,8 @@ plot_blk <- function (x, labels = FALSE, ...) {
   #edited version of the function from the SNA package, plots as square
   #and slightly changed labeling
 
-  #Carter T. Butts (2019). sna: Tools for Social Network Analysis. R package version 2.5.
+  #Carter T. Butts (2019). sna: Tools for Social Network Analysis.
+  #R package version 2.5.
   #https://CRAN.R-project.org/package=sna
 
   if (!labels) {
@@ -78,13 +81,15 @@ plot_blk <- function (x, labels = FALSE, ...) {
 }
 
 make_reduced_igraph <- function(reduced_mat) {
-  iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat, mode = "directed")
+  iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat,
+                                                 mode = "directed")
   return(iplotty)
 }
 
 
 plot_reduced <- function(blk) {
-  igraph::plot.igraph(blk, vertex.color = c(1:length(igraph::vertex.attributes(blk)[[1]])), vertex.label = NA,
-       edge.arrow.size = .6, vertex.size = 25)
+  vcolors <- c(1:length(igraph::vertex.attributes(blk)[[1]]))
+  igraph::plot.igraph(blk, vertex.color = vcolors, vertex.label = NA,
+                      edge.arrow.size = .6, vertex.size = 25)
 }
 
