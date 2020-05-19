@@ -8,7 +8,7 @@ Turns a reduced adjacency matrix (usually output from \code{\link{make_reduced}}
 make_reduced_igraph(reduced_mat)
 }
 \arguments{
-  \item{reduced_mat}{A reduced network adjacency matrix (typically outputted from \code{\link{make_reduced()}} in the \code{reduced_mat} list)}
+  \item{reduced_mat}{A reduced network adjacency matrix (typically outputted from \code{\link{make_reduced}} in the \code{reduced_mat} list)}
 }
 \value{
 Either an unweighted \pkg{igraph} object depending on if the input matrix has any values greater than 1. If such values exist, the output will be a weighted igraph object.
