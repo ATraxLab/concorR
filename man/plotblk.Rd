@@ -1,23 +1,18 @@
 \name{plot_blk}
 \alias{plot_blk}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{Plots a blockmodel
-%%  ~~function to do ... ~~
-}
+\title{Plots a blockmodel}
 \description{
 Displays a plot of a blockmodel. Based on \code{\link[sna]{plot.blockmodel}} (\pkg{sna} must be installed), but reformats the plot to be square and removes the mandatory title.
 }
 \usage{
 plot_blk(x, labels = FALSE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{An object of class \code{blockmodel}}
   \item{labels}{If \code{TRUE}, vertex ids are displayed as row/column/diagonal labels; if \code{FALSE}, no labels}
   \item{...}{Further arguments passed to or from other methods}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
 This is a modification of the \code{\link[sna]{plot.blockmodel}} function. The original displays vertex ids as row, column, and diagonal labels, which can cause readability problems for medium-sized and larger networks. \code{\link[sna]{plot.blockmodel}} also adds a title in the format "Relation - 1", which this version omits.
 }
 \value{
@@ -32,11 +27,6 @@ Carter T. Butts buttsc@uci.edu
 
 Modified by Tyme Suda
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{\link[sna]{plot.blockmodel}}
