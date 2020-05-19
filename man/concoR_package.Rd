@@ -4,7 +4,14 @@
 \title{The concoR Package}
 
 \description{
-concoR is a package built to allow use the use of the CONCOR (CONvergence of iterated CORrelations) algorithm in R. This package includes the \code{\link{concor}} algorithm itself, and some useful functions for plotting and interpreting the outputs. The possible plotting methods included are plotting the overall network with with the \code{\link{concor}} partitions as colors (using the \pkg{igraph} package's framework), plotting a blockmodel formed from the \code{\link{concor}} partitions (using the \code{sna} package's framework), and plotting reduced network graphs showing the connections between \code{\link{concor}} partitions (again using the \pkg{igraph} package's framework to plot).
+concoR is a package built to allow use the use of the CONCOR (CONvergence of iterated
+CORrelations) algorithm in R. This package includes the \code{\link{concor}} algorithm
+itself, and some useful functions for plotting and interpreting the outputs. The plotting
+methods included are: plotting the overall network with the \code{\link{concor}}
+partitions as colors (using the \pkg{igraph} package), plotting a blockmodel using the
+\code{\link{concor}} partitions (using the \pkg{sna} package), and plotting reduced
+network graphs showing the connections between \code{\link{concor}} partitions (again
+using \pkg{igraph}).
 }
 
 \author{
