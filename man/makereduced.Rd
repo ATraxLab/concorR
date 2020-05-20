@@ -2,19 +2,30 @@
 \alias{make_reduced}
 \title{Run CONCOR and output reduced adjacency matrices}
 \description{
-Takes a list of adjacency matrices, partitions using \code{concor}, and returns a list of reduced adjacency matrices and their corresponding cutoff densities. Each reduced matrix corresponds to one input relation. Needs the \pkg{sna} package installed to work (does not need to be attached).
+Takes a list of adjacency matrices, partitions using \code{concor}, and returns a list of
+reduced adjacency matrices and their corresponding cutoff densities. Each reduced matrix
+corresponds to one input relation. The \pkg{sna} package must be installed, but does not
+need to be attached.
 }
 \usage{
 make_reduced(adj_list, nsplit = 1)
 }
 \arguments{
-  \item{adj_list}{List of adjacency matrices for use in \code{concor}}
-  \item{nsplit}{The number of times \code{concor} splits each matrix}
+  \item{adj_list}{A list of adjacency matrices, each representing a different relation
+  for the same nodes.}
+
+  \item{nsplit}{The total number of splits CONCOR will (attempt to) perform.}
 }
 \details{
-A reduced network shows each identified position in the network as a single node. Links (or self-links) exist if the density of ties in that block is greater than a threshold density. In this implementation, the density of the whole network is used as the threshold for each block.
+A reduced network represents each identified position in the network as a single node.
+Links (or self-links) exist if the density of ties in that block is greater than a
+threshold density. In this implementation, the density of the whole network is used as
+the threshold for each block.
 
-In the list of input matrices \code{adj_list}, each should correspond to a different relation for the same nodes. Each matrix will be partitioned with the CONCOR algorithm, continuing through split \code{nsplit}. After the threshold density is applied, each entry in a reduced matrix has values of 0 or 1.
+In the list of input matrices \code{adj_list}, each should correspond to a different
+relation for the same nodes. Each adjacency matrix is partitioned with the CONCOR
+algorithm, continuing through split \code{nsplit}. After the threshold density is
+applied, each entry in a reduced matrix has values of 0 or 1.
 }
 \value{
 \item{reduced_mat}{A list of reduced matrices, one for each input matrix.}
