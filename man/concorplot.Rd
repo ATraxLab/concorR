@@ -2,17 +2,24 @@
 \alias{concor_plot}
 \title{Plot network colored by CONCOR partition}
 \description{
-Plots a network of interest with CONCOR partition as vertex color. The \pkg{igraph} object used should be created using \code{\link{concor_make_igraph}} or \code{\link{concor_igraph_apply}}.
+Plots a network of interest using CONCOR partition as vertex color. Uses an \pkg{igraph}
+object, normally created by \code{\link{concor_make_igraph}} or
+\code{\link{concor_igraph_apply}}.
 }
 \usage{
 concor_plot(iobject, nsplit = NULL)
 }
 \arguments{
-  \item{iobject}{An \pkg{igraph} object with \code{concor} splitting as vertex attribute. Should be created using \code{\link{concor_make_igraph}} or \code{\link{concor_igraph_apply}}}
-  \item{nsplit}{Split number of interest; \code{csplitp} should be a vertex attribute of \code{iobject}}
+  \item{iobject}{An \pkg{igraph} object with \code{concor} split as appropriately-named
+  vertex attribute.}
+
+  \item{nsplit}{Split number to use as vertex color.}
 }
 \details{
-This is a wrapper to plot an \pkg{igraph} object with usually-readable settings. It looks for the input \code{iobject} to have a vertex attribute \code{csplitp} that holds the CONCOR partition assignment for split \code{nsplit}.
+This is a wrapper to plot an \pkg{igraph} object with usually-readable settings. It looks
+for the input \code{iobject} to have a vertex attribute called \code{csplit(nsplit)} that
+holds the CONCOR partition assignment (e.g., if \code{nsplit = 2}, then
+\code{concor_plot} expects a vertex attribute named \code{csplit2}).
 }
 \value{
 Returns NULL, invisibly.
