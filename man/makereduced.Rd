@@ -2,10 +2,10 @@
 \alias{make_reduced}
 \title{Run CONCOR and output reduced adjacency matrices}
 \description{
-Takes a list of adjacency matrices, partitions using \code{concor}, and returns a list of
-reduced adjacency matrices and their corresponding cutoff densities. Each reduced matrix
-corresponds to one input relation. The \pkg{sna} package must be installed, but does not
-need to be attached.
+Takes a list of adjacency matrices, partitions using \code{\link{concor}}, and returns a
+list of reduced adjacency matrices and their corresponding cutoff densities. Each reduced
+matrix corresponds to one input relation. The \pkg{sna} package must be installed, but
+does not need to be attached.
 }
 \usage{
 make_reduced(adj_list, nsplit = 1)
@@ -24,8 +24,8 @@ the threshold for each block.
 
 In the list of input matrices \code{adj_list}, each should correspond to a different
 relation for the same nodes. Each adjacency matrix is partitioned with the CONCOR
-algorithm, continuing through split \code{nsplit}. After the threshold density is
-applied, each entry in a reduced matrix has values of 0 or 1.
+algorithm, continuing for \code{nsplit} divisions. After the threshold density is
+applied, each entry in the reduced matrix has values of 0 or 1.
 }
 \value{
 \item{reduced_mat}{A list of reduced matrices, one for each input matrix.}
