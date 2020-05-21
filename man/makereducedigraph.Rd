@@ -1,17 +1,19 @@
 \name{make_reduced_igraph}
 \alias{make_reduced_igraph}
-\title{Build a reduced network and make an \pkg{igraph} object for it}
+\title{Build an \code{igraph} object for a reduced network}
 \description{
-Turns a reduced adjacency matrix (usually output from \code{\link{make_reduced}}) into an \pkg{igraph} object. This function requires \pkg{igraph} to work.
+Turns a reduced adjacency matrix (usually output from \code{\link{make_reduced}}) into an
+\code{igraph} object. This function requires \pkg{igraph} to work.
 }
 \usage{
 make_reduced_igraph(reduced_mat)
 }
 \arguments{
-  \item{reduced_mat}{A reduced network adjacency matrix (typically outputted from \code{\link{make_reduced}} in the \code{reduced_mat} list)}
+  \item{reduced_mat}{A reduced network adjacency matrix (typically outputted from
+  \code{\link{make_reduced}} in the \code{reduced_mat} list)}
 }
 \value{
-Either an unweighted \pkg{igraph} object depending on if the input matrix has any values greater than 1. If such values exist, the output will be a weighted igraph object.
+A directed and unweighted \code{igraph} object for the reduced matrix.
 }
 
 \seealso{
@@ -22,9 +24,7 @@ a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
 rownames(a) <- c("a", "b", "c", "d")
 colnames(a) <- c("a", "b", "c", "d")
 
-#make the reduced matrix
 r_mat <- make_reduced(list(a), nsplit = 1)
-
 make_reduced_igraph(r_mat$reduced_mat[[1]])
 }
 
