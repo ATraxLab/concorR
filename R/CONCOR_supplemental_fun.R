@@ -31,7 +31,7 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1) {
   return(igraph_out)
 }
 
-concor_plot <- function(iobject, nsplit = NULL) {
+plot_socio <- function(iobject, nsplit = NULL) {
   split_name <- paste0("csplit", nsplit)
   vcolors <- igraph::vertex.attributes(iobject)[[split_name]]
   igraph::plot.igraph(iobject, vertex.color = vcolors,
