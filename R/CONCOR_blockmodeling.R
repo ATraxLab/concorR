@@ -87,9 +87,9 @@ make_reduced_igraph <- function(reduced_mat) {
 }
 
 
-plot_reduced <- function(blk) {
-  vcolors <- c(1:length(igraph::vertex.attributes(blk)[[1]]))
-  igraph::plot.igraph(blk, vertex.color = vcolors, vertex.label = NA,
+plot_reduced <- function(iobject) {
+  vcolors <- c(1:length(igraph::vertex_attr(iobject)$name))
+  igraph::plot.igraph(iobject, vertex.color = vcolors, vertex.label = NA,
                       edge.arrow.size = .6, vertex.size = 25)
 }
 
