@@ -103,6 +103,108 @@ plot_reduced(r_igraph)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
+## Example 2: Krackhardt high-tech managers
+
+CONCOR can use multiple adjacency matrices to partition nodes based on
+all relations simultaneously. The package includes `igraph` data files
+for the Krackhardt (1987) high-tech managers study, which gives networks
+for advice, friendship, and reporting among 21 managers at a firm.
+(These networks were used in the examples of Wasserman and Faust
+(1994).)
+
+First, take a look at the CONCOR partitions for two splits (four
+positions), considering only the advice or only the friendship networks.
+
+``` r
+par(mfrow = c(1, 2))
+plot_socio(krack_advice)  # plot_socio imposes some often-useful plot parameters
+plot_socio(krack_friend)
+```
+
+<img src="man/figures/README-krackhardt-NW-single-1.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+
+m1 <- igraph::as_adjacency_matrix(krack_advice, sparse = FALSE)
+m2 <- igraph::as_adjacency_matrix(krack_friend, sparse = FALSE)
+
+g1 <- concor_make_igraph(list(m1), nsplit = 2)
+g2 <- concor_make_igraph(list(m2), nsplit = 2)
+
+gadv <- set_vertex_attr(krack_advice, "csplit2", value = V(g1[[1]])$csplit2)
+gfrn <- set_vertex_attr(krack_friend, "csplit2", value = V(g2[[1]])$csplit2)
+
+par(mfrow = c(1, 2))
+plot_socio(gadv, nsplit = 2)
+plot_socio(gfrn, nsplit = 2)
+```
+
+<img src="man/figures/README-krackhardt-NW-single-2.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+```
+
+Next, compare with the multi-relation blocking:
+
+``` r
+gboth <- concor_make_igraph(list(m1, m2), nsplit = 2)
+
+gadv2 <- set_vertex_attr(krack_advice, "csplit2", value = V(gboth[[1]])$csplit2)
+gfrn2 <- set_vertex_attr(krack_friend, "csplit2", value = V(gboth[[2]])$csplit2)
+
+par(mfrow = c(1, 2))
+plot_socio(gadv2, nsplit = 2)
+plot_socio(gfrn2, nsplit = 2)
+```
+
+<img src="man/figures/README-krackhardt-NW-multi-1.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+```
+
+Including information from both relations changes the block membership
+of several nodes.
+
+It also affects the reduced networks, as can be seen from comparing the
+single-relation version:
+
+``` r
+red1 <- make_reduced(list(m1), nsplit = 2)
+red2 <- make_reduced(list(m2), nsplit = 2)
+
+gred1 <- make_reduced_igraph(red1$reduced_mat[[1]])
+gred2 <- make_reduced_igraph(red2$reduced_mat[[1]])
+
+par(mfrow = c(1, 2))
+plot_reduced(gred1)
+plot_reduced(gred2)
+```
+
+<img src="man/figures/README-krackhardt-reduced-single-1.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+```
+
+with the multi-relation version:
+
+``` r
+redboth <- make_reduced(list(m1, m2), nsplit = 2)
+gboth <- lapply(redboth$reduced_mat, make_reduced_igraph)
+par(mfrow = c(1, 2))
+plot_reduced(gboth[[1]])
+plot_reduced(gboth[[2]])
+```
+
+<img src="man/figures/README-krackhardt-reduced-multi-1.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+```
+
 ## References
 
 R. L. Breiger, S. A. Boorman, P. Arabie, An algorithm for clustering
