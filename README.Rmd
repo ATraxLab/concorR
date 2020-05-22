@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of concorR is to ...
+The goal of concorR is to implement the CONCOR (CONvergence of iterated CORrelations) algorithm for positional analysis. Positional analysis divides a network into blocks based on the similarity of links between actors. CONCOR uses structural equivalence---"same ties to same others"---as its criterion for grouping nodes, and calculates this by correlating columns in the adjacency matrix. For more details on CONCOR, see the original description by Breiger, Boorman, and Arabie (1975), or Chapter 9 in Wasserman and Faust (1994).
 
 ## Installation
 
@@ -58,3 +58,12 @@ plot(pressure)
 ```
 
 In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+
+
+## References
+R. L. Breiger, S. A. Boorman, P. Arabie, An algorithm for clustering relational data with
+applications to social network analysis and comparison with multidimensional scaling.
+*J. of Mathematical Psychology*. **12**, 328 (1975). <http://doi.org/10.1016/0022-2496(75)90028-0>
+
+S. Wasserman and K. Faust, *Social Network Analysis: Methods and Applications*
+(Cambridge University Press, 1994).
