@@ -28,7 +28,8 @@ devtools::install_github("atraxler/concorR")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows a common task: using CONCOR to
+partition a single adjacency matrix.
 
 ``` r
 library(concorR)
@@ -61,7 +62,7 @@ library(igraph)
 plot(graph_from_adjacency_matrix(a))
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-example-basic-1.png" width="100%" />
 
 ``` r
 glist <- concor_make_igraph(list(a))
@@ -69,7 +70,7 @@ glist <- concor_make_igraph(list(a))
 plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+<img src="man/figures/README-example-basic-2.png" width="100%" />
 
 The *blockmodel* shows the permuted adjacency matrix, rearranged to
 group nodes by CONCOR partition.
@@ -79,7 +80,7 @@ bm <- make_blk(list(a), 1)[[1]]
 plot_blk(bm, labels = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 The *reduced matrix* represents each position as a node, and calculates
 links by applying a density threshold to the ties between (and within)
@@ -101,7 +102,7 @@ r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 plot_reduced(r_igraph)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 ## Example 2: Krackhardt high-tech managers
 

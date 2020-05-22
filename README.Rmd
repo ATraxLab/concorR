@@ -32,7 +32,7 @@ devtools::install_github("atraxler/concorR")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows a common task: using CONCOR to partition a single adjacency matrix.
 
 ```{r example}
 library(concorR)
@@ -44,7 +44,7 @@ concor(list(a))
 ```
 
 Additional helper functions are included for using the `igraph` package:
-```{r}
+```{r example-basic}
 library(igraph)
 
 plot(graph_from_adjacency_matrix(a))
