@@ -22,48 +22,59 @@ The goal of concorR is to implement the CONCOR (CONvergence of iterated CORrelat
 
 ## Installation
 
-You can install the released version of concorR from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("concorR")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("atraxler/concorR")
 ```
+
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(concorR)
-## basic example code
+a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
+               1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
+rownames(a) <- letters[1:5]
+colnames(a) <- letters[1:5]
+concor(list(a))
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Additional helper functions are included for using the `igraph` package:
+```{r}
+library(igraph)
 
-```{r cars}
-summary(cars)
+plot(graph_from_adjacency_matrix(a))
+glist <- concor_make_igraph(list(a))
+
+plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+The *blockmodel* shows the permuted adjacency matrix, rearranged to group nodes by CONCOR partition. 
+```{r}
+bm <- make_blk(list(a), 1)[[1]]
+plot_blk(bm, labels = TRUE)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+The *reduced matrix* represents each position as a node, and calculates links by applying a density threshold to the ties between (and within) positions. 
+
+```{r}
+(r_mat <- make_reduced(list(a), nsplit = 1))
+r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
+
+plot_reduced(r_igraph)
+```
 
 
 ## References
 R. L. Breiger, S. A. Boorman, P. Arabie, An algorithm for clustering relational data with
 applications to social network analysis and comparison with multidimensional scaling.
 *J. of Mathematical Psychology*. **12**, 328 (1975). <http://doi.org/10.1016/0022-2496(75)90028-0>
+
+D. Krackhardt, Cognitive social structures. *Social Networks*. **9**, 104 (1987). <http://10.1016/0378-8733(87)90009-8>
 
 S. Wasserman and K. Faust, *Social Network Analysis: Methods and Applications*
 (Cambridge University Press, 1994).

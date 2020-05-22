@@ -18,14 +18,8 @@ original description by Breiger, Boorman, and Arabie (1975), or Chapter
 
 ## Installation
 
-You can install the released version of concorR from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("concorR")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -38,32 +32,76 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(concorR)
-## basic example code
+a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
+               1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
+rownames(a) <- letters[1:5]
+colnames(a) <- letters[1:5]
+concor(list(a))
+#>   block vertex
+#> 1     1      b
+#> 2     1      c
+#> 3     1      d
+#> 4     2      a
+#> 5     2      e
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+Additional helper functions are included for using the `igraph` package:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+library(igraph)
+#> 
+#> Attaching package: 'igraph'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     decompose, spectrum
+#> The following object is masked from 'package:base':
+#> 
+#>     union
+
+plot(graph_from_adjacency_matrix(a))
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
-You can also embed plots, for example:
+``` r
+glist <- concor_make_igraph(list(a))
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
+```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+
+The *blockmodel* shows the permuted adjacency matrix, rearranged to
+group nodes by CONCOR partition.
+
+``` r
+bm <- make_blk(list(a), 1)[[1]]
+plot_blk(bm, labels = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+The *reduced matrix* represents each position as a node, and calculates
+links by applying a density threshold to the ties between (and within)
+positions.
+
+``` r
+(r_mat <- make_reduced(list(a), nsplit = 1))
+#> $reduced_mat
+#> $reduced_mat[[1]]
+#>         Block 1 Block 2
+#> Block 1       1       0
+#> Block 2       1       1
+#> 
+#> 
+#> $dens
+#> [1] 0.6
+r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
+
+plot_reduced(r_igraph)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ## References
 
@@ -72,6 +110,9 @@ relational data with applications to social network analysis and
 comparison with multidimensional scaling. *J. of Mathematical
 Psychology*. **12**, 328 (1975).
 <http://doi.org/10.1016/0022-2496(75)90028-0>
+
+D. Krackhardt, Cognitive social structures. *Social Networks*. **9**,
+104 (1987). <http://10.1016/0378-8733(87)90009-8>
 
 S. Wasserman and K. Faust, *Social Network Analysis: Methods and
 Applications* (Cambridge University Press, 1994).
