@@ -22,3 +22,5 @@ Imports:
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/ATraxLab/concorR
+BugReports: https://github.com/ATraxLab/concorR/issues
