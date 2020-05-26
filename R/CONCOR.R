@@ -1,7 +1,3 @@
-#CONCOR and needed functions
-#created 11/26/18
-#By Tyme Suda
-
 #' @export
 #' @importFrom stats cor
 concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
@@ -100,8 +96,8 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(m1)
 }
 
-.make_sub_boolean <- function(cor_matrixies_orderd) {
-  group <- cor_matrixies_orderd[, 1] > 0
+.make_sub_boolean <- function(cor_matrixies_ordered) {
+  group <- cor_matrixies_ordered[, 1] > 0
   return(group)
 }
 

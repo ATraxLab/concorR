@@ -1,7 +1,3 @@
-#CONCOR supplementary functions
-#Tyme Suda
-
-
 .blk_apply <- function(iobject, split, v = "cat") {
   o <- match(igraph::vertex.attributes(iobject)$name, split$vertex)
   o_block <- split$block[o]
