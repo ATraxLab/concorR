@@ -9,6 +9,7 @@
   return(blk_return)
 }
 
+#' @export
 concor_make_igraph <- function(adj_list, nsplit = 1) {
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
@@ -20,6 +21,7 @@ concor_make_igraph <- function(adj_list, nsplit = 1) {
   return(igraph_out)
 }
 
+#' @export
 concor_igraph_apply <- function(igraph_list, nsplit = 1) {
   adj_list <- lapply(igraph_list,
                      function(x) igraph::get.adjacency(x, sparse = FALSE))
@@ -31,6 +33,7 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1) {
   return(igraph_out)
 }
 
+#' @export
 plot_socio <- function(iobject, nsplit = NULL) {
   split_name <- paste0("csplit", nsplit)
   vcolors <- igraph::vertex.attributes(iobject)[[split_name]]

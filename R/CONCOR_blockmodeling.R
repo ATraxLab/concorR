@@ -1,5 +1,4 @@
-
-
+#' @export
 make_blk <- function(adj_list, nsplit = 1) {
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
@@ -21,6 +20,7 @@ make_blk <- function(adj_list, nsplit = 1) {
   return(d)
 }
 
+#' @export
 make_reduced <- function(adj_list, nsplit = 1) {
   blk_out = make_blk(adj_list, nsplit)
   dens_vec <- sapply(adj_list, function(x) .edge_dens(x))
@@ -41,6 +41,7 @@ make_reduced <- function(adj_list, nsplit = 1) {
   return(return_list)
 }
 
+#' @export
 plot_blk <- function (x, labels = FALSE, ...) {
   #edited version of the function from the SNA package, plots as square
   #and slightly changed labeling
@@ -80,13 +81,14 @@ plot_blk <- function (x, labels = FALSE, ...) {
   }
 }
 
+#' @export
 make_reduced_igraph <- function(reduced_mat) {
   iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat,
                                                  mode = "directed")
   return(iplotty)
 }
 
-
+#' @export
 plot_reduced <- function(iobject) {
   vcolors <- c(1:length(igraph::vertex_attr(iobject)$name))
   igraph::plot.igraph(iobject, vertex.color = vcolors, vertex.label = NA,

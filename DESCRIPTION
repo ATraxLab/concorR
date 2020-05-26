@@ -24,3 +24,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ATraxLab/concorR
 BugReports: https://github.com/ATraxLab/concorR/issues
+RoxygenNote: 7.1.0

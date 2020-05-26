@@ -2,6 +2,8 @@
 #created 11/26/18
 #By Tyme Suda
 
+#' @export
+#' @importFrom stats cor
 concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   if (ncol(m_stack) < 2){
     return(cor(m_stack, use  =  "pairwise.complete.obs"))
@@ -135,6 +137,7 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
                                 stringsAsFactors = FALSE))
 }
 
+#' @export
 concor <- function(m_list, nsplit = 1, self_ties = FALSE, cutoff = .9999999,
                    max_iter = 50) {
   m_list <- .concor_validitycheck(m_list)
