@@ -40,10 +40,9 @@ Vertex attributes:
 }
 }
 \details{
-Edges in the \code{krack_advice} network come from the question 'Who would X go to for
-help or advice at work?' Edges in the \code{krack_friend} network use the question 'Who
-is a friend of X?' The \code{krack_report} network uses the formal organization chart to
-define connections between managers.
+Edges in the \code{krack_advice} and \code{krack_friend} networks come survey questions
+answered by all 21 managers. The \code{krack_report} network uses the formal organization
+chart to define connections between managers.
 }
 \source{
 The data was found at
