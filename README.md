@@ -206,6 +206,13 @@ plot_reduced(gboth[[2]])
 par(mfrow = c(1,1))
 ```
 
+## Acknowledgments
+
+This work was supported by National Science Foundation awards
+[DUE-1712341](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1712341)
+and
+[DUE-1711017](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1711017).
+
 ## References
 
 R. L. Breiger, S. A. Boorman, P. Arabie, An algorithm for clustering

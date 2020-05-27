@@ -18,6 +18,10 @@ connections between \code{\link{concor}} partitions (again using \pkg{igraph}).
 Tyme Suda \email{suda.4@wright.edu}
 
 Adrienne Traxler \email{adrienne.traxler@wright.edu}
+
+This work was supported by National Science Foundation awards
+\href{https://www.nsf.gov/awardsearch/showAward?AWD_ID=1712341}{DUE-1712341} and
+\href{https://www.nsf.gov/awardsearch/showAward?AWD_ID=1711017}{DUE-1711017}.
 }
 
 \references{
