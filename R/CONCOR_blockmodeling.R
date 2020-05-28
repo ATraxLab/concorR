@@ -43,12 +43,10 @@ make_reduced <- function(adj_list, nsplit = 1) {
 
 #' @export
 plot_blk <- function (x, labels = FALSE, ...) {
-  #edited version of the function from the SNA package, plots as square
-  #and slightly changed labeling
-
-  #Carter T. Butts (2019). sna: Tools for Social Network Analysis.
-  #R package version 2.5.
-  #https://CRAN.R-project.org/package=sna
+  # Adapted from sna::plot.blockmodel():
+  # Carter T. Butts (2019). sna: Tools for Social Network Analysis.
+  # R package version 2.5, licensed under GPL (>= 2).
+  # https://CRAN.R-project.org/package=sna
 
   if (!labels) {
     x$plabels <- rep("", length(x$plabels))
