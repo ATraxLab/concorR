@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.com/ATraxLab/concorR.svg?branch=master)](https://travis-ci.com/ATraxLab/concorR)
 <!-- badges: end -->
 
 The goal of concorR is to implement the CONCOR (CONvergence of iterated
