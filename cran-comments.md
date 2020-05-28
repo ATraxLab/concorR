@@ -4,7 +4,7 @@
 * win-builder (devel)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs
+There were no ERRORs or WARNINGs. 
 
 win-builder returned one NOTE:
 
@@ -27,6 +27,7 @@ win-builder returned one NOTE:
   This is my first submission. 
   
   The flagged words are proper names (and one uncommon term), not misspellings.
+
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
