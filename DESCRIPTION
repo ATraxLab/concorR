@@ -5,7 +5,9 @@ Version: 0.2.0
 Authors@R: c(
     person("Tyme", "Suda", email = "suda.4@wright.edu", role = "aut"),
     person("Adrienne", "Traxler", email = "adrienne.traxler@wright.edu", role = "cre",
-    comment = c(ORCID = "0000-0003-2725-0686")))
+    comment = c(ORCID = "0000-0003-2725-0686")),
+    person("Carter", "Butts", email = "buttsc@uci.edu", role = "ctb", comment = "Author 
+    of sna::plot.blockmodel(), which was adapted for plot_blk()"))
 Description: A package that contains the CONCOR (CONvergence of iterated 
     CORrelations) algorithm and a series of supplemental functions for easy 
     running, plotting, and blockmodeling. The CONCOR algorithm is used on 
