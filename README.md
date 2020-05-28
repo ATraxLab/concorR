@@ -224,7 +224,7 @@ Psychology*. **12**, 328 (1975).
 <http://doi.org/10.1016/0022-2496(75)90028-0>
 
 D. Krackhardt, Cognitive social structures. *Social Networks*. **9**,
-104 (1987). <http://10.1016/0378-8733(87)90009-8>
+104 (1987). <http://doi.org/10.1016/0378-8733(87)90009-8>
 
 S. Wasserman and K. Faust, *Social Network Analysis: Methods and
 Applications* (Cambridge University Press, 1994).
