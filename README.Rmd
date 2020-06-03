@@ -23,7 +23,13 @@ The goal of concorR is to implement the CONCOR (CONvergence of iterated CORrelat
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the released version of concorR from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("concorR")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
