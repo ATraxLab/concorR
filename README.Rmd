@@ -1,8 +1,10 @@
 ---
-output: github_document
+output: 
+    github_document:
+        pandoc_args: --webtex
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit README.Rmd -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
