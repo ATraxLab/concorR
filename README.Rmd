@@ -77,6 +77,31 @@ r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 plot_reduced(r_igraph)
 ```
 
+### Connection criteria for making the reduced network
+
+In the prior example, the reduced network was created using an edge density threshold.  For some applications, it may be preferred to use a degree-based measure instead.  If we define $M$ to be the adjacency matrix, define the sub-adjacency matrix $X_{ij}$ as follows:
+
+$$
+X_{ij} = M[(\text{elements in block i}), (\text{elements in block j})]
+$$
+
+We'd like to use a simple criterion to determine whether to draw an edge or not, we will use the normalized degree for this purpose:
+
+$$
+\frac{\texttt{mean}(\texttt{degree}(X_{ij}))}{\texttt{max possible degree}(X_{ij})} > \frac{\texttt{mean}(\texttt{degree}(M))}{\texttt{max possible degree}(M)}
+$$
+Note that for this definition, the sub-adjacency matrix will not be square if there are different numbers of elements in each block.
+
+To use this criteria, we have created an argument `connect`.  The default to this argument is `'density'`, which does the analysis in the previous section.  To use this criterion instead, use the option `'degree'`.
+
+```{r}
+(r_mat_deg <- make_reduced(list(a), nsplit = 1, connect = 'degree'))
+r_deg_igraph <- make_reduced_igraph(r_mat_deg$reduced_mat[[1]])
+
+plot_reduced(r_deg_igraph)
+```
+
+
 ## Example 2: Krackhardt high-tech managers
 
 CONCOR can use multiple adjacency matrices to partition nodes based on all relations simultaneously. The package includes `igraph` data files for the Krackhardt (1987) high-tech managers study, which gives networks for advice, friendship, and reporting among 21 managers at a firm. (These networks were used in the examples of Wasserman and Faust (1994).)
@@ -142,6 +167,30 @@ gboth <- lapply(redboth$reduced_mat, make_reduced_igraph)
 par(mfrow = c(1, 2))
 plot_reduced(gboth[[1]])
 plot_reduced(gboth[[2]])
+par(mfrow = c(1,1))
+```
+
+### Reduced networks using degree criterion
+```{r krackhardt-reduced-single-degree}
+red1d <- make_reduced(list(m1), nsplit = 2, connect='degree')
+red2d <- make_reduced(list(m2), nsplit = 2, connect='degree')
+
+gred1d <- make_reduced_igraph(red1d$reduced_mat[[1]])
+gred2d <- make_reduced_igraph(red2d$reduced_mat[[1]])
+
+par(mfrow = c(1, 2))
+plot_reduced(gred1d)
+plot_reduced(gred2d)
+par(mfrow = c(1,1))
+```
+
+with the multi-relation version:
+```{r krackhardt-reduced-multi-degree}
+redbothd <- make_reduced(list(m1, m2), nsplit = 2, connect='degree')
+gbothd <- lapply(redbothd$reduced_mat, make_reduced_igraph)
+par(mfrow = c(1, 2))
+plot_reduced(gbothd[[1]])
+plot_reduced(gbothd[[2]])
 par(mfrow = c(1,1))
 ```
 

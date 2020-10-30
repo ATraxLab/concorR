@@ -1,5 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit README.Rmd -->
 
 # concorR
 
@@ -112,6 +112,60 @@ plot_reduced(r_igraph)
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
+### Connection criteria for making the reduced network
+
+In the prior example, the reduced network was created using an edge
+density threshold. For some applications, it may be preferred to use a
+degree-based measure instead. If we define
+![M](https://latex.codecogs.com/png.latex?M "M") to be the adjacency
+matrix, define the sub-adjacency matrix
+![X\_{ij}](https://latex.codecogs.com/png.latex?X_%7Bij%7D "X_{ij}") as
+follows:
+
+  
+![&#10;X\_{ij} = M\[(\\text{elements in block i}), (\\text{elements in
+block
+j})\]&#10;](https://latex.codecogs.com/png.latex?%0AX_%7Bij%7D%20%3D%20M%5B%28%5Ctext%7Belements%20in%20block%20i%7D%29%2C%20%28%5Ctext%7Belements%20in%20block%20j%7D%29%5D%0A
+"
+X_{ij} = M[(\\text{elements in block i}), (\\text{elements in block j})]
+")  
+
+We’d like to use a simple criterion to determine whether to draw an edge
+or not, we will use the normalized degree for this purpose:
+
+  
+![&#10;\\frac{\\texttt{mean}(\\texttt{degree}(X\_{ij}))}{\\texttt{max
+possible degree}(X\_{ij})} \>
+\\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max possible
+degree}(M)}&#10;](https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28X_%7Bij%7D%29%29%7D%7B%5Ctexttt%7Bmax%20possible%20degree%7D%28X_%7Bij%7D%29%7D%20%3E%20%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28M%29%29%7D%7B%5Ctexttt%7Bmax%20possible%20degree%7D%28M%29%7D%0A
+"
+\\frac{\\texttt{mean}(\\texttt{degree}(X_{ij}))}{\\texttt{max possible degree}(X_{ij})} \> \\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max possible degree}(M)}
+")  
+Note that for this definition, the sub-adjacency matrix will not be
+square if there are different numbers of elements in each block.
+
+To use this criteria, we have created an argument `connect`. The default
+to this argument is `'density'`, which does the analysis in the previous
+section. To use this criterion instead, use the option `'degree'`.
+
+``` r
+(r_mat_deg <- make_reduced(list(a), nsplit = 1, connect = 'degree'))
+#> $reduced_mat
+#> $reduced_mat[[1]]
+#>         Block 1 Block 2
+#> Block 1       1       0
+#> Block 2       1       0
+#> 
+#> 
+#> $deg
+#> [1] 0.6
+r_deg_igraph <- make_reduced_igraph(r_mat_deg$reduced_mat[[1]])
+
+plot_reduced(r_deg_igraph)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
 ## Example 2: Krackhardt high-tech managers
 
 CONCOR can use multiple adjacency matrices to partition nodes based on
@@ -209,6 +263,42 @@ plot_reduced(gboth[[2]])
 ```
 
 <img src="man/figures/README-krackhardt-reduced-multi-1.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+```
+
+### Reduced networks using degree criterion
+
+``` r
+red1d <- make_reduced(list(m1), nsplit = 2, connect='degree')
+red2d <- make_reduced(list(m2), nsplit = 2, connect='degree')
+
+gred1d <- make_reduced_igraph(red1d$reduced_mat[[1]])
+gred2d <- make_reduced_igraph(red2d$reduced_mat[[1]])
+
+par(mfrow = c(1, 2))
+plot_reduced(gred1d)
+plot_reduced(gred2d)
+```
+
+<img src="man/figures/README-krackhardt-reduced-single-degree-1.png" width="100%" />
+
+``` r
+par(mfrow = c(1,1))
+```
+
+with the multi-relation version:
+
+``` r
+redbothd <- make_reduced(list(m1, m2), nsplit = 2, connect='degree')
+gbothd <- lapply(redbothd$reduced_mat, make_reduced_igraph)
+par(mfrow = c(1, 2))
+plot_reduced(gbothd[[1]])
+plot_reduced(gbothd[[2]])
+```
+
+<img src="man/figures/README-krackhardt-reduced-multi-degree-1.png" width="100%" />
 
 ``` r
 par(mfrow = c(1,1))
