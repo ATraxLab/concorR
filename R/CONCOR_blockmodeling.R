@@ -142,10 +142,11 @@ plot_blk <- function (x, labels = FALSE, ...) {
 
 #' @export
 make_reduced_igraph <- function(reduced_mat) {
-  iplotty <- igraph::graph_from_adjacency_matrix(reduced_mat,
-                                                 mode = "directed")
-  return(iplotty)
+  reduced_graph <- igraph::graph_from_adjacency_matrix(reduced_mat,
+                                                       mode = "directed")
+  return(reduced_graph)
 }
+
 
 #' @export
 plot_reduced <- function(iobject) {
