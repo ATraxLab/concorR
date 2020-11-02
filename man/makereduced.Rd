@@ -8,7 +8,7 @@ matrix corresponds to one input relation. The \pkg{sna} package must be installe
 does not need to be attached.
 }
 \usage{
-make_reduced(adj_list, nsplit = 1, stat=c('density','degree'))
+make_reduced(adj_list, nsplit = 1, stat = 'density')
 }
 \arguments{
   \item{adj_list}{A list of adjacency matrices, each representing a different relation

@@ -16,10 +16,9 @@ knitr::opts_chunk$set(
 ```
 
 # concorR
-<!-- badges: start --> 
-<!-- Ignoring Travis for now. 
-[![Travis build status](https://travis-ci.com/sfwolfphys/concorR.svg?branch=main)](https://travis-ci.com/sfwolfphys/concorR) -->
-<!-- badges: end --> 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.com/sfwolfphys/concorR.svg?branch=master)](https://travis-ci.com/sfwolfphys/concorR)
+<!-- badges: end -->
 
 
 The goal of concorR is to implement the CONCOR (CONvergence of iterated CORrelations) algorithm for positional analysis. Positional analysis divides a network into blocks based on the similarity of links between actors. CONCOR uses structural equivalence---"same ties to same others"---as its criterion for grouping nodes, and calculates this by correlating columns in the adjacency matrix. For more details on CONCOR, see the original description by Breiger, Boorman, and Arabie (1975), or Chapter 9 in Wasserman and Faust (1994).
