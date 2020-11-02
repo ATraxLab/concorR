@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # concorR
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/sfwolfphys/concorR.svg?branch=master)](https://travis-ci.com/sfwolfphys/concorR)
+[![Travis build status](https://travis-ci.com/sfwolfphys/concorR.svg?branch=main)](https://travis-ci.com/sfwolfphys/concorR)
 <!-- badges: end -->
 
 
