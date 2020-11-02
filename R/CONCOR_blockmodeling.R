@@ -41,8 +41,8 @@ make_blk <- function(adj_list, nsplit = 1) {
 }
 
 #' @export
-make_reduced <- function(adj_list, nsplit = 1, connect='density') {
-  if(connect=='density'){  
+make_reduced <- function(adj_list, nsplit = 1, stat='density') {
+  if(stat=='density'){  
     blk_out = make_blk(adj_list, nsplit)
     dens_vec <- sapply(adj_list, function(x) .edge_dens(x))
     d <- lapply(blk_out, function(x) x[[5]])
@@ -60,7 +60,7 @@ make_reduced <- function(adj_list, nsplit = 1, connect='density') {
     return_list$reduced_mat <- mat_return
     return_list$dens <- dens_vec
     return(return_list)
-  }else if(connect=='degree'){
+  }else if(stat=='degree'){
     blk_out = make_blk(adj_list, nsplit)
     outdegree = sapply(adj_list, function(x) .normoutdeg(x))
     mat_return <- vector("list", length = length(outdegree))
@@ -98,7 +98,8 @@ make_reduced <- function(adj_list, nsplit = 1, connect='density') {
     return_list$deg <- outdegree
     return(return_list)
   }else{
-    stop('connect must be density or degree.')
+    stop('Statistics implemented for determine edges in reduced networks are only 
+         density and degree.')
   }
 }
 
