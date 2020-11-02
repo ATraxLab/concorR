@@ -8,19 +8,18 @@ matrix corresponds to one input relation. The \pkg{sna} package must be installe
 does not need to be attached.
 }
 \usage{
-make_reduced(adj_list, nsplit = 1)
+make_reduced(adj_list, nsplit = 1, stat=c('density','degree'))
 }
 \arguments{
   \item{adj_list}{A list of adjacency matrices, each representing a different relation
   for the same nodes.}
 
   \item{nsplit}{The total number of splits CONCOR will (attempt to) perform.}
+  \item{stat}{The statistic that will be used to determine if edges should be included in a reduced network.  Default value is \code{density}}
 }
 \details{
 A reduced network represents each identified position in the network as a single node.
-Links (or self-links) exist if the density of ties in that block is greater than a
-threshold density. In this implementation, the density of the whole network is used as
-the threshold for each block.
+Links (or self-links) exist if the density (or normalized degree) of ties from that block to a target block is greater than a threshold density (or degree). In the default implementation, the density of the whole network is used as the threshold for each block.  In the degree implementation, the normalized degree of the network is used as the threshhold.
 
 In the list of input matrices \code{adj_list}, each should correspond to a different
 relation for the same nodes. Each adjacency matrix is partitioned with the CONCOR
@@ -48,4 +47,5 @@ rownames(g2) <- c("a", "b", "c", "d")
 colnames(g2) <- c("a", "b", "c", "d")
 
 make_reduced(list(g1, g2), nsplit = 1)
+make_reduced(list(g1, g2), nsplit = 1, stat="degree")
 }

@@ -31,7 +31,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ATraxLab/concorR")
+devtools::install_github("sfwolfphys/concorR")
 ```
 
 ## Example
@@ -144,12 +144,12 @@ degree}(M)}&#10;](https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B%5Ctexttt%7B
 Note that for this definition, the sub-adjacency matrix will not be
 square if there are different numbers of elements in each block.
 
-To use this criteria, we have created an argument `connect`. The default
-to this argument is `'density'`, which does the analysis in the previous
+To use this criteria, we have created an argument `stat`. The default to
+this argument is `'density'`, which does the analysis in the previous
 section. To use this criterion instead, use the option `'degree'`.
 
 ``` r
-(r_mat_deg <- make_reduced(list(a), nsplit = 1, connect = 'degree'))
+(r_mat_deg <- make_reduced(list(a), nsplit = 1, stat = 'degree'))
 #> $reduced_mat
 #> $reduced_mat[[1]]
 #>         Block 1 Block 2
@@ -271,8 +271,8 @@ par(mfrow = c(1,1))
 ### Reduced networks using degree criterion
 
 ``` r
-red1d <- make_reduced(list(m1), nsplit = 2, connect='degree')
-red2d <- make_reduced(list(m2), nsplit = 2, connect='degree')
+red1d <- make_reduced(list(m1), nsplit = 2, stat='degree')
+red2d <- make_reduced(list(m2), nsplit = 2, stat='degree')
 
 gred1d <- make_reduced_igraph(red1d$reduced_mat[[1]])
 gred2d <- make_reduced_igraph(red2d$reduced_mat[[1]])
@@ -291,7 +291,7 @@ par(mfrow = c(1,1))
 with the multi-relation version:
 
 ``` r
-redbothd <- make_reduced(list(m1, m2), nsplit = 2, connect='degree')
+redbothd <- make_reduced(list(m1, m2), nsplit = 2, stat='degree')
 gbothd <- lapply(redbothd$reduced_mat, make_reduced_igraph)
 par(mfrow = c(1, 2))
 plot_reduced(gbothd[[1]])
