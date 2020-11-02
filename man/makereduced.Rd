@@ -28,7 +28,8 @@ applied, each entry in the reduced matrix has values of 0 or 1.
 }
 \value{
 \item{reduced_mat}{A list of reduced matrices, one for each input matrix.}
-\item{dens}{A vector of the cut-off densities used (equal to the edge density of each entry in \code{adj_list}).}
+\item{dens}{A vector of the cut-off densities used (equal to the edge density of each entry in \code{adj_list}).  Only for \code{stat="density"}}
+\item{deg}{A vector of the cut-off normalized degrees used (equal to the mean normalized degree of each entry in \code{adj_list}).  Only for \code{stat="degree"}.}
 }
 \references{
 S. Wasserman and K. Faust, \emph{Social Network Analysis: Methods and Applications} (Cambridge University Press, 1994).
