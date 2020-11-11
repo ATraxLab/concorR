@@ -45,6 +45,8 @@ This is a basic example which shows a common task: using CONCOR to partition a s
 
 ```{r example}
 library(concorR)
+source('R/CONCOR_blockmodeling.R')
+
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
 rownames(a) <- letters[1:5]

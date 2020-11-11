@@ -27,7 +27,7 @@ make_blk <- function(adj_list, nsplit = 1) {
   adj_mat[adj_mat > 0] <- 1
   
   outdeg = sum(adj_mat)/nrow(adj_mat)
-  normoutdeg = outdeg/(nrow(adj_mat)-1)
+  normoutdeg = outdeg/(ncol(adj_mat)-1)
   return(normoutdeg)
 }
 
@@ -36,7 +36,7 @@ make_blk <- function(adj_list, nsplit = 1) {
   adj_mat[adj_mat > 0] <- 1
   
   outdeg = sum(adj_mat)/nrow(adj_mat)
-  offdiagoutdeg = outdeg/nrow(adj_mat)
+  offdiagoutdeg = outdeg/ncol(adj_mat)
   return(offdiagoutdeg)
 }
 
@@ -81,7 +81,7 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
       for(j in 1:nb){
         for(k in 1:nb){
           blk_adj_mat = this_adj_mat[j==members, k==members]
-          outDeg = ifelse(i!=j,.offdiagoutdeg(blk_adj_mat),.normoutdeg(blk_adj_mat))
+          outDeg = ifelse(i!=j, .offdiagoutdeg(blk_adj_mat), .normoutdeg(blk_adj_mat))
           reduced_degree[j,k] = outDeg
         }
       }
