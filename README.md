@@ -41,7 +41,6 @@ partition a single adjacency matrix.
 
 ``` r
 library(concorR)
-source('R/CONCOR_blockmodeling.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -260,7 +259,6 @@ plot_socio(krack_friend)
 <img src="man/figures/README-krackhardt-NW-single-1.png" width="100%" />
 
 ``` r
-par(mfrow = c(1,1))
 
 m1 <- igraph::as_adjacency_matrix(krack_advice, sparse = FALSE)
 m2 <- igraph::as_adjacency_matrix(krack_friend, sparse = FALSE)
@@ -278,10 +276,6 @@ plot_socio(gfrn, nsplit = 2)
 
 <img src="man/figures/README-krackhardt-NW-single-2.png" width="100%" />
 
-``` r
-par(mfrow = c(1,1))
-```
-
 Next, compare with the multi-relation blocking:
 
 ``` r
@@ -296,10 +290,6 @@ plot_socio(gfrn2, nsplit = 2)
 ```
 
 <img src="man/figures/README-krackhardt-NW-multi-1.png" width="100%" />
-
-``` r
-par(mfrow = c(1,1))
-```
 
 Including information from both relations changes the block membership
 of several nodes.
@@ -321,10 +311,6 @@ plot_reduced(gred2)
 
 <img src="man/figures/README-krackhardt-reduced-single-1.png" width="100%" />
 
-``` r
-par(mfrow = c(1,1))
-```
-
 with the multi-relation version:
 
 ``` r
@@ -336,10 +322,6 @@ plot_reduced(gboth[[2]])
 ```
 
 <img src="man/figures/README-krackhardt-reduced-multi-1.png" width="100%" />
-
-``` r
-par(mfrow = c(1,1))
-```
 
 ### Reduced networks using degree criterion
 
@@ -356,10 +338,6 @@ plot_reduced(gred2d)
 ```
 
 <img src="man/figures/README-krackhardt-reduced-single-degree-1.png" width="100%" />
-
-``` r
-par(mfrow = c(1,1))
-```
 
 with the multi-relation version:
 

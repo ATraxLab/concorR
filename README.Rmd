@@ -45,7 +45,6 @@ This is a basic example which shows a common task: using CONCOR to partition a s
 
 ```{r example}
 library(concorR)
-source('R/CONCOR_blockmodeling.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -158,7 +157,6 @@ First, take a look at the CONCOR partitions for two splits (four positions), con
 par(mfrow = c(1, 2))
 plot_socio(krack_advice)  # plot_socio imposes some often-useful plot parameters
 plot_socio(krack_friend)
-par(mfrow = c(1,1))
 
 m1 <- igraph::as_adjacency_matrix(krack_advice, sparse = FALSE)
 m2 <- igraph::as_adjacency_matrix(krack_friend, sparse = FALSE)
@@ -172,7 +170,6 @@ gfrn <- set_vertex_attr(krack_friend, "csplit2", value = V(g2[[1]])$csplit2)
 par(mfrow = c(1, 2))
 plot_socio(gadv, nsplit = 2)
 plot_socio(gfrn, nsplit = 2)
-par(mfrow = c(1,1))
 ```
 
 Next, compare with the multi-relation blocking:
@@ -186,8 +183,6 @@ gfrn2 <- set_vertex_attr(krack_friend, "csplit2", value = V(gboth[[2]])$csplit2)
 par(mfrow = c(1, 2))
 plot_socio(gadv2, nsplit = 2)
 plot_socio(gfrn2, nsplit = 2)
-par(mfrow = c(1,1))
-
 ```
 
 Including information from both relations changes the block membership of several nodes. 
@@ -203,7 +198,6 @@ gred2 <- make_reduced_igraph(red2$reduced_mat[[1]])
 par(mfrow = c(1, 2))
 plot_reduced(gred1)
 plot_reduced(gred2)
-par(mfrow = c(1,1))
 ```
 
 with the multi-relation version:
@@ -213,7 +207,6 @@ gboth <- lapply(redboth$reduced_mat, make_reduced_igraph)
 par(mfrow = c(1, 2))
 plot_reduced(gboth[[1]])
 plot_reduced(gboth[[2]])
-par(mfrow = c(1,1))
 ```
 
 ### Reduced networks using degree criterion
@@ -227,7 +220,6 @@ gred2d <- make_reduced_igraph(red2d$reduced_mat[[1]])
 par(mfrow = c(1, 2))
 plot_reduced(gred1d)
 plot_reduced(gred2d)
-par(mfrow = c(1,1))
 ```
 
 with the multi-relation version:
