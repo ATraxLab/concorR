@@ -41,6 +41,7 @@ partition a single adjacency matrix.
 
 ``` r
 library(concorR)
+source('R/CONCOR_blockmodeling.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -132,18 +133,21 @@ X_{ij} = M[(\\text{elements in block i}), (\\text{elements in block j})]
 ")  
 
 We’d like to use a simple criterion to determine whether to draw an edge
-or not, we will use the normalized degree for this purpose:
+or not, we will use the scaled degree for this purpose. For our
+definition, we will divide by the max *observed* degree.
 
   
 ![&#10;\\frac{\\texttt{mean}(\\texttt{degree}(X\_{ij}))}{\\texttt{max
-possible degree}(X\_{ij})} \>
-\\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max possible
-degree}(M)}&#10;](https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28X_%7Bij%7D%29%29%7D%7B%5Ctexttt%7Bmax%20possible%20degree%7D%28X_%7Bij%7D%29%7D%20%3E%20%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28M%29%29%7D%7B%5Ctexttt%7Bmax%20possible%20degree%7D%28M%29%7D%0A
+observed degree}(X\_{ij})} \>
+\\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max observed
+degree}(M)}&#10;](https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28X_%7Bij%7D%29%29%7D%7B%5Ctexttt%7Bmax%20observed%20degree%7D%28X_%7Bij%7D%29%7D%20%3E%20%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28M%29%29%7D%7B%5Ctexttt%7Bmax%20observed%20degree%7D%28M%29%7D%0A
 "
-\\frac{\\texttt{mean}(\\texttt{degree}(X_{ij}))}{\\texttt{max possible degree}(X_{ij})} \> \\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max possible degree}(M)}
+\\frac{\\texttt{mean}(\\texttt{degree}(X_{ij}))}{\\texttt{max observed degree}(X_{ij})} \> \\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max observed degree}(M)}
 ")  
 Note that for this definition, the sub-adjacency matrix will not be
-square if there are different numbers of elements in each block.
+square if there are different numbers of elements in each block. Also,
+while it is more common to use normalized degree, it is identical to
+edge density, and therefore of no help to us here.
 
 To use this criteria, we have created an argument `stat`. The default to
 this argument is `'density'`, which does the analysis in the previous
@@ -155,7 +159,7 @@ section. To use this criterion instead, use the option `'degree'`.
 #> $reduced_mat[[1]]
 #>         Block 1 Block 2
 #> Block 1       1       0
-#> Block 2       1       0
+#> Block 2       1       1
 #> 
 #> 
 #> $deg

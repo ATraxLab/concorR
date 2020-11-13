@@ -22,22 +22,14 @@ make_blk <- function(adj_list, nsplit = 1) {
   return(d)
 }
 
-.normoutdeg = function(adj_mat){
-  ## Make weighted matrix unweighted
-  adj_mat[adj_mat > 0] <- 1
-  
-  outdeg = sum(adj_mat)/nrow(adj_mat)
-  normoutdeg = outdeg/(ncol(adj_mat)-1)
-  return(normoutdeg)
-}
+.scaledDegree <-  function(adj_mat){
+    ## Make weighted matrix unweighted
+    adj_mat[adj_mat > 0] <- 1
 
-.offdiagoutdeg = function(adj_mat){
-  ## Make weighted matrix unweighted
-  adj_mat[adj_mat > 0] <- 1
-  
-  outdeg = sum(adj_mat)/nrow(adj_mat)
-  offdiagoutdeg = outdeg/ncol(adj_mat)
-  return(offdiagoutdeg)
+    avgOutDegree = sum(adj_mat)/nrow(adj_mat)
+    maxOutDegree = max(rowSums(adj_mat))
+    scaledDegree = ifelse(maxOutDegree > 0,avgOutDegree/maxOutDegree, 0)
+    return(scaledDegree)
 }
 
 #' @export
@@ -62,7 +54,7 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
     return(return_list)
   }else if(stat=='degree'){
     blk_out = make_blk(adj_list, nsplit)
-    outdegree = lapply(adj_list, function(x) .normoutdeg(x))
+    outdegree = lapply(adj_list, function(x) .scaledDegree(x))
     mat_return <- vector("list", length = length(outdegree))
     
     for(i in 1:length(outdegree)){ # For each adjacency matrix
@@ -74,9 +66,29 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
       rownames(reduced_degree) = paste("Block",1:nb)
       colnames(reduced_degree) = paste("Block",1:nb)
       for(j in 1:nb){
+        nRows = sum(j==members)
         for(k in 1:nb){
-          blk_adj_mat = this_adj_mat[j==members, k==members]
-          outDeg = ifelse(i!=j, .offdiagoutdeg(blk_adj_mat), .normoutdeg(blk_adj_mat))
+          nCols = sum(k==members)
+          # Note that subsetting a matrix with a single row/column, loses the dimensionality
+          # of the object.  I need to handle single row/column cases carefully.
+          if(nRows==1){
+            if(nCols==1){
+              blk_adj_mat = this_adj_mat[j==members, k==members] # single value
+              outDeg = ifelse(blk_adj_mat>0,1,0) # scaled degree is 1 if matrix not empty
+            }else{
+              blk_adj_mat = this_adj_mat[j==members, k==members] # single row
+              blk_adj_mat = matrix(blk_adj_mat,nrow=1)
+              outDeg = .scaledDegree(blk_adj_mat)
+            }
+          }else{
+            if(nCols==1){
+              blk_adj_mat = this_adj_mat[j==members, k==members] # single column
+              blk_adj_mat = matrix(blk_adj_mat,ncol=1)
+            }else{
+              blk_adj_mat = this_adj_mat[j==members, k==members]
+            }
+            outDeg = .scaledDegree(blk_adj_mat)
+          }
           reduced_degree[j,k] = outDeg
         }
       }

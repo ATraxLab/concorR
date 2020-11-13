@@ -45,6 +45,7 @@ This is a basic example which shows a common task: using CONCOR to partition a s
 
 ```{r example}
 library(concorR)
+source('R/CONCOR_blockmodeling.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -86,12 +87,12 @@ $$
 X_{ij} = M[(\text{elements in block i}), (\text{elements in block j})]
 $$
 
-We'd like to use a simple criterion to determine whether to draw an edge or not, we will use the normalized degree for this purpose:
+We'd like to use a simple criterion to determine whether to draw an edge or not, we will use the scaled degree for this purpose. For our definition, we will divide by the max _observed_ degree.
 
 $$
-\frac{\texttt{mean}(\texttt{degree}(X_{ij}))}{\texttt{max possible degree}(X_{ij})} > \frac{\texttt{mean}(\texttt{degree}(M))}{\texttt{max possible degree}(M)}
+\frac{\texttt{mean}(\texttt{degree}(X_{ij}))}{\texttt{max observed degree}(X_{ij})} > \frac{\texttt{mean}(\texttt{degree}(M))}{\texttt{max observed degree}(M)}
 $$
-Note that for this definition, the sub-adjacency matrix will not be square if there are different numbers of elements in each block.
+Note that for this definition, the sub-adjacency matrix will not be square if there are different numbers of elements in each block.  Also, while it is more common to use normalized degree, it is identical to edge density, and therefore of no help to us here.
 
 To use this criteria, we have created an argument `stat`.  The default to this argument is `'density'`, which does the analysis in the previous section.  To use this criterion instead, use the option `'degree'`.
 
