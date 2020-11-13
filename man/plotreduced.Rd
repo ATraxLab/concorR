@@ -5,10 +5,11 @@
 Plot a reduced network using \pkg{igraph}, with nodes colored by block number.
 }
 \usage{
-plot_reduced(iobject)
+plot_reduced(iobject,main)
 }
 \arguments{
   \item{iobject}{An \code{igraph} object representing the reduced network.}
+  \item{main}{Text for the title of the plot.  See \code{plot}.}
 }
 \details{
 Plots the reduced network, where each node represents all the nodes assigned to that
