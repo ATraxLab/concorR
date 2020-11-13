@@ -62,19 +62,14 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
     return(return_list)
   }else if(stat=='degree'){
     blk_out = make_blk(adj_list, nsplit)
-    outdegree = sapply(adj_list, function(x) .normoutdeg(x))
+    outdegree = lapply(adj_list, function(x) .normoutdeg(x))
     mat_return <- vector("list", length = length(outdegree))
-    
-    
-    blks = lapply(blk_out, function(x)x[[1]])
-    idx = lapply(blk_out, function(x)x[[2]])
-    blk_membership = mapply(function(x,y){x[y][y[y]]}, blks, idx, SIMPLIFY=FALSE)
-    nblks = lapply(blk_membership,max)
     
     for(i in 1:length(outdegree)){ # For each adjacency matrix
       this_adj_mat = adj_list[[i]]
-      nb = nblks[[i]]
-      members = blk_membership[[i]]
+      thisBlk = blk_out[[i]]
+      members = thisBlk$block.membership[sort(thisBlk$order.vector,index.return=TRUE)$ix]
+      nb = max(members)
       reduced_degree = matrix(0, nrow = nb, ncol = nb)
       rownames(reduced_degree) = paste("Block",1:nb)
       colnames(reduced_degree) = paste("Block",1:nb)

@@ -45,6 +45,7 @@ This is a basic example which shows a common task: using CONCOR to partition a s
 
 ```{r example}
 library(concorR)
+source('R/CONCOR_blockmodeling.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -64,14 +65,14 @@ plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
 ```
 
 The *blockmodel* shows the permuted adjacency matrix, rearranged to group nodes by CONCOR partition. 
-```{r}
+```{r example-basic-blockplot}
 bm <- make_blk(list(a), 1)[[1]]
 plot_blk(bm, labels = TRUE)
 ```
 
 The *reduced matrix* represents each position as a node, and calculates links by applying a density threshold to the ties between (and within) positions. 
 
-```{r}
+```{r example-basic-reducedplot}
 (r_mat <- make_reduced(list(a), nsplit = 1))
 r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 
@@ -95,15 +96,59 @@ Note that for this definition, the sub-adjacency matrix will not be square if th
 
 To use this criteria, we have created an argument `stat`.  The default to this argument is `'density'`, which does the analysis in the previous section.  To use this criterion instead, use the option `'degree'`.
 
-```{r}
+```{r example-basic-reduced-degree}
 (r_mat_deg <- make_reduced(list(a), nsplit = 1, stat = 'degree'))
 r_deg_igraph <- make_reduced_igraph(r_mat_deg$reduced_mat[[1]])
 
 plot_reduced(r_deg_igraph)
 ```
 
+## Example 2: A network with isolated members
 
-## Example 2: Krackhardt high-tech managers
+Sometimes, there are isolated nodes in a network.  The CONCOR algorithm works with this network by creating a block for isolated members, and then running the standard algorithm on the network with the isolated members removed.  Therefore the number of blocks will be `2^nsplit + 1` blocks in that event.  Consider this example:
+
+```{r}
+isoA = matrix(c(0,1,1,1,1,0,
+                1,0,1,1,1,0,
+                1,1,0,1,1,0,
+                0,0,0,0,1,0,
+                0,0,0,1,0,0,
+                0,0,0,0,0,0),
+              nrow=6,byrow=TRUE)
+rownames(isoA) = LETTERS[1:6]
+colnames(isoA) = LETTERS[1:6]
+concor(list(isoA),nsplit=1)
+```
+
+This network looks like this:
+```{r example-iso}
+plot(graph_from_adjacency_matrix(isoA))
+
+## With CONCOR block coloring
+gISOlist <- concor_make_igraph(list(isoA))
+plot(gISOlist[[1]], vertex.color = V(gISOlist[[1]])$csplit1)
+```
+
+
+```{r example-iso-block}
+bm = make_blk(list(isoA),nsplit=1)[[1]]
+plot_blk(bm, labels = TRUE)
+```
+
+```{r example-iso-reduced}
+rmDen = make_reduced(list(isoA),nsplit=1,stat='density')
+rmDeg = make_reduced(list(isoA),nsplit=1,stat='degree')
+
+rmDen.g = make_reduced_igraph(rmDen$reduced_mat[[1]])
+plot_reduced(rmDen.g)
+
+rmDeg.g = make_reduced_igraph(rmDeg$reduced_mat[[1]])
+plot_reduced(rmDeg.g)
+```
+
+
+
+## Example 3: Krackhardt high-tech managers
 
 CONCOR can use multiple adjacency matrices to partition nodes based on all relations simultaneously. The package includes `igraph` data files for the Krackhardt (1987) high-tech managers study, which gives networks for advice, friendship, and reporting among 21 managers at a firm. (These networks were used in the examples of Wasserman and Faust (1994).)
 
@@ -192,7 +237,6 @@ gbothd <- lapply(redbothd$reduced_mat, make_reduced_igraph)
 par(mfrow = c(1, 2))
 plot_reduced(gbothd[[1]])
 plot_reduced(gbothd[[2]])
-par(mfrow = c(1,1))
 ```
 
 
