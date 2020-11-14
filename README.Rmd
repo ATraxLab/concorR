@@ -45,6 +45,9 @@ This is a basic example which shows a common task: using CONCOR to partition a s
 
 ```{r example}
 library(concorR)
+source('R/CONCOR_blockmodeling.R')
+source('R/CONCOR.R')
+source('R/CONCOR_supplemental_fun.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -56,11 +59,13 @@ concor(list(a))
 Additional helper functions are included for using the `igraph` package:
 ```{r example-basic}
 library(igraph)
+library(viridis)
 
 plot(graph_from_adjacency_matrix(a))
 glist <- concor_make_igraph(list(a))
 
-plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
+col_pal_a = viridis(2)
+plot(glist[[1]], vertex.color = col_pal_a[V(glist[[1]])$csplit1])
 ```
 
 The *blockmodel* shows the permuted adjacency matrix, rearranged to group nodes by CONCOR partition. 
@@ -125,7 +130,8 @@ plot(graph_from_adjacency_matrix(isoA))
 
 ## With CONCOR block coloring
 gISOlist <- concor_make_igraph(list(isoA))
-plot(gISOlist[[1]], vertex.color = V(gISOlist[[1]])$csplit1)
+col_pal_iso = viridis(3)
+plot(gISOlist[[1]], vertex.color = col_pal_iso[V(gISOlist[[1]])$csplit1])
 ```
 
 

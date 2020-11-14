@@ -41,6 +41,9 @@ partition a single adjacency matrix.
 
 ``` r
 library(concorR)
+source('R/CONCOR_blockmodeling.R')
+source('R/CONCOR.R')
+source('R/CONCOR_supplemental_fun.R')
 
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
@@ -67,6 +70,8 @@ library(igraph)
 #> The following object is masked from 'package:base':
 #> 
 #>     union
+library(viridis)
+#> Loading required package: viridisLite
 
 plot(graph_from_adjacency_matrix(a))
 ```
@@ -76,7 +81,8 @@ plot(graph_from_adjacency_matrix(a))
 ``` r
 glist <- concor_make_igraph(list(a))
 
-plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
+col_pal_a = viridis(2)
+plot(glist[[1]], vertex.color = col_pal_a[V(glist[[1]])$csplit1])
 ```
 
 <img src="man/figures/README-example-basic-2.png" width="100%" />
@@ -211,7 +217,8 @@ plot(graph_from_adjacency_matrix(isoA))
 
 ## With CONCOR block coloring
 gISOlist <- concor_make_igraph(list(isoA))
-plot(gISOlist[[1]], vertex.color = V(gISOlist[[1]])$csplit1)
+col_pal_iso = viridis(3)
+plot(gISOlist[[1]], vertex.color = col_pal_iso[V(gISOlist[[1]])$csplit1])
 ```
 
 <img src="man/figures/README-example-iso-2.png" width="100%" />
