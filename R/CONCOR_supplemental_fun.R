@@ -19,8 +19,16 @@ concor_make_igraph <- function(adj_list, nsplit = 1) {
 
 #' @export
 concor_igraph_apply <- function(igraph_list, nsplit = 1) {
-  adj_list <- lapply(igraph_list,
-                     function(x) igraph::get.adjacency(x, sparse = FALSE))
+  if (is_weighted(igraph_list[[1]])) {
+    adj_list <- lapply(igraph_list,
+                       function(x) igraph::as_adjacency_matrix(x,
+                                                               attr = "weight",
+                                                               sparse = FALSE))
+  } else {
+    adj_list <- lapply(igraph_list,
+                       function(x) igraph::as_adjacency_matrix(x,
+                                                               sparse = FALSE))
+  }
 
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
   v <- paste("csplit", nsplit, sep = "")
