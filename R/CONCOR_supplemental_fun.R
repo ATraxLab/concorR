@@ -26,12 +26,19 @@ concor_make_igraph <- function(adj_list, nsplit = 1) {
 
 #' @export
 concor_igraph_apply <- function(igraph_list, nsplit = 1) {
-  if (is_weighted(igraph_list[[1]])) {
+  any_weighted <- any(sapply(igraph_list, is_weighted))
+  all_weighted <- all(sapply(igraph_list, is_weighted))
+
+  if (all_weighted) {
     adj_list <- lapply(igraph_list,
                        function(x) igraph::as_adjacency_matrix(x,
                                                                attr = "weight",
                                                                sparse = FALSE))
   } else {
+    if (any_weighted) {
+      warning("Some but not all input graphs are weighted; ignoring weights.\n")
+    }
+
     adj_list <- lapply(igraph_list,
                        function(x) igraph::as_adjacency_matrix(x,
                                                                sparse = FALSE))
