@@ -26,8 +26,8 @@ concor_make_igraph <- function(adj_list, nsplit = 1) {
 
 #' @export
 concor_igraph_apply <- function(igraph_list, nsplit = 1) {
-  any_weighted <- any(sapply(igraph_list, is_weighted))
-  all_weighted <- all(sapply(igraph_list, is_weighted))
+  any_weighted <- any(sapply(igraph_list, igraph::is_weighted))
+  all_weighted <- all(sapply(igraph_list, igraph::is_weighted))
 
   if (all_weighted) {
     adj_list <- lapply(igraph_list,
