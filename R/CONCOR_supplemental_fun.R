@@ -9,8 +9,15 @@
 concor_make_igraph <- function(adj_list, nsplit = 1) {
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
-  igraph_list <- lapply(adj_list,
-                        function(x) igraph::graph_from_adjacency_matrix(x))
+  all_unweighted <- all(sapply(adj_list, function(x) all(x %in% c(0,1))))
+  if (all_unweighted) {
+    igraph_list <- lapply(adj_list,
+                          function(x) igraph::graph_from_adjacency_matrix(x))
+  } else {
+    igraph_list <- lapply(adj_list,
+                          function(x) igraph::graph_from_adjacency_matrix(x, weighted = "weight"))
+  }
+
   v <- paste("csplit", nsplit, sep = "")
   igraph_out <- lapply(igraph_list, function(x) .blk_apply(x, concor_out, v))
 
