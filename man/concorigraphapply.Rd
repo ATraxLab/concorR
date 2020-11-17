@@ -17,6 +17,8 @@ This function is a wrapper for a common task: Running \code{\link{concor}} on on
 \pkg{igraph} objects and adding the resulting partition to each object as a vertex
 attribute. If multiple \pkg{igraph} objects are included in the input list, they should
 be multiple relations for the same nodes.
+
+If all of the input graphs are weighted, edge weights will be used by \code{concor}.
 }
 \value{
 Returns a list of \pkg{igraph} objects, each with a vertex attribute \code{csplitn}
@@ -32,6 +34,13 @@ a <- matrix(c(0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0), ncol = 4)
 rownames(a) <- c("a", "b", "c", "d")
 colnames(a) <- c("a", "b", "c", "d")
 a.igraph <- igraph::graph_from_adjacency_matrix(a)
-
 concor_igraph_apply(list(a.igraph))
+
+b <- matrix(c(0, 0, 0, 4, 1, 0, 3, 0, 2, 1, 0, 1, 1, 0, 2, 0), ncol = 4)
+rownames(b) <- c("a", "b", "c", "d")
+colnames(b) <- c("a", "b", "c", "d")
+b.igraph <- igraph::graph_from_adjacency_matrix(b, weighted = "weight")
+concor_igraph_apply(list(b.igraph))
+
+concor_igraph_apply(list(a.igraph, b.igraph))
 }
