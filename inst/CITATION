@@ -5,11 +5,11 @@ citEntry(entry = "manual",
     title = "{concorR}: {CONCOR} and Supplemental Functions",
     author = personList(as.person("Tyme Suda"),
                    as.person("Adrienne Traxler")),
-    note = "R package version 0.2.0.9000",
+    note = "R package version 0.2.1",
     year = "2020",
     url = "https://github.com/ATraxLab/concorR",
     textVersion  = paste("Tyme Suda and Adrienne Traxler (2020).",
         "concorR: CONCOR and Supplemental Functions.",
-        "R package version 0.2.0.9000.",
+        "R package version 0.2.1.",
         "https://github.com/ATraxLab/concorR")
 )
