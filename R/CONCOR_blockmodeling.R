@@ -13,17 +13,15 @@ make_blk <- function(adj_list, nsplit = 1) {
 }
 
 .edge_dens <- function(adj_mat) {
-  ## Make weighted matrix unweighted
   adj_mat[adj_mat > 0] <- 1
 
-  a <- sum(adj_mat)   # Count total edges in network
-  m <- length(adj_mat) - sqrt(length(adj_mat))  ## Count possible edges (remove the diagonal)
-  d <- a / m  # actual/possible
+  a <- sum(adj_mat)
+  m <- length(adj_mat) - sqrt(length(adj_mat))
+  d <- a / m
   return(d)
 }
 
 .scaledDegree <-  function(adj_mat){
-    ## Make weighted matrix unweighted
     adj_mat[adj_mat > 0] <- 1
 
     avgOutDegree = sum(adj_mat)/nrow(adj_mat)
@@ -57,7 +55,7 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
     outdegree = lapply(adj_list, function(x) .scaledDegree(x))
     mat_return <- vector("list", length = length(outdegree))
     
-    for(i in 1:length(outdegree)){ # For each adjacency matrix
+    for(i in 1:length(outdegree)){ 
       this_adj_mat = adj_list[[i]]
       thisBlk = blk_out[[i]]
       members = thisBlk$block.membership[sort(thisBlk$order.vector,index.return=TRUE)$ix]
@@ -69,20 +67,18 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
         nRows = sum(j==members)
         for(k in 1:nb){
           nCols = sum(k==members)
-          # Note that subsetting a matrix with a single row/column, loses the dimensionality
-          # of the object.  I need to handle single row/column cases carefully.
           if(nRows==1){
             if(nCols==1){
-              blk_adj_mat = this_adj_mat[j==members, k==members] # single value
-              outDeg = ifelse(blk_adj_mat>0,1,0) # scaled degree is 1 if matrix not empty
+              blk_adj_mat = this_adj_mat[j==members, k==members] 
+              outDeg = ifelse(blk_adj_mat>0,1,0) 
             }else{
-              blk_adj_mat = this_adj_mat[j==members, k==members] # single row
+              blk_adj_mat = this_adj_mat[j==members, k==members] 
               blk_adj_mat = matrix(blk_adj_mat,nrow=1)
               outDeg = .scaledDegree(blk_adj_mat)
             }
           }else{
             if(nCols==1){
-              blk_adj_mat = this_adj_mat[j==members, k==members] # single column
+              blk_adj_mat = this_adj_mat[j==members, k==members]
               blk_adj_mat = matrix(blk_adj_mat,ncol=1)
             }else{
               blk_adj_mat = this_adj_mat[j==members, k==members]
@@ -96,7 +92,6 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
       temp1[is.nan(temp1)] <- 0
       temp1[temp1 < outdegree[[i]]] <- 0
       temp1[temp1 > 0] <- 1
-#      diag(temp1) = ifelse(diag(reduced_degree)>0,1)
       mat_return[[i]] <- temp1
     }
                                                                 
@@ -116,7 +111,6 @@ plot_blk <- function (x, labels = FALSE, ...) {
   # Carter T. Butts (2019). sna: Tools for Social Network Analysis.
   # R package version 2.5, licensed under GPL (>= 2).
   # https://CRAN.R-project.org/package=sna
-
   if (!labels) {
     x$plabels <- rep("", length(x$plabels))
     x$glabels <- ""
@@ -159,7 +153,6 @@ make_reduced_igraph <- function(reduced_mat) {
 #' @export
 plot_reduced <- function(iobject,main='') {
     vcolors  <- viridis::viridis(length(igraph::vertex_attr(iobject)$name))
-    #vcolors <- c(1:length(igraph::vertex_attr(iobject)$name))
     igraph::plot.igraph(iobject, vertex.color = vcolors, vertex.label = NA,
                       edge.arrow.size = .6, vertex.size = 25,main = main)
 }
