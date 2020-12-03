@@ -1,5 +1,6 @@
 #' @export
 make_blk <- function(adj_list, nsplit = 1) {
+  adj_list <- .concor_validitycheck(adj_list)
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
   concor_order <- match(colnames(adj_list[[1]]), concor_out$vertex)

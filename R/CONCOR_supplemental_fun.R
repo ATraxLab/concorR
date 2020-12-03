@@ -7,6 +7,7 @@
 
 #' @export
 concor_make_igraph <- function(adj_list, nsplit = 1) {
+  adj_list <- .concor_validitycheck(adj_list)
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
 
   all_unweighted <- all(sapply(adj_list, function(x) all(x %in% c(0,1))))
