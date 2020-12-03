@@ -1,5 +1,10 @@
 # concorR (development version)
 
+* Added a check for vertex names to `concor_igraph_apply()`, add them if 
+missing.
+* Fixed `make_blk()` and `concor_make_igraph()` to carry vertex names through if 
+they had to be added.
+
 # concorR 0.2.1
 
 * `concor_make_igraph()` and `concor_igraph_apply()` fixed to use edge weights 
