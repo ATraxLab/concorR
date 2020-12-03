@@ -45,6 +45,7 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1) {
                                                                sparse = FALSE))
   }
 
+  igraph_list <- .concor_igraph_validitycheck(igraph_list)
   concor_out <- suppressWarnings(concor(adj_list, nsplit))
   v <- paste("csplit", nsplit, sep = "")
   igraph_out <- lapply(igraph_list, function(x) .blk_apply(x, concor_out, v))
