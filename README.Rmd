@@ -1,8 +1,10 @@
 ---
-output: github_document
+output: 
+    github_document:
+        pandoc_args: --webtex
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.Rmd. Please edit README.Rmd -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -14,10 +16,10 @@ knitr::opts_chunk$set(
 ```
 
 # concorR
-
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/ATraxLab/concorR.svg?branch=master)](https://travis-ci.com/ATraxLab/concorR)
+[![Travis build status](https://travis-ci.com/sfwolfphys/concorR.svg?branch=main)](https://travis-ci.com/sfwolfphys/concorR)
 <!-- badges: end -->
+
 
 The goal of concorR is to implement the CONCOR (CONvergence of iterated CORrelations) algorithm for positional analysis. Positional analysis divides a network into blocks based on the similarity of links between actors. CONCOR uses structural equivalence---"same ties to same others"---as its criterion for grouping nodes, and calculates this by correlating columns in the adjacency matrix. For more details on CONCOR, see the original description by Breiger, Boorman, and Arabie (1975), or Chapter 9 in Wasserman and Faust (1994).
 
@@ -33,7 +35,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ATraxLab/concorR")
+devtools::install_github("sfwolfphys/concorR")
 ```
 
 
@@ -43,6 +45,7 @@ This is a basic example which shows a common task: using CONCOR to partition a s
 
 ```{r example}
 library(concorR)
+
 a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 
                1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
 rownames(a) <- letters[1:5]
@@ -53,29 +56,101 @@ concor(list(a))
 Additional helper functions are included for using the `igraph` package:
 ```{r example-basic}
 library(igraph)
+library(viridis)
 
 plot(graph_from_adjacency_matrix(a))
 glist <- concor_make_igraph(list(a))
 
-plot(glist[[1]], vertex.color = V(glist[[1]])$csplit1)
+col_pal_a = viridis(2)
+plot(glist[[1]], vertex.color = col_pal_a[V(glist[[1]])$csplit1])
 ```
 
 The *blockmodel* shows the permuted adjacency matrix, rearranged to group nodes by CONCOR partition. 
-```{r}
+```{r example-basic-blockplot}
 bm <- make_blk(list(a), 1)[[1]]
 plot_blk(bm, labels = TRUE)
 ```
 
 The *reduced matrix* represents each position as a node, and calculates links by applying a density threshold to the ties between (and within) positions. 
 
-```{r}
+```{r example-basic-reducedplot}
 (r_mat <- make_reduced(list(a), nsplit = 1))
 r_igraph <- make_reduced_igraph(r_mat$reduced_mat[[1]])
 
 plot_reduced(r_igraph)
 ```
 
-## Example 2: Krackhardt high-tech managers
+### Connection criteria for making the reduced network
+
+In the prior example, the reduced network was created using an edge density threshold.  For some applications, it may be preferred to use a degree-based measure instead.  If we define $M$ to be the adjacency matrix, define the sub-adjacency matrix $X_{ij}$ as follows:
+
+$$
+X_{ij} = M[(\text{elements in block i}), (\text{elements in block j})]
+$$
+
+We'd like to use a simple criterion to determine whether to draw an edge or not, we will use the scaled degree for this purpose. For our definition, we will divide by the max _observed_ degree.
+
+$$
+\frac{\texttt{mean}(\texttt{degree}(X_{ij}))}{\texttt{max observed degree}(X_{ij})} > \frac{\texttt{mean}(\texttt{degree}(M))}{\texttt{max observed degree}(M)}
+$$
+Note that for this definition, the sub-adjacency matrix will not be square if there are different numbers of elements in each block.  Also, while it is more common to use normalized degree, it is identical to edge density, and therefore of no help to us here.
+
+To use this criteria, we have created an argument `stat`.  The default to this argument is `'density'`, which does the analysis in the previous section.  To use this criterion instead, use the option `'degree'`.
+
+```{r example-basic-reduced-degree}
+(r_mat_deg <- make_reduced(list(a), nsplit = 1, stat = 'degree'))
+r_deg_igraph <- make_reduced_igraph(r_mat_deg$reduced_mat[[1]])
+
+plot_reduced(r_deg_igraph)
+```
+
+## Example 2: A network with isolated members
+
+Sometimes, there are isolated nodes in a network.  The CONCOR algorithm works with this network by creating a block for isolated members, and then running the standard algorithm on the network with the isolated members removed.  Therefore the number of blocks will be `2^nsplit + 1` blocks in that event.  Consider this example:
+
+```{r}
+isoA = matrix(c(0,1,1,1,1,0,
+                1,0,1,1,1,0,
+                1,1,0,1,1,0,
+                0,0,0,0,1,0,
+                0,0,0,1,0,0,
+                0,0,0,0,0,0),
+              nrow=6,byrow=TRUE)
+rownames(isoA) = LETTERS[1:6]
+colnames(isoA) = LETTERS[1:6]
+concor(list(isoA),nsplit=1)
+```
+
+This network looks like this:
+```{r example-iso}
+plot(graph_from_adjacency_matrix(isoA))
+
+## With CONCOR block coloring
+gISOlist <- concor_make_igraph(list(isoA))
+col_pal_iso = viridis(3)
+plot(gISOlist[[1]], vertex.color = col_pal_iso[V(gISOlist[[1]])$csplit1])
+```
+
+
+```{r example-iso-block}
+bm = make_blk(list(isoA),nsplit=1)[[1]]
+plot_blk(bm, labels = TRUE)
+```
+
+```{r example-iso-reduced}
+rmDen = make_reduced(list(isoA),nsplit=1,stat='density')
+rmDeg = make_reduced(list(isoA),nsplit=1,stat='degree')
+
+rmDen.g = make_reduced_igraph(rmDen$reduced_mat[[1]])
+plot_reduced(rmDen.g)
+
+rmDeg.g = make_reduced_igraph(rmDeg$reduced_mat[[1]])
+plot_reduced(rmDeg.g)
+```
+
+
+
+## Example 3: Krackhardt high-tech managers
 
 CONCOR can use multiple adjacency matrices to partition nodes based on all relations simultaneously. The package includes `igraph` data files for the Krackhardt (1987) high-tech managers study, which gives networks for advice, friendship, and reporting among 21 managers at a firm. (These networks were used in the examples of Wasserman and Faust (1994).)
 
@@ -85,7 +160,6 @@ First, take a look at the CONCOR partitions for two splits (four positions), con
 par(mfrow = c(1, 2))
 plot_socio(krack_advice)  # plot_socio imposes some often-useful plot parameters
 plot_socio(krack_friend)
-par(mfrow = c(1,1))
 
 m1 <- igraph::as_adjacency_matrix(krack_advice, sparse = FALSE)
 m2 <- igraph::as_adjacency_matrix(krack_friend, sparse = FALSE)
@@ -99,7 +173,6 @@ gfrn <- set_vertex_attr(krack_friend, "csplit2", value = V(g2[[1]])$csplit2)
 par(mfrow = c(1, 2))
 plot_socio(gadv, nsplit = 2)
 plot_socio(gfrn, nsplit = 2)
-par(mfrow = c(1,1))
 ```
 
 Next, compare with the multi-relation blocking:
@@ -113,8 +186,6 @@ gfrn2 <- set_vertex_attr(krack_friend, "csplit2", value = V(gboth[[2]])$csplit2)
 par(mfrow = c(1, 2))
 plot_socio(gadv2, nsplit = 2)
 plot_socio(gfrn2, nsplit = 2)
-par(mfrow = c(1,1))
-
 ```
 
 Including information from both relations changes the block membership of several nodes. 
@@ -130,7 +201,6 @@ gred2 <- make_reduced_igraph(red2$reduced_mat[[1]])
 par(mfrow = c(1, 2))
 plot_reduced(gred1)
 plot_reduced(gred2)
-par(mfrow = c(1,1))
 ```
 
 with the multi-relation version:
@@ -140,7 +210,28 @@ gboth <- lapply(redboth$reduced_mat, make_reduced_igraph)
 par(mfrow = c(1, 2))
 plot_reduced(gboth[[1]])
 plot_reduced(gboth[[2]])
-par(mfrow = c(1,1))
+```
+
+### Reduced networks using degree criterion
+```{r krackhardt-reduced-single-degree}
+red1d <- make_reduced(list(m1), nsplit = 2, stat='degree')
+red2d <- make_reduced(list(m2), nsplit = 2, stat='degree')
+
+gred1d <- make_reduced_igraph(red1d$reduced_mat[[1]])
+gred2d <- make_reduced_igraph(red2d$reduced_mat[[1]])
+
+par(mfrow = c(1, 2))
+plot_reduced(gred1d)
+plot_reduced(gred2d)
+```
+
+with the multi-relation version:
+```{r krackhardt-reduced-multi-degree}
+redbothd <- make_reduced(list(m1, m2), nsplit = 2, stat='degree')
+gbothd <- lapply(redbothd$reduced_mat, make_reduced_igraph)
+par(mfrow = c(1, 2))
+plot_reduced(gbothd[[1]])
+plot_reduced(gbothd[[2]])
 ```
 
 

@@ -56,7 +56,12 @@ concor_igraph_apply <- function(igraph_list, nsplit = 1) {
 #' @export
 plot_socio <- function(iobject, nsplit = NULL) {
   split_name <- paste0("csplit", nsplit)
-  vcolors <- igraph::vertex.attributes(iobject)[[split_name]]
+  if(is.null(nsplit)){
+    vcolors <- igraph::vertex.attributes(iobject)[[split_name]]
+  }else{
+    colpal <- viridis::viridis(max(igraph::vertex.attributes(iobject)[[split_name]]))
+    vcolors <- colpal[igraph::vertex.attributes(iobject)[[split_name]]]
+  }
   igraph::plot.igraph(iobject, vertex.color = vcolors,
                       vertex.label = NA, vertex.size = 5, edge.arrow.size = .3)
 }
