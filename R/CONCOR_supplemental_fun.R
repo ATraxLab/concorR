@@ -42,11 +42,3 @@ plot_socio <- function(iobject, nsplit = NULL) {
                       vertex.label = NA, vertex.size = 5, edge.arrow.size = .3)
 }
 
-# library(concorR)
-# library(igraph)
-# a <- matrix(c(0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0), ncol = 5)
-# rownames(a) <- letters[1:5]
-# colnames(a) <- letters[1:5]
-# g = concor_make_igraph(list(a), nsplit=1)
-# gsimp = set_vertex_attr(g[[1]], "csplit1", value = V(g[[1]])$csplit1)
-# plot_socio(gsimp,nsplit=1)
