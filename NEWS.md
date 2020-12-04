@@ -4,6 +4,8 @@
 missing.
 * Fixed `make_blk()` and `concor_make_igraph()` to carry vertex names through if 
 they had to be added.
+* Added a `stat` option to `make_reduced()`, so it can use density to threshold 
+reduced network links (the original behavior) or average degree.
 
 # concorR 0.2.1
 
