@@ -6,6 +6,8 @@ Authors@R: c(
     person("Tyme", "Suda", email = "suda.4@wright.edu", role = "aut"),
     person("Adrienne", "Traxler", email = "adrienne.traxler@wright.edu", 
     role = "cre", comment = c(ORCID = "0000-0003-2725-0686")), 
+    person("Steven", "Wolf", email = "wolfs15@ecu.edu",
+    role = "aut", comment = c(ORCID = "0000-0003-1434-2944")), 
     person("Carter", "Butts", email = "buttsc@uci.edu", role = "ctb", 
     comment = "Author of sna::plot.blockmodel(), adapted for plot_blk()"))
 Description: Contains the CONCOR (CONvergence of iterated CORrelations) 
@@ -28,4 +30,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/ATraxLab/concorR
 BugReports: https://github.com/ATraxLab/concorR/issues
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
