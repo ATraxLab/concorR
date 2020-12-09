@@ -26,6 +26,13 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
   return(mat)
 }
 
+.igname <- function(ig) {
+  a <- 1:igraph::vcount(ig)
+  vnames <- sprintf("v%03d", a)
+  ig <- igraph::set_vertex_attr(ig, "name", value = vnames)
+  return(ig)
+}
+
 .concor_validitycheck <- function(m_list) {
   a <- m_list[[1]]
   for (i in 1:length(m_list)) {
@@ -51,6 +58,20 @@ concor1 <- function(m_stack, cutoff = .9999999, max_iter = 50) {
     }
   }
   return(m_list)
+}
+
+.concor_igraph_validitycheck <- function(ig_list) {
+  b <- sapply(ig_list, function(x) !(igraph::is_named(x)))
+  if (all(b)) {
+    warning("node names don't exist\nAdding default node names\n")
+    ig_list <- lapply(ig_list, function(x) .igname(x))
+    b <- sapply(ig_list, function(x) !(igraph::is_named(x)))
+  }
+  if (any(b)) {
+    stop("Node name mismatch")
+  }
+
+  return(ig_list)
 }
 
 .val_diag <- function(m, value = NA) {

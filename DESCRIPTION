@@ -1,7 +1,7 @@
 Package: concorR
 Type: Package
 Title: CONCOR and Supplemental Functions
-Version: 0.2.0.9000
+Version: 0.2.1.9000
 Authors@R: c(
     person("Tyme", "Suda", email = "suda.4@wright.edu", role = "aut"),
     person("Adrienne", "Traxler", email = "adrienne.traxler@wright.edu", 
