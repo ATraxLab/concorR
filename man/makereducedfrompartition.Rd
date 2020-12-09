@@ -1,6 +1,6 @@
-\name{make_reduced}
-\alias{make_reduced}
-\title{Run CONCOR and output reduced adjacency matrices}
+\name{make_reduced_from_partition}
+\alias{make_reduced_from_partition}
+\title{Output reduced adjacency matrices given a partitioning of the nodes into appropriate groups}
 \description{
 Takes an adjacency matrix and a partition of the nodes, and returns a
 reduced adjacency matrix and the corresponding cutoff density/degree. The 
@@ -21,7 +21,7 @@ Links (or self-links) exist if the density (or normalized degree) of ties from t
 \value{
 \item{reduced_mat}{A reduced matrix}
 \item{dens}{The cut-off density used (equal to the edge density of \code{adj_mat}).  Only for \code{stat="density"}}
-\item{deg}{The cut-off normalized degree used (equal to the scaled degree of \code{adj_mat}).  Only for \code{stat="degree"}.}
+\item{deg}{The cut-off normalized outdegree used (equal to the mean outdegree of \code{adj_mat}).  Only for \code{stat="degree"}.}
 }
 \references{
 S. Wasserman and K. Faust, \emph{Social Network Analysis: Methods and Applications} (Cambridge University Press, 1994).
