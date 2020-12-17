@@ -31,6 +31,9 @@ S. Wasserman and K. Faust, \emph{Social Network Analysis: Methods and Applicatio
   \code{\link{make_reduced}}, \code{\link{make_blk}}
 }
 \examples{
+## Needed to generate random network and detect communities
+library(igraph)
+
 ## Generate a random network (with reproducibility)
 set.seed(1234)
 g  <-  erdos.renyi.game(50,p=0.2)
