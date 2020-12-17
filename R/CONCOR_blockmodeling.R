@@ -181,7 +181,7 @@ make_reduced_from_partition <- function(adj_mat, partition, stat='density') {
   }
   
   partRange = 1:max(partition)
-  uniquePart = sort(unique(partition))
+  uniquePart = as.integer(sort(unique(partition)))
   if(!identical(partRange,uniquePart)){
     stop('`partition` must contain elements in each group.')
   }
