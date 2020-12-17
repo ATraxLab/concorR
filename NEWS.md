@@ -6,7 +6,7 @@ missing.
 they had to be added.
 * Added a `stat` option to `make_reduced()`, so it can use density to threshold 
 reduced network links (the original behavior) or average degree.
-* Updated `plot_reduced()` color pallette so that it auto-generates the number of needed colors. Using viridis now instead of rainbow.
+* Updated `plot_reduced()` color palette so that it auto-generates the number of needed colors. Using viridis now instead of rainbow.
 * Added a function `make_reduced_from_partition()` which makes a reduced network matrix based on a given partition.
 
 # concorR 0.2.1

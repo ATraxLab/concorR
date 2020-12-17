@@ -171,6 +171,21 @@ plot_reduced <- function(iobject,main='') {
 
 #' @export
 make_reduced_from_partition <- function(adj_mat, partition, stat='density') {
+  if(!is.numeric(partition)){
+    stop('Non-numeric partition input detected.  `partition` must be integer values between 
+         1 and the total number of groups')
+  }
+  
+  if(min(partition)<1){
+    stop('`partition` must be integer values between 1 and the total number of groups')
+  }
+  
+  partRange = 1:max(partition)
+  uniquePart = sort(unique(partition))
+  if(!identical(partRange,uniquePart)){
+    stop('`partition` must contain elements in each group.')
+  }
+  
   if(stat=='density'){  
       dens <- .edge_dens(adj_mat)
 
@@ -182,25 +197,9 @@ make_reduced_from_partition <- function(adj_mat, partition, stat='density') {
           nRows = sum(j==partition)
           for(k in 1:nb){
               nCols = sum(k==partition)
-              if(nRows==1){
-                  if(nCols==1){
-                      blk_adj_mat = adj_mat[j==partition, k==partition] 
-                      d = ifelse(blk_adj_mat>0,1,0) 
-                  }else{
-                      blk_adj_mat = adj_mat[j==partition, k==partition] 
-                      blk_adj_mat = matrix(blk_adj_mat,nrow=1)
-                      d = .block_edge_dens(blk_adj_mat)
-                  }
-              }else{
-                  if(nCols==1){
-                      blk_adj_mat = adj_mat[j==partition, k==partition]
-                      blk_adj_mat = matrix(blk_adj_mat,ncol=1)
-                  }else{
-                      blk_adj_mat = adj_mat[j==partition, k==partition]
-                  }
-                  d = ifelse(j==k,.edge_dens(blk_adj_mat),
+              blk_adj_mat = adj_mat[j==partition, k==partition]
+              d = ifelse(j==k,.edge_dens(blk_adj_mat),
                              .block_edge_dens(blk_adj_mat))
-              }
               reduced_den[j,k] = d
           }
       }
