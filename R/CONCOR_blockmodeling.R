@@ -31,6 +31,8 @@ make_blk <- function(adj_list, nsplit = 1) {
     return(scaledDegree)
 }
 
+
+
 #' @export
 make_reduced <- function(adj_list, nsplit = 1, stat='density') {
   if(stat=='density'){  
@@ -101,7 +103,7 @@ make_reduced <- function(adj_list, nsplit = 1, stat='density') {
     return_list$deg <- outdegree
     return(return_list)
   }else{
-    stop('Statistics implemented for determine edges in reduced networks are only 
+    stop('Statistics implemented for determining edges in reduced networks are only 
          density and degree.')
   }
 }
@@ -153,8 +155,105 @@ make_reduced_igraph <- function(reduced_mat) {
 
 #' @export
 plot_reduced <- function(iobject,main='') {
-    vcolors  <- viridis::viridis(length(igraph::vertex_attr(iobject)$name))
-    igraph::plot.igraph(iobject, vertex.color = vcolors, vertex.label = NA,
+  vcolors  <- viridis::viridis(length(igraph::vertex_attr(iobject)$name))
+  igraph::plot.igraph(iobject, vertex.color = vcolors, vertex.label = NA,
                       edge.arrow.size = .6, vertex.size = 25,main = main)
+}
+
+.block_edge_dens  <- function(adj_mat){
+  adj_mat[adj_mat > 0]  <- 1
+  
+  a <- sum(adj_mat)
+  m <- length(adj_mat)
+  d <- a / m
+  return(d)
+}    
+
+#' @export
+make_reduced_from_partition <- function(adj_mat, partition, stat='density') {
+  if(!is.numeric(partition)){
+    stop('Non-numeric partition input detected.  `partition` must be integer values between 
+         1 and the total number of groups')
+  }
+  
+  if(min(partition)<1){
+    stop('`partition` must be integer values between 1 and the total number of groups')
+  }
+  
+  partRange = 1:max(partition)
+  uniquePart = as.integer(sort(unique(partition)))
+  if(!identical(partRange,uniquePart)){
+    stop('`partition` must contain elements in each group.')
+  }
+  
+  if(stat=='density'){  
+      dens <- .edge_dens(adj_mat)
+
+      nb = max(partition)
+      reduced_den = matrix(0, nrow = nb, ncol = nb)
+      rownames(reduced_den) = paste("Block",1:nb)
+      colnames(reduced_den) = paste("Block",1:nb)
+      for(j in 1:nb){
+          nRows = sum(j==partition)
+          for(k in 1:nb){
+              nCols = sum(k==partition)
+              blk_adj_mat = adj_mat[j==partition, k==partition]
+              d = ifelse(j==k,.edge_dens(blk_adj_mat),
+                             .block_edge_dens(blk_adj_mat))
+              reduced_den[j,k] = d
+          }
+      }
+      reduced_den[is.nan(reduced_den)] <- 0
+      reduced_den[reduced_den < dens] <- 0
+      reduced_den[reduced_den > 0] <- 1
+ 
+      return_list <- list()
+      return_list$reduced_mat <- reduced_den
+      return_list$dens <- dens
+      return(return_list)
+  }else if(stat=='degree'){
+      outdegree = .scaledDegree(adj_mat)
+
+      nb = max(partition)
+      reduced_degree = matrix(0, nrow = nb, ncol = nb)
+      rownames(reduced_degree) = paste("Block",1:nb)
+      colnames(reduced_degree) = paste("Block",1:nb)
+      for(j in 1:nb){
+          nRows = sum(j==partition)
+          for(k in 1:nb){
+              nCols = sum(k==partition)
+              if(nRows==1){
+                  if(nCols==1){
+                      blk_adj_mat = adj_mat[j==partition, k==partition] 
+                      outDeg = ifelse(blk_adj_mat>0,1,0) 
+                  }else{
+                      blk_adj_mat = adj_mat[j==partition, k==partition] 
+                      blk_adj_mat = matrix(blk_adj_mat,nrow=1)
+                      outDeg = .scaledDegree(blk_adj_mat)
+                  }
+              }else{
+                  if(nCols==1){
+                      blk_adj_mat = adj_mat[j==partition, k==partition]
+                      blk_adj_mat = matrix(blk_adj_mat,ncol=1)
+                  }else{
+                      blk_adj_mat = adj_mat[j==partition, k==partition]
+                  }
+                  outDeg = .scaledDegree(blk_adj_mat)
+              }
+              reduced_degree[j,k] = outDeg
+          }
+      }
+      reduced_degree[is.nan(reduced_degree)] <- 0
+      reduced_degree[reduced_degree < outdegree] <- 0
+      reduced_degree[reduced_degree > 0] <- 1
+      
+      return_list <- list()
+      return_list$reduced_mat <- reduced_degree
+      return_list$deg <- outdegree
+      return(return_list)
+  }else{
+      stop('Statistics implemented for determining edges in reduced networks are only 
+         density and degree.')
+  }
 }
 

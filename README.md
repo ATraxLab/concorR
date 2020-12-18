@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/sfwolfphys/concorR.svg?branch=main)](https://travis-ci.com/sfwolfphys/concorR)
+status](https://travis-ci.com/ATraxLab/concorR.svg?branch=master)](https://travis-ci.com/ATraxLab/concorR)
 <!-- badges: end -->
 
 The goal of concorR is to implement the CONCOR (CONvergence of iterated
@@ -31,7 +31,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("sfwolfphys/concorR")
+devtools::install_github("ATraxLab/concorR")
 ```
 
 ## Example
@@ -371,9 +371,10 @@ R. L. Breiger, S. A. Boorman, P. Arabie, An algorithm for clustering
 relational data with applications to social network analysis and
 comparison with multidimensional scaling. *J. of Mathematical
 Psychology*. **12**, 328 (1975).
+<http://doi.org/10.1016/0022-2496(75)90028-0>
 
 D. Krackhardt, Cognitive social structures. *Social Networks*. **9**,
-104 (1987). 
+104 (1987). <http://doi.org/10.1016/0378-8733(87)90009-8>
 
 S. Wasserman and K. Faust, *Social Network Analysis: Methods and
 Applications* (Cambridge University Press, 1994).
