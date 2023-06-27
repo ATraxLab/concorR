@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # concorR
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/ATraxLab/concorR.svg?branch=master)](https://travis-ci.com/ATraxLab/concorR)
+[![R-CMD-check](https://github.com/ATraxLab/concorR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ATraxLab/concorR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 
