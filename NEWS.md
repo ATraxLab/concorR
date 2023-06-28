@@ -1,5 +1,6 @@
-# concorR (development version)
+# concorR 0.3.0
 
+* Added @sfwolfphys as package author. 
 * Added a check for vertex names to `concor_igraph_apply()`, add them if 
 missing.
 * Fixed `make_blk()` and `concor_make_igraph()` to carry vertex names through if 
