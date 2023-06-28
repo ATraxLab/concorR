@@ -5,8 +5,7 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.com/ATraxLab/concorR.svg?branch=master)](https://travis-ci.com/ATraxLab/concorR)
+[![R-CMD-check](https://github.com/ATraxLab/concorR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ATraxLab/concorR/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of concorR is to implement the CONCOR (CONvergence of iterated
@@ -60,15 +59,17 @@ Additional helper functions are included for using the `igraph` package:
 ``` r
 library(igraph)
 #> 
-#> Attaching package: 'igraph'
-#> The following objects are masked from 'package:stats':
+#> Vedhæfter pakke: 'igraph'
+#> De følgende objekter er maskerede fra 'package:stats':
 #> 
 #>     decompose, spectrum
-#> The following object is masked from 'package:base':
+#> Det følgende objekt er maskeret fra 'package:base':
 #> 
 #>     union
 library(viridis)
-#> Loading required package: viridisLite
+#> Warning: pakke 'viridis' blev bygget under R version 4.2.3
+#> Indlæser krævet pakke: viridisLite
+#> Warning: pakke 'viridisLite' blev bygget under R version 4.2.3
 
 plot(graph_from_adjacency_matrix(a))
 ```
@@ -126,26 +127,14 @@ matrix, define the sub-adjacency matrix
 ![X\_{ij}](https://latex.codecogs.com/png.latex?X_%7Bij%7D "X_{ij}") as
 follows:
 
-  
-![&#10;X\_{ij} = M\[(\\text{elements in block i}), (\\text{elements in
-block
-j})\]&#10;](https://latex.codecogs.com/png.latex?%0AX_%7Bij%7D%20%3D%20M%5B%28%5Ctext%7Belements%20in%20block%20i%7D%29%2C%20%28%5Ctext%7Belements%20in%20block%20j%7D%29%5D%0A
-"
-X_{ij} = M[(\\text{elements in block i}), (\\text{elements in block j})]
-")  
+![X\_{ij} = M\[(\text{elements in block i}), (\text{elements in block j})\]](https://latex.codecogs.com/png.latex?X_%7Bij%7D%20%3D%20M%5B%28%5Ctext%7Belements%20in%20block%20i%7D%29%2C%20%28%5Ctext%7Belements%20in%20block%20j%7D%29%5D "X_{ij} = M[(\text{elements in block i}), (\text{elements in block j})]")
 
 We’d like to use a simple criterion to determine whether to draw an edge
 or not, we will use the scaled degree for this purpose. For our
 definition, we will divide by the max *observed* degree.
 
-  
-![&#10;\\frac{\\texttt{mean}(\\texttt{degree}(X\_{ij}))}{\\texttt{max
-observed degree}(X\_{ij})} \>
-\\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max observed
-degree}(M)}&#10;](https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28X_%7Bij%7D%29%29%7D%7B%5Ctexttt%7Bmax%20observed%20degree%7D%28X_%7Bij%7D%29%7D%20%3E%20%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28M%29%29%7D%7B%5Ctexttt%7Bmax%20observed%20degree%7D%28M%29%7D%0A
-"
-\\frac{\\texttt{mean}(\\texttt{degree}(X_{ij}))}{\\texttt{max observed degree}(X_{ij})} \> \\frac{\\texttt{mean}(\\texttt{degree}(M))}{\\texttt{max observed degree}(M)}
-")  
+![\frac{\texttt{mean}(\texttt{degree}(X\_{ij}))}{\texttt{max observed degree}(X\_{ij})} \> \frac{\texttt{mean}(\texttt{degree}(M))}{\texttt{max observed degree}(M)}](https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28X_%7Bij%7D%29%29%7D%7B%5Ctexttt%7Bmax%20observed%20degree%7D%28X_%7Bij%7D%29%7D%20%3E%20%5Cfrac%7B%5Ctexttt%7Bmean%7D%28%5Ctexttt%7Bdegree%7D%28M%29%29%7D%7B%5Ctexttt%7Bmax%20observed%20degree%7D%28M%29%7D "\frac{\texttt{mean}(\texttt{degree}(X_{ij}))}{\texttt{max observed degree}(X_{ij})} > \frac{\texttt{mean}(\texttt{degree}(M))}{\texttt{max observed degree}(M)}")
+
 Note that for this definition, the sub-adjacency matrix will not be
 square if there are different numbers of elements in each block. Also,
 while it is more common to use normalized degree, it is identical to
